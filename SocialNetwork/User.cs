@@ -6,5 +6,6 @@ namespace SocialNetwork
 {
     public class User
     {
+        //Hello
     }
 }
