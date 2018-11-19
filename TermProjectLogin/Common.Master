@@ -6,6 +6,7 @@
 <head runat="server">
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
+
     </asp:ContentPlaceHolder>
 </head>
 <body>
@@ -21,7 +22,6 @@
                     <asp:Button ID="btnLogin" runat="server" Text="Log In" />
                 </asp:Panel>
             </asp:ContentPlaceHolder>
-
         </div>
         <asp:Panel ID="pnLoggedIn" runat="server" Visible="False">
             <asp:ImageButton ID="imgBtnProfilePhoto" runat="server" />
