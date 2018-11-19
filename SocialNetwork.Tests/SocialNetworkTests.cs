@@ -21,8 +21,16 @@ namespace SocialNetwork.Tests
         [TestMethod]
         public void TestPasswordEncryptionDecryption()
         {
-            // Encrypting and decrypting password for cookies.
-            // NOTE: this is different from encrypting/decrypting for login.
+            // Encrypting and decrypting for passwords/cookies.
+
+            string plainTestPassword = "Hello World";
+            EncryptionManager em = new EncryptionManager();
+
+            string encryptedPassword = em.Encrypt(plainTestPassword);
+
+            string decryptedPassword = em.Decrypt(encryptedPassword);
+
+            Assert.IsTrue(plainTestPassword == decryptedPassword);
         }
 
         [TestMethod]

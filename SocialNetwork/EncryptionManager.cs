@@ -45,16 +45,16 @@ namespace SocialNetwork
             {
                 rm.Key = key;
                 rm.IV = iv;
-                ICryptoTransform encryptor = rm.CreateEncryptor(rm.Key, rm.IV);
+                ICryptoTransform decrypter = rm.CreateDecryptor(rm.Key, rm.IV);
 
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Read))
+                    using (CryptoStream cs = new CryptoStream(ms, decrypter, CryptoStreamMode.Read))
                     {
                         using (StreamReader sr = new StreamReader(cs))
                         {
                             //Read all data from the stream.
-                           decrypted =  sr.ReadToEnd();
+                           decrypted = sr.ReadToEnd();
                         }
                     }
                 }
