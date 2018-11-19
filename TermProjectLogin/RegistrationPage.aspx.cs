@@ -13,8 +13,6 @@ namespace TermProjectLogin
     {
         RegisterInfo registerInfo = new RegisterInfo();
         ContactInfo contactInfo = new ContactInfo();
-        int year;
-        int month;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,16 +28,18 @@ namespace TermProjectLogin
             txtEmail.Text = contactInfo.Email;
             txtPassword.Text = registerInfo.Password;
 
-            registerInfo.BirthDate.Month = DateTime.Parse(month.ToString());
-
+            string month = ddlMonth.SelectedValue;
+            string day = ddlDay.SelectedValue;
+            string year = ddlYear.SelectedValue;
+            registerInfo.BirthDate = DateTime.Parse(month + "/" + day + "/" + year);
 
             registerInfo.ContactInfo = contactInfo;
         }
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
-            year = Convert.ToInt32(ddlYear.SelectedValue);
-            month = Convert.ToInt32(ddlMonth.SelectedValue);
+            int year = Convert.ToInt32(ddlYear.SelectedValue);
+            int month = Convert.ToInt32(ddlMonth.SelectedValue);
 
             int days = DateTime.DaysInMonth(year, month);
             for (int i = 1; i <= days; i++)
