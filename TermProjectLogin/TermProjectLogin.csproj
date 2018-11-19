@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MainPage.aspx" />
     <Content Include="Web.config" />
     <Content Include="RegistrationPage.aspx" />
     <Content Include="SettingsPage.aspx" />
@@ -78,6 +79,13 @@
     </Compile>
     <Compile Include="Common.Master.designer.cs">
       <DependentUpon>Common.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.aspx.cs">
+      <DependentUpon>MainPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainPage.aspx.designer.cs">
+      <DependentUpon>MainPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistrationPage.aspx.cs">

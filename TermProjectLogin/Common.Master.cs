@@ -1,30 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using SocialNetwork;
+using System;
 
 namespace TermProjectLogin
 {
     public partial class Common : System.Web.UI.MasterPage
     {
+        private const string UserEmailCookie = "UserEmail";
+        private const string UserLoggedInCookie = "UserIsLoggedIn";
+        private const string UserPasswordCookie = "UserPassword";
+
+        EncryptionManager encryptionManager = new EncryptionManager();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            pnLogin.Visible = true;
-            pnLoggedIn.Visible = false;
-            var userCookie = Response.Cookies.Get("User");
-
-            if(userCookie != null)
+            if (!IsPostBack)
             {
-                bool isLoggedIn = Convert.ToBoolean(userCookie.Values["IsLoggedIn"]);
+                pnLogin.Visible = true;
+                pnLoggedIn.Visible = false;
+                bool isLoggedIn = Convert.ToBoolean(Response.Cookies[UserLoggedInCookie]);
 
-                if (isLoggedIn)
+                if (!isLoggedIn)
                 {
-                    pnLogin.Visible = false;
-                    pnLoggedIn.Visible = true;
+                    if (Response.Cookies[UserEmailCookie] != null)
+                    {
+                        txtEmail.Text = Response.Cookies[UserEmailCookie].Value;
+                    }
+
+                    if (Response.Cookies[UserPasswordCookie] != null)
+                    {
+                        txtPassword.Text = encryptionManager.Decrypt(Response.Cookies[UserPasswordCookie].Value);
+                    }
+
+                    if (!string.IsNullOrEmpty(txtEmail.Text) && !string.IsNullOrEmpty(txtPassword.Text))
+                    {
+                        HandleLogin(txtEmail.Text, txtPassword.Text, LoginSettingType.FastLogin);
+                    }
+
+                    return;
                 }
-            } 
+
+                pnLogin.Visible = false;
+                pnLoggedIn.Visible = true;
+
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -32,26 +50,28 @@ namespace TermProjectLogin
             string email = txtEmail.Text;
             string password = txtPassword.Text;
 
-            Login(email, password);
+            HandleLogin(email, password, LoginSettingType.None);
         }
 
-        private void Login(string email, string password)
+        private void HandleLogin(string email, string password, LoginSettingType loginSetting)
         {
-            HttpCookie cookie;
-
-            if (Response.Cookies["User"] != null)
+            switch (loginSetting)
             {
-                cookie = Response.Cookies["User"];
+                case LoginSettingType.AutoLogin:
+                    Response.Cookies[UserEmailCookie].Value = email;
+                    Response.Cookies[UserPasswordCookie].Value = encryptionManager.Encrypt(password);
+                    break;
+                case LoginSettingType.FastLogin:
+                    Response.Cookies[UserEmailCookie].Value = email;
+                    Response.Cookies[UserPasswordCookie].Value = null;
+                    break;
+                case LoginSettingType.None:
+                    Response.Cookies[UserEmailCookie].Value = null;
+                    Response.Cookies[UserPasswordCookie].Value = null;
+                    break;
             }
-            else
-            {
-                cookie = new HttpCookie("User");
 
-            }
-
-            cookie.Values["IsLoggedIn"] = "true";
-            cookie.Values["Email"] = email;
-            cookie.Values["Password"] = "";
+            Response.Cookies["IsLoggedIn"].Value = "true";
         }
     }
 }
