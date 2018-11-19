@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Web.config" />
     <Content Include="RegistrationPage.aspx" />
+    <Content Include="SettingsPage.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.Master.cs">
@@ -86,6 +87,13 @@
     <Compile Include="RegistrationPage.aspx.designer.cs">
       <DependentUpon>RegistrationPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPage.aspx.cs">
+      <DependentUpon>SettingsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SettingsPage.aspx.designer.cs">
+      <DependentUpon>SettingsPage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Common.Master" />
@@ -96,6 +104,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SocialNetwork\SocialNetwork.csproj">
+      <Project>{b63f8f79-eabf-4a43-8d00-72d5b0ea9be8}</Project>
+      <Name>SocialNetwork</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
