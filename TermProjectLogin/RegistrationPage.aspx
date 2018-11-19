@@ -12,7 +12,7 @@
         <asp:Label ID="lblPassword" runat="server" Text="Password:"></asp:Label>
         <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox><br />
         <asp:Label ID="lblBirthday" runat="server" Text="Birthday:"></asp:Label>
-        <asp:DropDownList ID="ddlMonth" runat="server"></asp:DropDownList>
+        <asp:DropDownList ID="ddlMonth" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"></asp:DropDownList>
         <asp:DropDownList ID="ddlDay" runat="server"></asp:DropDownList>
         <asp:DropDownList ID="ddlYear" runat="server"></asp:DropDownList><br />
         <br />
