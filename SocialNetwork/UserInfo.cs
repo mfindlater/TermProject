@@ -7,7 +7,7 @@ namespace SocialNetwork
     public class UserInfo
     {
         public string Name { get; set; }
-        public Address address { get; set; }
+        public Address Address { get; set; }
         public ContactInfo ContactInfo { get; set; }
         public DateTime BirthDate { get; set; }
     }
