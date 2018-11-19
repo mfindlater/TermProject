@@ -8,6 +8,6 @@ namespace SocialNetwork
     {
         public int PhotoID { get; set; }
         public string URL { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime PostedDate { get; set; }
     }
 }
