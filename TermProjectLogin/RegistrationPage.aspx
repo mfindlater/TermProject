@@ -14,8 +14,9 @@
         <asp:Label ID="lblBirthday" runat="server" Text="Birthday:"></asp:Label>
         <asp:DropDownList ID="ddlMonth" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"></asp:DropDownList>
         <asp:DropDownList ID="ddlDay" runat="server"></asp:DropDownList>
-        <asp:DropDownList ID="ddlYear" runat="server"></asp:DropDownList><br />
+        <asp:DropDownList ID="ddlYear" runat="server" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"></asp:DropDownList><br />
         <br />
         <asp:Button ID="btnSignUp" runat="server" Text="Sign Up" OnClick="btnSignUp_Click" />
+        <asp:Label ID="lblMessage" runat="server"></asp:Label>
     </asp:Panel>
 </asp:Content>
