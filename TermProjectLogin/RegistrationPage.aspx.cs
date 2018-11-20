@@ -40,9 +40,9 @@ namespace TermProjectLogin
                 return;
             }
 
-            txtName.Text = registerInfo.Name;
-            txtEmail.Text = contactInfo.Email;
-            txtPassword.Text = registerInfo.Password;
+            registerInfo.Name = txtName.Text;
+            contactInfo.Email = txtEmail.Text;
+            registerInfo.Password = txtPassword.TextMode.ToString();
 
             string month = ddlMonth.SelectedValue;
             string day = ddlDay.SelectedValue;
