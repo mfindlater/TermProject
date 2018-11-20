@@ -17,7 +17,13 @@ namespace TermProjectLogin
             {
                 pnLogin.Visible = true;
                 pnLoggedIn.Visible = false;
-                bool isLoggedIn = Convert.ToBoolean(Response.Cookies[UserLoggedInCookie]);
+
+                bool isLoggedIn = false;
+
+                if(Response.Cookies[UserLoggedInCookie] != null)
+                {
+                    isLoggedIn = Convert.ToBoolean(Response.Cookies[UserLoggedInCookie].Value);
+                }
 
                 if (!isLoggedIn)
                 {
@@ -28,7 +34,7 @@ namespace TermProjectLogin
 
                     if (Response.Cookies[UserPasswordCookie] != null)
                     {
-                        txtPassword.Text = encryptionManager.Decrypt(Response.Cookies[UserPasswordCookie].Value);
+                        //txtPassword.Text = encryptionManager.Decrypt(Response.Cookies[UserPasswordCookie].Value);
                     }
 
                     if (!string.IsNullOrEmpty(txtEmail.Text) && !string.IsNullOrEmpty(txtPassword.Text))
