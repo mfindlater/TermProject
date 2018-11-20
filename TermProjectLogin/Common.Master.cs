@@ -1,15 +1,15 @@
 ﻿using SocialNetwork;
 using System;
+using System.Web;
 
 namespace TermProjectLogin
 {
     public partial class Common : System.Web.UI.MasterPage
     {
+        private const string UserCookie = "UserCookie";
         private const string UserEmailCookie = "UserEmail";
         private const string UserLoggedInCookie = "UserIsLoggedIn";
         private const string UserPasswordCookie = "UserPassword";
-
-        EncryptionManager encryptionManager = new EncryptionManager();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,34 +20,38 @@ namespace TermProjectLogin
 
                 bool isLoggedIn = false;
 
-                if(Response.Cookies[UserLoggedInCookie] != null)
+                if(Request.Cookies[UserCookie] != null)
                 {
-                    isLoggedIn = Convert.ToBoolean(Response.Cookies[UserLoggedInCookie].Value);
+                    var userCookie = Request.Cookies[UserCookie];
+
+                    isLoggedIn = Convert.ToBoolean(userCookie.Values[UserLoggedInCookie]);
+
+                    if (!isLoggedIn)
+                    {
+                        string email = "";
+                        string password = "";
+
+                        if (userCookie.Values[UserEmailCookie] != null)
+                        {
+                            email = userCookie.Values[UserEmailCookie];
+                        }
+
+                        if (userCookie.Values[UserPasswordCookie] != null)
+                        {
+                            password = EncryptionManager.Decode(userCookie.Values[UserPasswordCookie]);
+                        }
+
+                        if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+                        {
+                            HandleLogin(txtEmail.Text, txtPassword.Text, LoginSettingType.FastLogin);
+                        }
+                    }
+                    else
+                    {
+                        pnLoggedIn.Visible = true;
+                        pnLogin.Visible = false;
+                    }
                 }
-
-                if (!isLoggedIn)
-                {
-                    if (Response.Cookies[UserEmailCookie] != null)
-                    {
-                        txtEmail.Text = Response.Cookies[UserEmailCookie].Value;
-                    }
-
-                    if (Response.Cookies[UserPasswordCookie] != null)
-                    {
-                        //txtPassword.Text = encryptionManager.Decrypt(Response.Cookies[UserPasswordCookie].Value);
-                    }
-
-                    if (!string.IsNullOrEmpty(txtEmail.Text) && !string.IsNullOrEmpty(txtPassword.Text))
-                    {
-                        HandleLogin(txtEmail.Text, txtPassword.Text, LoginSettingType.FastLogin);
-                    }
-
-                    return;
-                }
-
-                pnLogin.Visible = false;
-                pnLoggedIn.Visible = true;
-
             }
         }
 
@@ -56,28 +60,39 @@ namespace TermProjectLogin
             string email = txtEmail.Text;
             string password = txtPassword.Text;
 
-            HandleLogin(email, password, LoginSettingType.None);
+            HandleLogin(email, password, LoginSettingType.AutoLogin);
+
+          
         }
 
         private void HandleLogin(string email, string password, LoginSettingType loginSetting)
         {
+            HttpCookie userCookie = new HttpCookie(UserCookie);
+        
+            if(Request.Cookies[UserCookie] != null)
+            {
+                userCookie = Request.Cookies[UserCookie];
+            }
+
             switch (loginSetting)
             {
                 case LoginSettingType.AutoLogin:
-                    Response.Cookies[UserEmailCookie].Value = email;
-                    Response.Cookies[UserPasswordCookie].Value = encryptionManager.Encrypt(password);
+                    userCookie.Values[UserEmailCookie] = email;
+                    userCookie.Values[UserPasswordCookie] = EncryptionManager.Encode(password);
                     break;
                 case LoginSettingType.FastLogin:
-                    Response.Cookies[UserEmailCookie].Value = email;
-                    Response.Cookies[UserPasswordCookie].Value = null;
+                    userCookie.Values[UserEmailCookie] = email;
+                    userCookie.Values[UserPasswordCookie] = null;
                     break;
                 case LoginSettingType.None:
-                    Response.Cookies[UserEmailCookie].Value = null;
-                    Response.Cookies[UserPasswordCookie].Value = null;
+                    userCookie.Values[UserEmailCookie] = null;
+                    userCookie.Values[UserPasswordCookie] = null;
                     break;
             }
 
-            Response.Cookies["IsLoggedIn"].Value = "true";
+            userCookie.Values[UserLoggedInCookie] = "true";
+            userCookie.Expires = DateTime.Now.AddYears(10);
+            Response.Cookies.Add(userCookie);
         }
     }
 }
