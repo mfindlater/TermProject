@@ -22,15 +22,10 @@ namespace SocialNetwork.Tests
         public void TestPasswordEncryptionDecryption()
         {
             // Encrypting and decrypting for passwords/cookies.
-
             string plainTestPassword = "Hello World";
             EncryptionManager em = new EncryptionManager();
-
-            string encryptedPassword = em.Encrypt(plainTestPassword);
-
-            string decryptedPassword = em.Decrypt(encryptedPassword);
-
-            Assert.IsTrue(plainTestPassword == decryptedPassword);
+            string hashedPassword = em.Encrypt(plainTestPassword);
+            Assert.IsTrue(em.Check(plainTestPassword, hashedPassword));
         }
 
         [TestMethod]
