@@ -42,7 +42,7 @@ namespace TermProjectLogin
 
             registerInfo.Name = txtName.Text;
             contactInfo.Email = txtEmail.Text;
-            registerInfo.Password = txtPassword.TextMode.ToString();
+            registerInfo.Password = txtPassword.Text;
 
             string month = ddlMonth.SelectedValue;
             string day = ddlDay.SelectedValue;
