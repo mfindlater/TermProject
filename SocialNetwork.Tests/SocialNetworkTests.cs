@@ -1,21 +1,47 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace SocialNetwork.Tests
 {
     [TestClass]
     public class SocialNetworkTests
     {
+
+        private FakeRepository repository;
+        private SocialNetworkManager manager;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            repository = new FakeRepository();
+            manager = new SocialNetworkManager(repository);
+        }
+
         [TestMethod]
         public void TestUserRegisterUser()
         {
             // Creating a user account. Tests password encryption.
+
+            repository.ClearUsers();
+
+            int id = CreateUser1();
+
+            Assert.IsTrue(id != 0);
         }
 
         [TestMethod]
         public void TestUserLogin()
         {
             // Logging in a user. Tests password decryption. Check if that user is actually logged in.
+
+            repository.ClearUsers();
+
+            int id = CreateUser1();
+
+            var user = manager.LoginUser("kkhan@email.com","Password");
+
+            Assert.IsNotNull(user);
         }
 
         [TestMethod]
@@ -24,8 +50,6 @@ namespace SocialNetwork.Tests
             // Encrypting and decrypting for passwords/cookies.
             string plainTestPassword = "He5l8lo World!@%$#";
             string hashedPassword = EncryptionManager.HashPassword(plainTestPassword);
-
-
 
             Assert.IsTrue(EncryptionManager.CheckPassword(plainTestPassword, hashedPassword));
 
@@ -74,6 +98,31 @@ namespace SocialNetwork.Tests
         public void TestThemeSettings()
         {
             // User 1 changes some of their theme settings.
+        }
+
+        private int CreateUser1()
+        {
+            var registerInfo = new RegisterInfo()
+            {
+                Name = "Kamala Khan",
+                Password = "Password",
+                BirthDate = DateTime.Now.AddYears(-18),
+                ContactInfo = new ContactInfo()
+                {
+                    Email = "kkhan@email.com",
+                    Phone = "1234567890"
+                },
+                SecurityQuestions = new List<SecurityQuestion>()
+                {
+                    new SecurityQuestion()
+                    {
+                        Question = "Is the sky blue?",
+                        Answer = "Yes"
+                    },
+                }
+            };
+
+            return manager.RegisterNewUser(registerInfo);
         }
     }
 }
