@@ -23,7 +23,6 @@ namespace SocialNetwork
             return BCrypt.CheckPassword(password, hashedPassword);
         }
 
-
         public static string Encode(string input)
         {
             string output = "";

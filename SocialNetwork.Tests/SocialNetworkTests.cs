@@ -124,5 +124,55 @@ namespace SocialNetwork.Tests
 
             return manager.RegisterNewUser(registerInfo);
         }
+
+        private bool CreateUser2()
+        {
+            var registerInfo = new RegisterInfo()
+            {
+                Name = "Miles Morales",
+                Password = "Password",
+                BirthDate = DateTime.Now.AddYears(-18),
+                ContactInfo = new ContactInfo()
+                {
+                    Email = "mmorales@email.com",
+                    Phone = "1234567890"
+                },
+                SecurityQuestions = new List<SecurityQuestion>()
+                {
+                    new SecurityQuestion()
+                    {
+                        Question = "Is the sky blue?",
+                        Answer = "Yes"
+                    },
+                }
+            };
+
+            return manager.RegisterNewUser(registerInfo);
+        }
+
+        private bool CreateUser3()
+        {
+            var registerInfo = new RegisterInfo()
+            {
+                Name = "Gwen Stacey",
+                Password = "Password",
+                BirthDate = DateTime.Now.AddYears(-18),
+                ContactInfo = new ContactInfo()
+                {
+                    Email = "gstacey@email.com",
+                    Phone = "1234567890"
+                },
+                SecurityQuestions = new List<SecurityQuestion>()
+                {
+                    new SecurityQuestion()
+                    {
+                        Question = "Is the sky blue?",
+                        Answer = "Yes"
+                    },
+                }
+            };
+
+            return manager.RegisterNewUser(registerInfo);
+        }
     }
 }
