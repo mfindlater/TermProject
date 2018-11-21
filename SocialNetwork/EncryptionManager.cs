@@ -11,6 +11,8 @@ namespace SocialNetwork
     { 
         private static string salt = "$2a$10$W1g98wmY8D2kbaXL9SUSze";
 
+        private static readonly int padding = 3;
+
         public static string HashPassword(string password)
         {
             return BCrypt.HashPassword(password, salt);
@@ -28,7 +30,7 @@ namespace SocialNetwork
 
             for (int i = 0; i < input.Length; i++)
             {
-                output += (char)(input[i] + 3);
+                output += (char)(input[i] + padding);
             }
 
             return output;
@@ -40,7 +42,7 @@ namespace SocialNetwork
 
             for (int i = 0; i < input.Length; i++)
             {
-                output += (char)(input[i] - 3);
+                output += (char)(input[i] - padding);
             }
 
             return output;
