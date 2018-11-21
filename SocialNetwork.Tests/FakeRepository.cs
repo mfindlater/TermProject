@@ -12,11 +12,11 @@ namespace SocialNetwork.Tests
         private readonly List<User> users = new List<User>();
         private static int nextId = 0;
 
-        public int CreateUser(RegisterInfo registerInfo)
+        public bool CreateUser(RegisterInfo registerInfo)
         {
             nextId++;
 
-            User user = new User()
+            var user = new User()
             {
                 UserId = nextId,
                 Address = registerInfo.Address,
@@ -33,7 +33,7 @@ namespace SocialNetwork.Tests
 
             users.Add(user);
 
-            return user.UserId;
+            return true;
         }
 
         public string GetPassword(string email)
@@ -65,11 +65,6 @@ namespace SocialNetwork.Tests
         {
             var user = users.Where(u => u.ContactInfo.Email == email).First();
             return user;
-        }
-
-        public List<User> GetUsers()
-        {
-            return users;
         }
 
         public bool UpdateSecurityQuestions(string email,List<SecurityQuestion> questions)

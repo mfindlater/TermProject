@@ -4,6 +4,7 @@ using System.Text;
 
 namespace SocialNetwork
 {
+    [Serializable]
     public class Theme
     {
         public string Name { get; set; }

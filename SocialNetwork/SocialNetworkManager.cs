@@ -13,7 +13,7 @@ namespace SocialNetwork
             this.repository = repository;
         }
 
-        public int RegisterNewUser(RegisterInfo registerInfo)
+        public bool RegisterNewUser(RegisterInfo registerInfo)
         {
             return repository.CreateUser(registerInfo);
         }
@@ -28,16 +28,6 @@ namespace SocialNetwork
             }
 
             return null;
-        }
-
-        public SecurityQuestion GetUserSecurityQuestion(string email)
-        {
-            return repository.GetSecurityQuestion(email);
-        }
-
-        public bool UpdateSecurityQuestions(string email,List<SecurityQuestion> questions)
-        {
-            return repository.UpdateSecurityQuestions(email,questions);
         }
 
         public string GetUserPassword(string email)

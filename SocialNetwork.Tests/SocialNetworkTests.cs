@@ -25,9 +25,9 @@ namespace SocialNetwork.Tests
 
             repository.ClearUsers();
 
-            int id = CreateUser1();
+            bool result = CreateUser1();
 
-            Assert.IsTrue(id != 0);
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace SocialNetwork.Tests
 
             repository.ClearUsers();
 
-            int id = CreateUser1();
+            CreateUser1();
 
             var user = manager.LoginUser("kkhan@email.com","Password");
 
@@ -100,7 +100,7 @@ namespace SocialNetwork.Tests
             // User 1 changes some of their theme settings.
         }
 
-        private int CreateUser1()
+        private bool CreateUser1()
         {
             var registerInfo = new RegisterInfo()
             {
