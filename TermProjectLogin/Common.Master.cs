@@ -61,8 +61,6 @@ namespace TermProjectLogin
             string password = txtPassword.Text;
 
             HandleLogin(email, password, LoginSettingType.AutoLogin);
-
-          
         }
 
         private void HandleLogin(string email, string password, LoginSettingType loginSetting)
@@ -93,6 +91,29 @@ namespace TermProjectLogin
             userCookie.Values[UserLoggedInCookie] = "true";
             userCookie.Expires = DateTime.Now.AddYears(10);
             Response.Cookies.Add(userCookie);
+
+            Response.Redirect("MainPage.aspx");
+        }
+
+        protected void btnSettings_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("SettingsPage.aspx");
+        }
+
+        protected void imgBtnProfilePhoto_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+        {
+            Response.Redirect("MainPage.aspx");
+        }
+
+        protected void btnLogOut_Click(object sender, EventArgs e)
+        {
+
+            if (Request.Cookies[UserCookie] != null)
+            {
+                Response.Cookies[UserCookie].Expires = DateTime.Now.AddDays(-1);
+            }
+
+            Response.Redirect("RegistrationPage.aspx");
         }
     }
 }

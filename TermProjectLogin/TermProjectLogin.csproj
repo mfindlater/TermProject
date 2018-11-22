@@ -67,6 +67,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="img\person_temp.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="MainPage.aspx" />
     <Content Include="Web.config" />
     <Content Include="RegistrationPage.aspx" />
