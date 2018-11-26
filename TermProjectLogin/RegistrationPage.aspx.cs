@@ -11,16 +11,23 @@ namespace TermProjectLogin
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        RegisterInfo registerInfo = new RegisterInfo();
-        ContactInfo contactInfo = new ContactInfo();
-        SqlRepository sqlRepository = new SqlRepository();
-        SocialNetworkManager socialNetworkManager;
-
+        private RegisterInfo registerInfo = new RegisterInfo();
+        private ContactInfo contactInfo = new ContactInfo();
+        private SqlRepository sqlRepository = new SqlRepository();
+        private SocialNetworkManager socialNetworkManager;
+    
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 SetDate();
+               
+                var cookie = Request.Cookies[Constants.UserCookie];
+                if (cookie != null && cookie.Values[Constants.UserLoggedInCookie] == "true")
+                {
+                    Response.Redirect("MainPage.aspx");
+                    return;
+                }
             }
             socialNetworkManager = new SocialNetworkManager(sqlRepository);
         }

@@ -129,6 +129,7 @@
     <Compile Include="Common.Master.designer.cs">
       <DependentUpon>Common.Master</DependentUpon>
     </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="MainPage.aspx.cs">
       <DependentUpon>MainPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

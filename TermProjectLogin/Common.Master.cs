@@ -6,10 +6,6 @@ namespace TermProjectLogin
 {
     public partial class Common : System.Web.UI.MasterPage
     {
-        private const string UserCookie = "UserCookie";
-        private const string UserEmailCookie = "UserEmail";
-        private const string UserLoggedInCookie = "UserIsLoggedIn";
-        private const string UserPasswordCookie = "UserPassword";
         private SqlRepository sqlRepository = new SqlRepository();
         private SocialNetworkManager socialNetworkManager;
 
@@ -25,25 +21,25 @@ namespace TermProjectLogin
 
                 bool isLoggedIn = false;
 
-                if(Request.Cookies[UserCookie] != null)
+                if(Request.Cookies[Constants.UserCookie] != null)
                 {
-                    var userCookie = Request.Cookies[UserCookie];
+                    var userCookie = Request.Cookies[Constants.UserCookie];
 
-                    isLoggedIn = Convert.ToBoolean(userCookie.Values[UserLoggedInCookie]);
+                    isLoggedIn = Convert.ToBoolean(userCookie.Values[Constants.UserLoggedInCookie]);
 
                     if (!isLoggedIn)
                     {
                         string email = "";
                         string password = "";
 
-                        if (userCookie.Values[UserEmailCookie] != null)
+                        if (userCookie.Values[Constants.UserEmailCookie] != null)
                         {
-                            email = userCookie.Values[UserEmailCookie];
+                            email = userCookie.Values[Constants.UserEmailCookie];
                         }
 
-                        if (userCookie.Values[UserPasswordCookie] != null)
+                        if (userCookie.Values[Constants.UserPasswordCookie] != null)
                         {
-                            password = EncryptionManager.Decode(userCookie.Values[UserPasswordCookie]);
+                            password = EncryptionManager.Decode(userCookie.Values[Constants.UserPasswordCookie]);
                         }
 
                         if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
@@ -79,33 +75,33 @@ namespace TermProjectLogin
 
         private void HandleLogin(string email, string password, LoginSettingType loginSetting)
         {
-            HttpCookie userCookie = new HttpCookie(UserCookie);
+            HttpCookie userCookie = new HttpCookie(Constants.UserCookie);
         
-            if(Request.Cookies[UserCookie] != null)
+            if(Request.Cookies[Constants.UserCookie] != null)
             {
-                userCookie = Request.Cookies[UserCookie];
+                userCookie = Request.Cookies[Constants.UserCookie];
             }
 
             switch (loginSetting)
             {
                 case LoginSettingType.AutoLogin:
-                    userCookie.Values[UserEmailCookie] = email;
-                    userCookie.Values[UserPasswordCookie] = EncryptionManager.Encode(password);
+                    userCookie.Values[Constants.UserEmailCookie] = email;
+                    userCookie.Values[Constants.UserPasswordCookie] = EncryptionManager.Encode(password);
                     break;
                 case LoginSettingType.FastLogin:
-                    userCookie.Values[UserEmailCookie] = email;
-                    userCookie.Values[UserPasswordCookie] = null;
+                    userCookie.Values[Constants.UserEmailCookie] = email;
+                    userCookie.Values[Constants.UserPasswordCookie] = null;
                     break;
                 case LoginSettingType.None:
-                    userCookie.Values[UserEmailCookie] = null;
-                    userCookie.Values[UserPasswordCookie] = null;
+                    userCookie.Values[Constants.UserEmailCookie] = null;
+                    userCookie.Values[Constants.UserPasswordCookie] = null;
                     break;
             }
 
             var user = socialNetworkManager.Login(email, password);
             if(user != null)
             {
-                userCookie.Values[UserLoggedInCookie] = "true";
+                userCookie.Values[Constants.UserLoggedInCookie] = "true";
                 userCookie.Expires = DateTime.Now.AddYears(10);
                 Response.Cookies.Add(userCookie);
                 Response.Redirect("MainPage.aspx");
@@ -127,10 +123,12 @@ namespace TermProjectLogin
 
         protected void btnLogOut_Click(object sender, EventArgs e)
         {
-
-            if (Request.Cookies[UserCookie] != null)
+            if (Request.Cookies[Constants.UserCookie] != null)
             {
-                Response.Cookies[UserCookie].Expires = DateTime.Now.AddDays(-1);
+                var cookie = Response.Cookies[Constants.UserCookie];
+                cookie.Values[Constants.UserLoggedInCookie] = "false";
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookie);
             }
 
             Response.Redirect("RegistrationPage.aspx");
