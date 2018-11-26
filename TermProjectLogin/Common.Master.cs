@@ -101,6 +101,7 @@ namespace TermProjectLogin
             var user = socialNetworkManager.Login(email, password);
             if(user != null)
             {
+                Session[Constants.UserSession] = user;
                 userCookie.Values[Constants.UserLoggedInCookie] = "true";
                 userCookie.Expires = DateTime.Now.AddYears(10);
                 Response.Cookies.Add(userCookie);
@@ -123,6 +124,11 @@ namespace TermProjectLogin
 
         protected void btnLogOut_Click(object sender, EventArgs e)
         {
+            if (Session[Constants.UserSession] != null)
+            {
+                Session.Remove(Constants.UserSession);
+            }
+
             if (Request.Cookies[Constants.UserCookie] != null)
             {
                 var cookie = Response.Cookies[Constants.UserCookie];

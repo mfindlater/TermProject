@@ -145,6 +145,7 @@ namespace SocialNetwork
                     command.Parameters.AddWithValue("@AddressLine1", user.Address.AddressLine1);
                     command.Parameters.AddWithValue("@AddressLine2", user.Address.AddressLine2);
                     command.Parameters.AddWithValue("@City",  user.Address.City);
+                    command.Parameters.AddWithValue("@State", user.Address.State);
                     command.Parameters.AddWithValue("@PostalCode", user.Address.PostalCode);
 
                     var settings = new UserSettings();

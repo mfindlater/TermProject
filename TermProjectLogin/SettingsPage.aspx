@@ -28,6 +28,8 @@
         <asp:Label ID="lblAnswer3" runat="server" Text="Answer:"></asp:Label>
         <asp:TextBox ID="txtSecurityQuestion3" runat="server"></asp:TextBox><br />
         <br />
-        <asp:Button ID="btnSave" runat="server" Text="Save" />
+        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
+        <br />
+        <asp:Label ID="lblMessage" runat="server"></asp:Label>
     </asp:Panel>
 </asp:Content>

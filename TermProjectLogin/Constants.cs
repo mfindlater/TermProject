@@ -7,6 +7,7 @@ namespace TermProjectLogin
 {
     public class Constants
     {
+        public const string UserSession = "UserSession";
         public const string UserCookie = "UserCookie";
         public const string UserEmailCookie = "UserEmail";
         public const string UserLoggedInCookie = "UserIsLoggedIn";
