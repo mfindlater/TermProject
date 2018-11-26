@@ -35,6 +35,16 @@ namespace SocialNetwork
             return repository.GetPassword(email);
         }
 
+        public User Login(string email, string password)
+        {
+            if(repository.GetPassword(email) == password)
+            {
+                return repository.GetUser(email);
+            }
+
+            return null;
+        }
+
         public bool UpdateUser(User user)
         {
             return repository.UpdateUser(user);

@@ -13,6 +13,7 @@ namespace SocialNetwork
     public class SqlRepository : IRepository
     {
         private readonly DBConnect db = new DBConnect();
+       
 
         public bool CreateUser(RegisterInfo registerInfo)
         {
@@ -22,7 +23,7 @@ namespace SocialNetwork
                 {
                     var command = new SqlCommand("TP_CreateUser") { CommandType = CommandType.StoredProcedure };
 
-                    command.Parameters.AddWithValue("@Password", registerInfo.Password);
+                    command.Parameters.AddWithValue("@Password", EncryptionManager.Encode(registerInfo.Password));
                     command.Parameters.AddWithValue("@Name", registerInfo.Name); 
                     command.Parameters.AddWithValue("@Email", registerInfo.ContactInfo.Email);
                     command.Parameters.AddWithValue("@Phone", registerInfo.ContactInfo.Phone);
@@ -121,7 +122,7 @@ namespace SocialNetwork
                             PostalCode = db.GetField("PostalCode", 0).ToString(),
                             State = db.GetField("State", 0).ToString()
                         },
-                        ProfilePhotoURL = db.GetField("ProfilePhotoURL", 0).ToString(),
+                        ProfilePhotoURL = db.GetField("URL", 0).ToString(),
                         Settings = (UserSettings)binaryFormatter.Deserialize(ms),
                     };
                     return user;
