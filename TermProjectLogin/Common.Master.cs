@@ -25,7 +25,14 @@ namespace TermProjectLogin
                 {
                     var userCookie = Request.Cookies[Constants.UserCookie];
 
-                    isLoggedIn = Convert.ToBoolean(userCookie.Values[Constants.UserLoggedInCookie]);
+                    User user = null;
+
+                    if (Session[Constants.UserSession] != null)
+                    {
+                        user = (User)Session[Constants.UserSession];
+                    }
+                    
+                    isLoggedIn = user != null;
 
                     if (!isLoggedIn)
                     {

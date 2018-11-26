@@ -22,8 +22,7 @@ namespace TermProjectLogin
             {
                 SetDate();
                
-                var cookie = Request.Cookies[Constants.UserCookie];
-                if (cookie != null && cookie.Values[Constants.UserLoggedInCookie] == "true")
+                if (Session[Constants.UserSession] != null)
                 {
                     Response.Redirect("MainPage.aspx");
                     return;
