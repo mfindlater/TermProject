@@ -49,10 +49,6 @@ namespace SocialNetwork.Tests
         {
             // Encrypting and decrypting for passwords/cookies.
             string plainTestPassword = "He5l8lo World!@%$#";
-            string hashedPassword = EncryptionManager.HashPassword(plainTestPassword);
-
-            Assert.IsTrue(EncryptionManager.CheckPassword(plainTestPassword, hashedPassword));
-
             string encodedPassword = EncryptionManager.Encode(plainTestPassword);
 
             string decodedPassword = EncryptionManager.Decode(encodedPassword);

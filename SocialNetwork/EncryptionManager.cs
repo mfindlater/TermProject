@@ -3,25 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 using System.IO;
-using Mzsoft.BCrypt;
 
 namespace SocialNetwork
 {
     public class EncryptionManager
     { 
-        private static string salt = "$2a$10$W1g98wmY8D2kbaXL9SUSze";
-
         private static readonly int padding = 3;
-
-        public static string HashPassword(string password)
-        {
-            return BCrypt.HashPassword(password, salt);
-        }
-
-        public static bool CheckPassword(string password,string hashedPassword)
-        {
-            return BCrypt.CheckPassword(password, hashedPassword);
-        }
 
         public static string Encode(string input)
         {

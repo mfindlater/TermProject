@@ -35,6 +35,13 @@ namespace TermProjectLogin
             if (Session[Constants.UserSession] != null)
             {
                 var user = (User)Session[Constants.UserSession];
+
+                user.Address.AddressLine1 = txtAddressLine1.Text;
+                user.Address.AddressLine2 = txtAddressLine2.Text;
+                user.Address.City = txtCity.Text;
+                user.Address.PostalCode = txtPostalCode.Text;
+                user.Address.State = txtState.Text;
+                user.ContactInfo.Phone = txtPhone.Text;
                 
                 bool result = socialNetworkManager.UpdateUser(user);
 
