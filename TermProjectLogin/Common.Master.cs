@@ -15,6 +15,7 @@ namespace TermProjectLogin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMessage.Text = "";
             socialNetworkManager = new SocialNetworkManager(sqlRepository);
 
             if (!IsPostBack)
@@ -108,7 +109,10 @@ namespace TermProjectLogin
                 userCookie.Expires = DateTime.Now.AddYears(10);
                 Response.Cookies.Add(userCookie);
                 Response.Redirect("MainPage.aspx");
+                return;
             }
+
+            lblMessage.Text = "Invalid email or password provided.";
         }
 
         protected void btnSettings_Click(object sender, EventArgs e)
