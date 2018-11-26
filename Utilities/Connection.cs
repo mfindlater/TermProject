@@ -19,7 +19,7 @@ namespace Utilities
         {
 
 #if DEBUG
-            SqlConnectString = "server=127.0.0.1,5555;Database=fa18_3342_tuc28686;User id=tuc28686;Password=ung3aPie";
+            //SqlConnectString = "server=127.0.0.1,5555;Database=fa18_3342_tuc28686;User id=tuc28686;Password=ung3aPie";
 #endif
             myConnectionSql = new SqlConnection(SqlConnectString);
         }

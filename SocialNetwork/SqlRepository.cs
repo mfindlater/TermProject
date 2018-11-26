@@ -20,16 +20,18 @@ namespace SocialNetwork
             {
                 using (var ms = new MemoryStream())
                 {
-                    var command = new SqlCommand("TP_RegisterUser") { CommandType = CommandType.StoredProcedure };
+                    var command = new SqlCommand("TP_CreateUser") { CommandType = CommandType.StoredProcedure };
 
+                    command.Parameters.AddWithValue("@Password", registerInfo.Password);
                     command.Parameters.AddWithValue("@Name", registerInfo.Name); 
                     command.Parameters.AddWithValue("@Email", registerInfo.ContactInfo.Email);
-                    command.Parameters.AddWithValue("@Password", registerInfo.Password);
                     command.Parameters.AddWithValue("@Phone", registerInfo.ContactInfo.Phone);
                     command.Parameters.AddWithValue("@AddressLine1", registerInfo.Address.AddressLine1);
                     command.Parameters.AddWithValue("@AddressLine2", registerInfo.Address.AddressLine2);
                     command.Parameters.AddWithValue("@City", registerInfo.Address.City);
+                    command.Parameters.AddWithValue("@State", registerInfo.Address.State);
                     command.Parameters.AddWithValue("@PostalCode", registerInfo.Address.PostalCode);
+                    command.Parameters.AddWithValue("@Birthdate", registerInfo.BirthDate);
 
                     var settings = new UserSettings();
 

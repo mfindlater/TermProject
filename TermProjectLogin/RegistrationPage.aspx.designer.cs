@@ -10,7 +10,8 @@
 namespace TermProjectLogin {
     
     
-    public partial class WebForm1 {
+    public partial class WebForm1
+    {
         
         /// <summary>
         /// pnlNewAccount control.

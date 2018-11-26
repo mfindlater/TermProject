@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SocialNetwork\SocialNetwork.csproj">
-      <Project>{b63f8f79-eabf-4a43-8d00-72d5b0ea9be8}</Project>
+      <Project>{62f36a5a-2afa-4465-abc6-3812ab945c57}</Project>
       <Name>SocialNetwork</Name>
     </ProjectReference>
   </ItemGroup>

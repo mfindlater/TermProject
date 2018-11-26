@@ -13,6 +13,8 @@ namespace TermProjectLogin
     {
         RegisterInfo registerInfo = new RegisterInfo();
         ContactInfo contactInfo = new ContactInfo();
+        SqlRepository sqlRepository = new SqlRepository();
+        SocialNetworkManager socialNetworkManager;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,6 +22,7 @@ namespace TermProjectLogin
             {
                 SetDate();
             }
+            socialNetworkManager = new SocialNetworkManager(sqlRepository);
         }
 
         protected void btnSignUp_Click(object sender, EventArgs e)
@@ -50,6 +53,9 @@ namespace TermProjectLogin
             registerInfo.BirthDate = DateTime.Parse(month + "/" + day + "/" + year);
 
             registerInfo.ContactInfo = contactInfo;
+
+            socialNetworkManager.RegisterNewUser(registerInfo);
+            lblMessage.Text = "Successfully registered!";
         }
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
