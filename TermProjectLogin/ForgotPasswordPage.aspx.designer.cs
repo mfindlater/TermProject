@@ -40,6 +40,15 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.Button btnCheckEmail;
         
         /// <summary>
+        /// lblAnswer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAnswer;
+        
+        /// <summary>
         /// pnQuestion control.
         /// </summary>
         /// <remarks>

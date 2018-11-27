@@ -12,6 +12,7 @@ namespace TermProjectLogin
     {
         private SqlRepository sqlRepository = new SqlRepository();
         private SocialNetworkManager socialNetworkManager;
+        private SecurityQuestion randomQuestion;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +27,25 @@ namespace TermProjectLogin
             {
                 lblMessage.Text = "User not found.";
                 return;
+            }
+            randomQuestion = socialNetworkManager.GetRandomQuestion(txtEmail.Text);
+            lblQuestion.Text = randomQuestion.Question;
+            lblAnswer.Text = randomQuestion.Answer;
+
+            pnQuestion.Visible = true;
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            randomQuestion = new SecurityQuestion();
+            randomQuestion.Answer = lblAnswer.Text;
+            if (randomQuestion.CheckAnswer(txtAnswer.Text))
+            {
+                lblMessage.Text = "Your password is: " + socialNetworkManager.GetUserPassword(txtEmail.Text);
+            }
+            else
+            {
+                lblMessage.Text = "Your answer is wrong!";
             }
         }
     }

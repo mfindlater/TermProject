@@ -54,5 +54,17 @@ namespace SocialNetwork
         {
             return repository.GetUser(email);
         }
+
+        public SecurityQuestion GetRandomQuestion(string email)
+        {
+            SecurityQuestion securityQuestion = new SecurityQuestion();
+            User user = repository.GetUser(email);
+            Random random = new Random();
+            int index = random.Next(0, user.Settings.SecurityQuestions.Count);
+            securityQuestion.Question = user.Settings.SecurityQuestions[index].Question;
+            securityQuestion.Answer = user.Settings.SecurityQuestions[index].Answer;
+
+            return securityQuestion;
+        }
     }
 }
