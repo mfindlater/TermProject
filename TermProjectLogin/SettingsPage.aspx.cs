@@ -43,8 +43,8 @@ namespace TermProjectLogin
                 ddlProfilePrivacy.SelectedValue = user.Settings.UserInfoSetting.ToString();
 
                 ddlSecurityQuestion1.DataSource = Constants.SecurityQuestion1;
-                ddlSecurityQuestion1.DataSource = Constants.SecurityQuestion2;
-                ddlSecurityQuestion1.DataSource = Constants.SecurityQuestion3;
+                ddlSecurityQuestion2.DataSource = Constants.SecurityQuestion2;
+                ddlSecurityQuestion3.DataSource = Constants.SecurityQuestion3;
                 ddlSecurityQuestion1.DataBind();
                 ddlSecurityQuestion2.DataBind();
                 ddlSecurityQuestion3.DataBind();
@@ -52,6 +52,10 @@ namespace TermProjectLogin
                 ddlSecurityQuestion1.SelectedValue = user.Settings.SecurityQuestions[0].Question;
                 ddlSecurityQuestion2.SelectedValue = user.Settings.SecurityQuestions[1].Question;
                 ddlSecurityQuestion3.SelectedValue = user.Settings.SecurityQuestions[2].Question;
+
+                txtSecurityQuestion1.Text = user.Settings.SecurityQuestions[0].Answer;
+                txtSecurityQuestion2.Text = user.Settings.SecurityQuestions[1].Answer;
+                txtSecurityQuestion3.Text = user.Settings.SecurityQuestions[2].Answer;
             }
         }
 
