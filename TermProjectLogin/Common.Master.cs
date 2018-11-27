@@ -42,6 +42,7 @@ namespace TermProjectLogin
                         if (userCookie.Values[Constants.UserEmailCookie] != null)
                         {
                             email = userCookie.Values[Constants.UserEmailCookie];
+                            txtEmail.Text = email;
                         }
 
                         if (userCookie.Values[Constants.UserPasswordCookie] != null)
@@ -51,7 +52,7 @@ namespace TermProjectLogin
 
                         if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
                         {
-                            HandleLogin(txtEmail.Text, txtPassword.Text, LoginSettingType.FastLogin);
+                            HandleLogin(txtEmail.Text, password);
                         }
                     }
                     else
@@ -62,9 +63,8 @@ namespace TermProjectLogin
                 }
                 else
                 {
-
                     string name = Page.ToString();
-                    if(name != "ASP.registrationpage_aspx" && name != "ASP.forgotpasswordpage_aspx")
+                    if (name != "ASP.registrationpage_aspx" && name != "ASP.forgotpasswordpage_aspx")
                     {
                         Response.Redirect("RegistrationPage.aspx");
                     }
@@ -77,10 +77,10 @@ namespace TermProjectLogin
             string email = txtEmail.Text;
             string password = txtPassword.Text;
 
-            HandleLogin(email, password, LoginSettingType.AutoLogin);
+            HandleLogin(email, password);
         }
 
-        private void HandleLogin(string email, string password, LoginSettingType loginSetting)
+        private void HandleLogin(string email, string password)
         {
             HttpCookie userCookie = new HttpCookie(Constants.UserCookie);
         
@@ -89,25 +89,24 @@ namespace TermProjectLogin
                 userCookie = Request.Cookies[Constants.UserCookie];
             }
 
-            switch (loginSetting)
-            {
-                case LoginSettingType.AutoLogin:
-                    userCookie.Values[Constants.UserEmailCookie] = email;
-                    userCookie.Values[Constants.UserPasswordCookie] = EncryptionManager.Encode(password);
-                    break;
-                case LoginSettingType.FastLogin:
-                    userCookie.Values[Constants.UserEmailCookie] = email;
-                    userCookie.Values[Constants.UserPasswordCookie] = null;
-                    break;
-                case LoginSettingType.None:
-                    userCookie.Values[Constants.UserEmailCookie] = null;
-                    userCookie.Values[Constants.UserPasswordCookie] = null;
-                    break;
-            }
-
             var user = socialNetworkManager.Login(email, password);
             if(user != null)
             {
+                switch (user.Settings.LoginSetting)
+                {
+                    case LoginSettingType.AutoLogin:
+                        userCookie.Values[Constants.UserEmailCookie] = email;
+                        userCookie.Values[Constants.UserPasswordCookie] = EncryptionManager.Encode(password);
+                        break;
+                    case LoginSettingType.FastLogin:
+                        userCookie.Values[Constants.UserEmailCookie] = email;
+                        userCookie.Values[Constants.UserPasswordCookie] = null;
+                        break;
+                    case LoginSettingType.None:
+                        userCookie.Values[Constants.UserEmailCookie] = null;
+                        userCookie.Values[Constants.UserPasswordCookie] = null;
+                        break;
+                }
                 Session[Constants.UserSession] = user;
                 userCookie.Values[Constants.UserLoggedInCookie] = "true";
                 userCookie.Expires = DateTime.Now.AddYears(10);
@@ -138,7 +137,7 @@ namespace TermProjectLogin
 
             if (Request.Cookies[Constants.UserCookie] != null)
             {
-                var cookie = Response.Cookies[Constants.UserCookie];
+                var cookie = Request.Cookies[Constants.UserCookie];
                 cookie.Values[Constants.UserLoggedInCookie] = "false";
                 cookie.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(cookie);

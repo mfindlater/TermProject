@@ -108,6 +108,29 @@ namespace TermProjectLogin
                 user.Settings.UserInfoSetting = (PrivacySettingType)Enum.Parse(typeof(PrivacySettingType), ddlProfilePrivacy.SelectedValue);
                 user.Settings.LoginSetting = (LoginSettingType)Enum.Parse(typeof(LoginSettingType), ddlLoginSetting.SelectedValue);
 
+                HttpCookie userCookie = new HttpCookie(Constants.UserCookie);
+
+                if (Request.Cookies[Constants.UserCookie] != null)
+                {
+                    userCookie = Request.Cookies[Constants.UserCookie];
+                }
+
+                switch (user.Settings.LoginSetting)
+                {
+                    case LoginSettingType.AutoLogin:
+                        userCookie.Values[Constants.UserEmailCookie] = user.ContactInfo.Email;
+                        break;
+                    case LoginSettingType.FastLogin:
+                        userCookie.Values[Constants.UserEmailCookie] = user.ContactInfo.Email;
+                        userCookie.Values[Constants.UserPasswordCookie] = null;
+                        break;
+                    case LoginSettingType.None:
+                        userCookie.Values[Constants.UserEmailCookie] = null;
+                        userCookie.Values[Constants.UserPasswordCookie] = null;
+                        break;
+                }
+                Response.Cookies.Add(userCookie);
+
                 bool result = socialNetworkManager.UpdateUser(user);
 
                 if(result)
