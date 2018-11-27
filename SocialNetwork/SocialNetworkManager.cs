@@ -49,5 +49,10 @@ namespace SocialNetwork
         {
             return repository.UpdateUser(user);
         }
+
+        public User GetUser(string email)
+        {
+            return repository.GetUser(email);
+        }
     }
 }

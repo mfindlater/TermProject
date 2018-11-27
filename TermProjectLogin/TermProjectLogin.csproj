@@ -78,6 +78,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="ForgotPasswordPage.aspx" />
     <Content Include="img\person_temp.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -130,6 +131,13 @@
       <DependentUpon>Common.Master</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="ForgotPasswordPage.aspx.cs">
+      <DependentUpon>ForgotPasswordPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPasswordPage.aspx.designer.cs">
+      <DependentUpon>ForgotPasswordPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.aspx.cs">
       <DependentUpon>MainPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

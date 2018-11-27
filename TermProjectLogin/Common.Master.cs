@@ -64,7 +64,7 @@ namespace TermProjectLogin
                 {
 
                     string name = Page.ToString();
-                    if(name != "ASP.registrationpage_aspx")
+                    if(name != "ASP.registrationpage_aspx" && name != "ASP.forgotpasswordpage_aspx")
                     {
                         Response.Redirect("RegistrationPage.aspx");
                     }
@@ -145,6 +145,11 @@ namespace TermProjectLogin
             }
 
             Response.Redirect("RegistrationPage.aspx");
+        }
+
+        protected void btnForgotPassword_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ForgotPasswordPage.aspx");
         }
     }
 }
