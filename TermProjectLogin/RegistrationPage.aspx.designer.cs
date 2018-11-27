@@ -10,8 +10,7 @@
 namespace TermProjectLogin {
     
     
-    public partial class WebForm1
-    {
+    public partial class WebForm1 {
         
         /// <summary>
         /// pnlNewAccount control.
@@ -111,6 +110,96 @@ namespace TermProjectLogin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlYear;
+        
+        /// <summary>
+        /// lblSecurityQuestion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSecurityQuestion;
+        
+        /// <summary>
+        /// ddlSecurityQuestion1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSecurityQuestion1;
+        
+        /// <summary>
+        /// lblAnswer1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAnswer1;
+        
+        /// <summary>
+        /// txtSecurityQuestion1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSecurityQuestion1;
+        
+        /// <summary>
+        /// ddlSecurityQuestion2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSecurityQuestion2;
+        
+        /// <summary>
+        /// lblAnswer2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAnswer2;
+        
+        /// <summary>
+        /// txtSecurityQuestion2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSecurityQuestion2;
+        
+        /// <summary>
+        /// ddlSecurityQuestion3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSecurityQuestion3;
+        
+        /// <summary>
+        /// lblAnswer3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAnswer3;
+        
+        /// <summary>
+        /// txtSecurityQuestion3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSecurityQuestion3;
         
         /// <summary>
         /// btnSignUp control.
