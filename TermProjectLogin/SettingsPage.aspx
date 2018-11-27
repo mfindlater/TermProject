@@ -41,6 +41,8 @@
             </asp:DropDownList>
         </asp:Panel>
         <br />
+        <asp:Label ID="lblLoginSetting" runat="server" Text="Login Setting"></asp:Label>
+        <asp:DropDownList ID="ddlLoginSetting" runat="server"></asp:DropDownList><br />
         <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
         <br />
         <asp:Label ID="lblMessage" runat="server"></asp:Label>

@@ -30,6 +30,7 @@ namespace TermProjectLogin
 
                 var privacyNames = Enum.GetNames(typeof(PrivacySettingType));
                 var privacyValues = Enum.GetValues(typeof(PrivacySettingType));
+                var loginSetting = Enum.GetNames(typeof(LoginSettingType));
 
                 for(int i=0; i < privacyNames.Length; i++)
                 {
@@ -37,10 +38,15 @@ namespace TermProjectLogin
                     ddlPhotoPrivacy.Items.Add(new ListItem(privacyNames[i], privacyValues.GetValue(i).ToString()));
                     ddlProfilePrivacy.Items.Add(new ListItem(privacyNames[i], privacyValues.GetValue(i).ToString()));
                 }
+                for(int i=0; i< loginSetting.Length; i++)
+                {
+                    ddlLoginSetting.Items.Add(new ListItem(loginSetting[i], loginSetting[i]));
+                }
 
                 ddlContactPrivacy.SelectedValue = user.Settings.ContactInfoPrivacySetting.ToString();
                 ddlPhotoPrivacy.SelectedValue = user.Settings.PhotoPrivacySetting.ToString();
                 ddlProfilePrivacy.SelectedValue = user.Settings.UserInfoSetting.ToString();
+                ddlLoginSetting.SelectedValue = user.Settings.LoginSetting.ToString();
 
                 ddlSecurityQuestion1.DataSource = Constants.SecurityQuestion1;
                 ddlSecurityQuestion2.DataSource = Constants.SecurityQuestion2;
@@ -100,6 +106,7 @@ namespace TermProjectLogin
                 user.Settings.ContactInfoPrivacySetting = (PrivacySettingType)Enum.Parse(typeof(PrivacySettingType),ddlContactPrivacy.SelectedValue);
                 user.Settings.PhotoPrivacySetting = (PrivacySettingType)Enum.Parse(typeof(PrivacySettingType), ddlPhotoPrivacy.SelectedValue);
                 user.Settings.UserInfoSetting = (PrivacySettingType)Enum.Parse(typeof(PrivacySettingType), ddlProfilePrivacy.SelectedValue);
+                user.Settings.LoginSetting = (LoginSettingType)Enum.Parse(typeof(LoginSettingType), ddlLoginSetting.SelectedValue);
 
                 bool result = socialNetworkManager.UpdateUser(user);
 
