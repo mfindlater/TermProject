@@ -132,6 +132,15 @@ namespace TermProjectLogin
         {
             if (Session[Constants.UserSession] != null)
             {
+                var user = (User)Session[Constants.UserSession];
+                if (user.Settings.LoginSetting == LoginSettingType.AutoLogin)
+                {
+                    if (Request.Cookies[Constants.UserCookie] != null)
+                    {
+                        var cookie = Request.Cookies[Constants.UserCookie];
+                        cookie.Expires = DateTime.Now.AddDays(-1);
+                    }
+                }
                 Session.Remove(Constants.UserSession);
             }
 
@@ -139,7 +148,7 @@ namespace TermProjectLogin
             {
                 var cookie = Request.Cookies[Constants.UserCookie];
                 cookie.Values[Constants.UserLoggedInCookie] = "false";
-                cookie.Expires = DateTime.Now.AddDays(-1);
+                //cookie.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(cookie);
             }
 
