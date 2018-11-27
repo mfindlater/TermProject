@@ -10,7 +10,6 @@ namespace TermProjectLogin
         public const string UserSession = "UserSession";
         public const string UserCookie = "UserCookie";
         public const string UserEmailCookie = "UserEmail";
-        public const string UserLoggedInCookie = "UserIsLoggedIn";
         public const string UserPasswordCookie = "UserPassword";
 
         public static string[] SecurityQuestion1 = { "What is your favorite color?", "In what city did your mother and father meet?"

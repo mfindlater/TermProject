@@ -108,7 +108,6 @@ namespace TermProjectLogin
                         break;
                 }
                 Session[Constants.UserSession] = user;
-                userCookie.Values[Constants.UserLoggedInCookie] = "true";
                 userCookie.Expires = DateTime.Now.AddYears(10);
                 Response.Cookies.Add(userCookie);
                 Response.Redirect("MainPage.aspx");
@@ -147,8 +146,6 @@ namespace TermProjectLogin
             if (Request.Cookies[Constants.UserCookie] != null)
             {
                 var cookie = Request.Cookies[Constants.UserCookie];
-                cookie.Values[Constants.UserLoggedInCookie] = "false";
-                //cookie.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(cookie);
             }
 
