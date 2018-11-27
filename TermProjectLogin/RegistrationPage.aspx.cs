@@ -21,7 +21,13 @@ namespace TermProjectLogin
             if (!IsPostBack)
             {
                 SetDate();
-               
+                ddlSecurityQuestion1.DataSource = Constants.SecurityQuestion1;
+                ddlSecurityQuestion2.DataSource = Constants.SecurityQuestion2;
+                ddlSecurityQuestion3.DataSource = Constants.SecurityQuestion3;
+                ddlSecurityQuestion1.DataBind();
+                ddlSecurityQuestion2.DataBind();
+                ddlSecurityQuestion3.DataBind();
+
                 if (Session[Constants.UserSession] != null)
                 {
                     Response.Redirect("MainPage.aspx");
@@ -33,25 +39,58 @@ namespace TermProjectLogin
 
         protected void btnSignUp_Click(object sender, EventArgs e)
         {
-            if (txtName.Text == "" || txtName.Text == null)
+            if (string.IsNullOrEmpty(txtName.Text))
             {
                 lblMessage.Text = "Please enter Name!";
                 return;
             }
-            if (txtEmail.Text == "" || txtEmail.Text == null)
+            if (string.IsNullOrEmpty(txtEmail.Text))
             {
                 lblMessage.Text = "Please enter Email!";
                 return;
             }
-            if (txtPassword.Text == "" || txtPassword.Text == null)
+            if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 lblMessage.Text = "Please enter Password!";
                 return;
             }
+            if (string.IsNullOrEmpty(txtSecurityQuestion1.Text))
+            {
+                lblMessage.Text = "Please anser all Security Questions!";
+                return;
+            }
+            if (string.IsNullOrEmpty(txtSecurityQuestion2.Text))
+            {
+                lblMessage.Text = "Please anser all Security Questions!";
+                return;
+            }
+            if (string.IsNullOrEmpty(txtSecurityQuestion3.Text))
+            {
+                lblMessage.Text = "Please anser all Security Questions!";
+                return;
+            }
+
+            SecurityQuestion securityQuestion1 = new SecurityQuestion();
+            SecurityQuestion securityQuestion2 = new SecurityQuestion();
+            SecurityQuestion securityQuestion3 = new SecurityQuestion();
+
+            List<SecurityQuestion> securityQuestions = new List<SecurityQuestion>();
+            securityQuestion1.Question = ddlSecurityQuestion1.SelectedItem.Text;
+            
+            securityQuestion1.Answer = txtSecurityQuestion1.Text;
+            securityQuestion2.Question = ddlSecurityQuestion2.SelectedItem.Text;
+            securityQuestion2.Answer = txtSecurityQuestion2.Text;
+            securityQuestion3.Question = ddlSecurityQuestion3.SelectedItem.Text;
+            securityQuestion3.Answer = txtSecurityQuestion3.Text;
 
             registerInfo.Name = txtName.Text;
             contactInfo.Email = txtEmail.Text;
             registerInfo.Password = txtPassword.Text;
+
+            securityQuestions.Add(securityQuestion1);
+            securityQuestions.Add(securityQuestion2);
+            securityQuestions.Add(securityQuestion3);
+            registerInfo.SecurityQuestions = securityQuestions;
 
             string month = ddlMonth.SelectedValue;
             string day = ddlDay.SelectedValue;
