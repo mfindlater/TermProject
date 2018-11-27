@@ -99,8 +99,15 @@ namespace TermProjectLogin
 
             registerInfo.ContactInfo = contactInfo;
 
-            socialNetworkManager.RegisterNewUser(registerInfo);
-            lblMessage.Text = "Successfully registered!";
+            bool result = socialNetworkManager.RegisterNewUser(registerInfo);
+            if (result)
+            {
+                lblMessage.Text = "Successfully registered!";
+            }
+            else
+            {
+                lblMessage.Text = "The email is already an existing account!";
+            }
         }
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
