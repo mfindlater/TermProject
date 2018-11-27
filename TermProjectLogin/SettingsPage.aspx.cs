@@ -27,6 +27,31 @@ namespace TermProjectLogin
                 txtPostalCode.Text = user.Address.PostalCode;
                 txtState.Text = user.Address.State;
                 txtPhone.Text = user.ContactInfo.Phone;
+
+                var privacyNames = Enum.GetNames(typeof(PrivacySettingType));
+                var privacyValues = Enum.GetValues(typeof(PrivacySettingType));
+
+                for(int i=0; i < privacyNames.Length; i++)
+                {
+                    ddlContactPrivacy.Items.Add(new ListItem(privacyNames[i], privacyValues.GetValue(i).ToString()));
+                    ddlPhotoPrivacy.Items.Add(new ListItem(privacyNames[i], privacyValues.GetValue(i).ToString()));
+                    ddlProfilePrivacy.Items.Add(new ListItem(privacyNames[i], privacyValues.GetValue(i).ToString()));
+                }
+
+                ddlContactPrivacy.SelectedValue = user.Settings.ContactInfoPrivacySetting.ToString();
+                ddlPhotoPrivacy.SelectedValue = user.Settings.PhotoPrivacySetting.ToString();
+                ddlProfilePrivacy.SelectedValue = user.Settings.UserInfoSetting.ToString();
+
+                ddlSecurityQuestion1.DataSource = Constants.SecurityQuestion1;
+                ddlSecurityQuestion1.DataSource = Constants.SecurityQuestion2;
+                ddlSecurityQuestion1.DataSource = Constants.SecurityQuestion3;
+                ddlSecurityQuestion1.DataBind();
+                ddlSecurityQuestion2.DataBind();
+                ddlSecurityQuestion3.DataBind();
+
+                ddlSecurityQuestion1.SelectedValue = user.Settings.SecurityQuestions[0].Question;
+                ddlSecurityQuestion2.SelectedValue = user.Settings.SecurityQuestions[1].Question;
+                ddlSecurityQuestion3.SelectedValue = user.Settings.SecurityQuestions[2].Question;
             }
         }
 

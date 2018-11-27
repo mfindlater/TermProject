@@ -35,6 +35,7 @@ namespace SocialNetwork
                     command.Parameters.AddWithValue("@Birthdate", registerInfo.BirthDate);
 
                     var settings = new UserSettings();
+                    settings.SecurityQuestions = registerInfo.SecurityQuestions;
 
                     var binaryFormatter = new BinaryFormatter();
                     binaryFormatter.Serialize(ms, settings);
