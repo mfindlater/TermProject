@@ -149,10 +149,8 @@ namespace SocialNetwork
                     command.Parameters.AddWithValue("@State", user.Address.State);
                     command.Parameters.AddWithValue("@PostalCode", user.Address.PostalCode);
 
-                    var settings = new UserSettings();
-
                     var binaryFormatter = new BinaryFormatter();
-                    binaryFormatter.Serialize(ms, settings);
+                    binaryFormatter.Serialize(ms, user.Settings);
 
                     byte[] serializedSettings = ms.ToArray();
 

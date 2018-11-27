@@ -49,13 +49,16 @@ namespace TermProjectLogin
                 ddlSecurityQuestion2.DataBind();
                 ddlSecurityQuestion3.DataBind();
 
-                ddlSecurityQuestion1.SelectedValue = user.Settings.SecurityQuestions[0].Question;
-                ddlSecurityQuestion2.SelectedValue = user.Settings.SecurityQuestions[1].Question;
-                ddlSecurityQuestion3.SelectedValue = user.Settings.SecurityQuestions[2].Question;
+                if(user.Settings.SecurityQuestions.Count == 3)
+                {
+                    ddlSecurityQuestion1.SelectedValue = user.Settings.SecurityQuestions[0].Question;
+                    ddlSecurityQuestion2.SelectedValue = user.Settings.SecurityQuestions[1].Question;
+                    ddlSecurityQuestion3.SelectedValue = user.Settings.SecurityQuestions[2].Question;
 
-                txtSecurityQuestion1.Text = user.Settings.SecurityQuestions[0].Answer;
-                txtSecurityQuestion2.Text = user.Settings.SecurityQuestions[1].Answer;
-                txtSecurityQuestion3.Text = user.Settings.SecurityQuestions[2].Answer;
+                    txtSecurityQuestion1.Text = user.Settings.SecurityQuestions[0].Answer;
+                    txtSecurityQuestion2.Text = user.Settings.SecurityQuestions[1].Answer;
+                    txtSecurityQuestion3.Text = user.Settings.SecurityQuestions[2].Answer;
+                }
             }
         }
 
@@ -71,7 +74,33 @@ namespace TermProjectLogin
                 user.Address.PostalCode = txtPostalCode.Text;
                 user.Address.State = txtState.Text;
                 user.ContactInfo.Phone = txtPhone.Text;
-                
+
+                var sq1 = new SecurityQuestion()
+                {
+                    Question = ddlSecurityQuestion1.SelectedValue,
+                    Answer = txtSecurityQuestion1.Text
+                };
+
+                var sq2 = new SecurityQuestion()
+                {
+                    Question = ddlSecurityQuestion2.SelectedValue,
+                    Answer = txtSecurityQuestion2.Text
+                };
+
+                var sq3 = new SecurityQuestion()
+                {
+                    Question = ddlSecurityQuestion3.SelectedValue,
+                    Answer = txtSecurityQuestion3.Text
+                };
+
+                var securityQuestions = new List<SecurityQuestion>() { sq1, sq2, sq3 };
+
+                user.Settings.SecurityQuestions = securityQuestions;
+
+                user.Settings.ContactInfoPrivacySetting = (PrivacySettingType)Enum.Parse(typeof(PrivacySettingType),ddlContactPrivacy.SelectedValue);
+                user.Settings.PhotoPrivacySetting = (PrivacySettingType)Enum.Parse(typeof(PrivacySettingType), ddlPhotoPrivacy.SelectedValue);
+                user.Settings.UserInfoSetting = (PrivacySettingType)Enum.Parse(typeof(PrivacySettingType), ddlProfilePrivacy.SelectedValue);
+
                 bool result = socialNetworkManager.UpdateUser(user);
 
                 if(result)
