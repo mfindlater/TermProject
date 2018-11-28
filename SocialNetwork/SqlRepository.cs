@@ -23,7 +23,7 @@ namespace SocialNetwork
                 {
                     var command = new SqlCommand("TP_CreateUser") { CommandType = CommandType.StoredProcedure };
 
-                    command.Parameters.AddWithValue("@Password", EncryptionManager.Encode(registerInfo.Password));
+                    command.Parameters.AddWithValue("@Password", EncryptionManager.Encrypt(registerInfo.Password));
                     command.Parameters.AddWithValue("@Name", registerInfo.Name); 
                     command.Parameters.AddWithValue("@Email", registerInfo.ContactInfo.Email);
                     command.Parameters.AddWithValue("@Phone", registerInfo.ContactInfo.Phone);
@@ -73,7 +73,7 @@ namespace SocialNetwork
 
                 if(ds.Tables[0].Rows.Count > 0)
                 {
-                    string password = EncryptionManager.Decode(db.GetField("Password", 0).ToString());
+                    string password = EncryptionManager.Decrypt(db.GetField("Password", 0).ToString());
                     return password;
                 }
             }

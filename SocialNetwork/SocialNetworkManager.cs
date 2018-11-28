@@ -22,7 +22,7 @@ namespace SocialNetwork
         {
             User user = repository.GetUser(email);
 
-            if(EncryptionManager.Decode(user.EncryptedPassword) == password)
+            if(EncryptionManager.Decrypt(user.EncryptedPassword) == password)
             {
                 return user;
             }

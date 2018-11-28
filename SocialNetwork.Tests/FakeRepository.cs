@@ -29,7 +29,7 @@ namespace SocialNetwork.Tests
                 }
             };
 
-            user.EncryptedPassword = EncryptionManager.Encode(registerInfo.Password);
+            user.EncryptedPassword = EncryptionManager.Encrypt(registerInfo.Password);
 
             users.Add(user);
 
@@ -39,7 +39,7 @@ namespace SocialNetwork.Tests
         public string GetPassword(string email)
         {
            var user = users.Where(u => u.ContactInfo.Email == email).First();
-            return EncryptionManager.Decode(user.EncryptedPassword);
+            return EncryptionManager.Decrypt(user.EncryptedPassword);
         }
 
         public SecurityQuestion GetSecurityQuestion(string email)

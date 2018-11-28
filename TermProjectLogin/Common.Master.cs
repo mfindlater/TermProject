@@ -47,7 +47,7 @@ namespace TermProjectLogin
 
                         if (userCookie.Values[Constants.UserPasswordCookie] != null)
                         {
-                            password = EncryptionManager.Decode(userCookie.Values[Constants.UserPasswordCookie]);
+                            password = EncryptionManager.Decrypt(userCookie.Values[Constants.UserPasswordCookie]);
                         }
 
                         if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
@@ -96,7 +96,7 @@ namespace TermProjectLogin
                 {
                     case LoginSettingType.AutoLogin:
                         userCookie.Values[Constants.UserEmailCookie] = email;
-                        userCookie.Values[Constants.UserPasswordCookie] = EncryptionManager.Encode(password);
+                        userCookie.Values[Constants.UserPasswordCookie] = EncryptionManager.Encrypt(password);
                         break;
                     case LoginSettingType.FastLogin:
                         userCookie.Values[Constants.UserEmailCookie] = email;
