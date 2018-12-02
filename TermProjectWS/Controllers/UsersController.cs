@@ -9,12 +9,11 @@ using SocialNetwork;
 namespace TermProjectWS.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Users")]
+    [Route("api/SocialNetworkService")]
     public class UsersController : Controller
     {
         private readonly IRepository repository;
         private readonly SocialNetworkManager socialNetworkManager;
-
         
         public UsersController(IRepository repository)
         {
@@ -27,7 +26,6 @@ namespace TermProjectWS.Controllers
         {
             return socialNetworkManager.FindUsersByName(name);
         }
-
         
         [HttpGet("searchByLocation/{city}/{state}")]
         public List<User> FindUsersByLocation(string city, string state)

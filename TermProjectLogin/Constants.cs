@@ -19,5 +19,7 @@ namespace TermProjectLogin
             "What was your favorite food?", "What is the make of your first car?", "What is the name of your first pet?" };
         public static string[] SecurityQuestion3 = { "What is your favorite team?", "What was your childhood nickname?",
             "In what city was your first full time job?", "What primary school did you attend?", "What is your oldest sibling's middle name?" };
+
+        public const string RequestUriString = "http://localhost:49884/api/SocialNetworkService/searchByName/";
     }
 }

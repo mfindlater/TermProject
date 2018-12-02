@@ -1,6 +1,11 @@
 ﻿using SocialNetwork;
 using System;
 using System.Web;
+using System.Collections.Generic;
+
+using System.Web.Script.Serialization;  // needed for JSON serializers
+using System.IO;                        // needed for Stream and Stream Reader
+using System.Net;                       // needed for the Web Request
 
 namespace TermProjectLogin
 {
@@ -59,6 +64,7 @@ namespace TermProjectLogin
                     {
                         pnLoggedIn.Visible = true;
                         pnLogin.Visible = false;
+                        pnSearch.Visible = true;
                     }
                 }
                 else
@@ -155,6 +161,29 @@ namespace TermProjectLogin
         protected void btnForgotPassword_Click(object sender, EventArgs e)
         {
             Response.Redirect("ForgotPasswordPage.aspx");
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string search = txtSearch.Text;
+            if (!string.IsNullOrEmpty(search))
+            {
+                WebRequest request = WebRequest.Create(Constants.RequestUriString + search);
+                WebResponse response = request.GetResponse();
+
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                String data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                List<User> userList = js.Deserialize<List<User>>(data);
+
+                gvSearchResult.DataSource = userList;
+                gvSearchResult.DataBind();
+                gvSearchResult.Visible = true;
+            }
         }
     }
 }
