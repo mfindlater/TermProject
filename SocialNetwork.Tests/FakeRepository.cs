@@ -10,6 +10,7 @@ namespace SocialNetwork.Tests
     public class FakeRepository : IRepository
     {
         private readonly List<User> users = new List<User>();
+        private readonly Dictionary<string, List<Friend>> friendDict = new Dictionary<string, List<Friend>>();
         private static int nextId = 0;
 
         public bool CreateUser(RegisterInfo registerInfo)
@@ -102,6 +103,31 @@ namespace SocialNetwork.Tests
         public List<User> FindUsersByOrganization(string orgnanization)
         {
             return users.Where(u => u.Organization.Contains(orgnanization)).ToList();
+        }
+
+        public List<Friend> GetFriends(string email)
+        {
+            return friendDict[email];
+        }
+
+        public bool CreateFriendRequest(string fromEmail, string toEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AcceptFriendRequest(string userEmail, string requestEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeclineFriendRequest(string userEmail, string requestEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsFriend(string user1Email, string user2Email, string verificationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

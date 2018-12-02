@@ -13,7 +13,28 @@ namespace SocialNetwork
     public class SqlRepository : IRepository
     {
         private readonly DBConnect db = new DBConnect();
-       
+
+        public bool AcceptFriendRequest(string userEmail, string requestEmail)
+        {
+            var command = new SqlCommand("TP_AcceptFriendRequest") { CommandType = CommandType.StoredProcedure };
+            command.Parameters.AddWithValue("@UserEmail", userEmail);
+            command.Parameters.AddWithValue("@RequestEmail", requestEmail);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return (result != -1);
+        }
+
+        public bool CreateFriendRequest(string userEmail, string requestEmail)
+        {
+            var command = new SqlCommand("TP_CreateFriendRequest") { CommandType = CommandType.StoredProcedure };
+            command.Parameters.AddWithValue("@UserEmail", userEmail);
+            command.Parameters.AddWithValue("@RequestEmail", requestEmail);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+   
+            return (result != -1);
+        }
 
         public bool CreateUser(RegisterInfo registerInfo)
         {
@@ -55,6 +76,17 @@ namespace SocialNetwork
             }
 
             return false;
+        }
+
+        public bool DeclineFriendRequest(string userEmail, string requestEmail)
+        {
+            var command = new SqlCommand("TP_DeclineFriendRequest") { CommandType = CommandType.StoredProcedure };
+            command.Parameters.AddWithValue("@UserEmail", userEmail);
+            command.Parameters.AddWithValue("@RequestEmail", requestEmail);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return (result != -1);
         }
 
         public List<User> FindUsersByLocation(string city, string state)
@@ -246,6 +278,18 @@ namespace SocialNetwork
                 }
             }
             return null;
+        }
+
+        public bool IsFriend(string user1Email, string user2Email, string verificationToken)
+        {
+            var command = new SqlCommand("TP_IsFriend", db.GetConnection()) { CommandType = CommandType.StoredProcedure };
+            command.Parameters.AddWithValue("@User1Email", user1Email);
+            command.Parameters.AddWithValue("@User2Email", user2Email);
+            command.Parameters.AddWithValue("@VerificationToken", Guid.Parse(verificationToken));
+
+            bool result = (bool)command.ExecuteScalar();
+
+            return result;
         }
 
         public bool UpdateUser(User user)

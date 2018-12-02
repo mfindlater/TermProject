@@ -210,5 +210,10 @@ namespace SocialNetwork.Tests
 
             return manager.RegisterNewUser(registerInfo);
         }
+
+        private void AddFriend(string email, User user)
+        {
+          
+        }
     }
 }

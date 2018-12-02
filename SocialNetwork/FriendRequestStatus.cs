@@ -6,8 +6,8 @@ namespace SocialNetwork
 {
     public enum FriendRequestStatus
     {
-        Pending,
-        Accepted,
-        Declined
+        Pending = 3,
+        Accepted = 1,
+        Declined = 2
     }
 }

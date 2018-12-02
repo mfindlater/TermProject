@@ -14,5 +14,9 @@ namespace SocialNetwork
         List<User> FindUsersByLocation(string city, string state);
         List<User> FindUsersByOrganization(string orgnanization);
         List<Friend> GetFriends(string email);
+        bool CreateFriendRequest(string fromEmail, string toEmail);
+        bool AcceptFriendRequest(string userEmail, string requestEmail);
+        bool DeclineFriendRequest(string userEmail, string requestEmail);
+        bool IsFriend(string user1Email, string user2Email, string verificationToken);
     }
 }
