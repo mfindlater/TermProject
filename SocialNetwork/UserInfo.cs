@@ -10,5 +10,6 @@ namespace SocialNetwork
         public Address Address { get; set; } = new Address();
         public ContactInfo ContactInfo { get; set; } = new ContactInfo();
         public DateTime BirthDate { get; set; }
+        public string Organization { get; set; }
     }
 }

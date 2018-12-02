@@ -57,6 +57,21 @@ namespace SocialNetwork
             return false;
         }
 
+        public List<User> FindUsersByLocation(string city, string state)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> FindUsersByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> FindUsersByOrganization(string orgnanization)
+        {
+            throw new NotImplementedException();
+        }
+
         public string GetPassword(string email)
         {
             try

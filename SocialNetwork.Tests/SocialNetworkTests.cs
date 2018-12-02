@@ -96,6 +96,25 @@ namespace SocialNetwork.Tests
             // User 1 changes some of their theme settings.
         }
 
+        [TestMethod]
+        public void TestSearch()
+        {
+            repository.ClearUsers();
+
+            CreateUser1();
+            CreateUser2();
+            CreateUser3();
+
+            var results = manager.FindUsersByName("Miles");
+            Assert.IsTrue(results.Count == 1);
+
+            results = manager.FindUsersByLocation("New York City", "New York");
+            Assert.IsTrue(results.Count == 2);
+
+            results = manager.FindUsersByOrganization("Public High School");
+            Assert.IsTrue(results.Count == 2);
+        }
+
         private bool CreateUser1()
         {
             var registerInfo = new RegisterInfo()
@@ -108,6 +127,13 @@ namespace SocialNetwork.Tests
                     Email = "kkhan@email.com",
                     Phone = "1234567890"
                 },
+                Address = new Address()
+                {
+                    AddressLine1 = "101 Fake St.",
+                    City = "Jersey City",
+                    State = "New Jersey"
+                },
+                Organization = "Public High School",
                 SecurityQuestions = new List<SecurityQuestion>()
                 {
                     new SecurityQuestion()
@@ -133,6 +159,13 @@ namespace SocialNetwork.Tests
                     Email = "mmorales@email.com",
                     Phone = "1234567890"
                 },
+                Address = new Address()
+                {
+                    AddressLine1 = "101 Fake St.",
+                    City = "New York City",
+                    State = "New York"
+                },
+                Organization = "Private Charter School",
                 SecurityQuestions = new List<SecurityQuestion>()
                 {
                     new SecurityQuestion()
@@ -158,6 +191,13 @@ namespace SocialNetwork.Tests
                     Email = "gstacey@email.com",
                     Phone = "1234567890"
                 },
+                Address = new Address()
+                {
+                    AddressLine1 = "101 Fake St.",
+                    City = "New York City",
+                    State = "New York"
+                },
+                Organization = "Public High School",
                 SecurityQuestions = new List<SecurityQuestion>()
                 {
                     new SecurityQuestion()

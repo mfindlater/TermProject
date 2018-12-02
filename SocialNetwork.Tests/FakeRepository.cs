@@ -26,7 +26,8 @@ namespace SocialNetwork.Tests
                 Settings = new UserSettings()
                 {
                   SecurityQuestions = registerInfo.SecurityQuestions
-                }
+                },
+                Organization = registerInfo.Organization,
             };
 
             user.EncryptedPassword = EncryptionManager.Encrypt(registerInfo.Password);
@@ -86,6 +87,21 @@ namespace SocialNetwork.Tests
         public void ClearUsers()
         {
             users.Clear();
+        }
+
+        public List<User> FindUsersByName(string name)
+        {
+            return users.Where(u => u.Name.Contains(name)).ToList();
+        }
+
+        public List<User> FindUsersByLocation(string city, string state)
+        {
+            return users.Where(u => u.Address.City == city && u.Address.State == state).ToList();
+        }
+
+        public List<User> FindUsersByOrganization(string orgnanization)
+        {
+            return users.Where(u => u.Organization.Contains(orgnanization)).ToList();
         }
     }
 }

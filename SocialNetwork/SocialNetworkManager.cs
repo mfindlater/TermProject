@@ -66,5 +66,20 @@ namespace SocialNetwork
 
             return securityQuestion;
         }
+
+        public List<User> FindUsersByName(string name)
+        {
+            return repository.FindUsersByName(name);
+        }
+
+        public List<User> FindUsersByLocation(string city, string state)
+        {
+            return repository.FindUsersByLocation(city, state);
+        }
+
+        public List<User> FindUsersByOrganization(string organization)
+        {
+            return repository.FindUsersByOrganization(organization);
+        }
     }
 }
