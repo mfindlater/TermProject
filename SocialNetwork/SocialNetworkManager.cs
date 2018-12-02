@@ -81,5 +81,10 @@ namespace SocialNetwork
         {
             return repository.FindUsersByOrganization(organization);
         }
+
+        public List<Friend> GetFriends(string email)
+        {
+            return repository.GetFriends(email);
+        }
     }
 }

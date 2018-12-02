@@ -59,17 +59,139 @@ namespace SocialNetwork
 
         public List<User> FindUsersByLocation(string city, string state)
         {
-            throw new NotImplementedException();
+            var users = new List<User>();
+
+            try
+            {
+                var command = new SqlCommand("TP_FindUsersByLocation")
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddWithValue("@City", city);
+                command.Parameters.AddWithValue("@State", state);
+
+                var ds = db.GetDataSetUsingCmdObj(command);
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for(int i=0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        var user = GetUserFromRow(i);
+                        users.Add(user);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return users;
         }
 
         public List<User> FindUsersByName(string name)
         {
-            throw new NotImplementedException();
+            var users = new List<User>();
+
+            try
+            {
+                var command = new SqlCommand("TP_FindUsersByName")
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddWithValue("@Name", name);
+
+                var ds = db.GetDataSetUsingCmdObj(command);
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        var user = GetUserFromRow(i);
+                        users.Add(user);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return users;
         }
 
-        public List<User> FindUsersByOrganization(string orgnanization)
+        public List<User> FindUsersByOrganization(string organization)
         {
-            throw new NotImplementedException();
+            var users = new List<User>();
+
+            try
+            {
+                var command = new SqlCommand("TP_FindUsersByOrganization")
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddWithValue("@Organization", organization);
+
+                var ds = db.GetDataSetUsingCmdObj(command);
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        var user = GetUserFromRow(i);
+                        users.Add(user);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return users;
+        }
+
+        public List<Friend> GetFriends(string email)
+        {
+            var friends = new List<Friend>();
+
+            try
+            {
+                var command = new SqlCommand("TP_GetFriends")
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddWithValue("@Email", email);
+
+                var ds = db.GetDataSetUsingCmdObj(command);
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        var user = GetUserFromRow(i);
+
+                        var friend = new Friend()
+                        {
+                            Name = user.Name,
+                            ProfilePhotoURL = user.ProfilePhotoURL,
+                            UserId = user.UserId
+                        };
+
+                        friends.Add(friend);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return friends;
         }
 
         public string GetPassword(string email)
@@ -119,28 +241,7 @@ namespace SocialNetwork
                 {
                     var binaryFormatter = new BinaryFormatter();
 
-                    var user = new User()
-                    {
-                        UserId = Convert.ToInt32(db.GetField("UserID", 0)),
-                        Name = db.GetField("Name", 0).ToString(),
-                        EncryptedPassword = db.GetField("Password", 0).ToString(),
-                        BirthDate = DateTime.Parse(db.GetField("BirthDate", 0).ToString()),
-                        ContactInfo = new ContactInfo()
-                        {
-                            Email = db.GetField("Email", 0).ToString(),
-                            Phone = db.GetField("Phone", 0).ToString()
-                        },
-                        Address = new Address()
-                        {
-                            AddressLine1 = db.GetField("AddressLine1", 0).ToString(),
-                            AddressLine2 = db.GetField("AddressLine2", 0).ToString(),
-                            City = db.GetField("City", 0).ToString(),
-                            PostalCode = db.GetField("PostalCode", 0).ToString(),
-                            State = db.GetField("State", 0).ToString()
-                        },
-                        ProfilePhotoURL = db.GetField("URL", 0).ToString(),
-                        Settings = (UserSettings)binaryFormatter.Deserialize(ms),
-                    };
+                    var user = GetUserFromRow(0);
                     return user;
                 }
             }
@@ -163,6 +264,7 @@ namespace SocialNetwork
                     command.Parameters.AddWithValue("@City",  user.Address.City);
                     command.Parameters.AddWithValue("@State", user.Address.State);
                     command.Parameters.AddWithValue("@PostalCode", user.Address.PostalCode);
+                    command.Parameters.AddWithValue("@Organization", user.Organization);
 
                     var binaryFormatter = new BinaryFormatter();
                     binaryFormatter.Serialize(ms, user.Settings);
@@ -183,6 +285,41 @@ namespace SocialNetwork
             }
 
             return false;
+        }
+
+        private User GetUserFromRow(int row)
+        {
+            byte[] settings = (byte[])db.GetField("Settings", row);
+
+            using (var ms = new MemoryStream(settings))
+            {
+                var binaryFormatter = new BinaryFormatter();
+
+                var user = new User()
+                {
+                    UserId = Convert.ToInt32(db.GetField("UserID", row)),
+                    Name = db.GetField("Name", row).ToString(),
+                    EncryptedPassword = db.GetField("Password", row).ToString(),
+                    BirthDate = DateTime.Parse(db.GetField("BirthDate", row).ToString()),
+                    ContactInfo = new ContactInfo()
+                    {
+                        Email = db.GetField("Email", row).ToString(),
+                        Phone = db.GetField("Phone", row).ToString()
+                    },
+                    Address = new Address()
+                    {
+                        AddressLine1 = db.GetField("AddressLine1", row).ToString(),
+                        AddressLine2 = db.GetField("AddressLine2", row).ToString(),
+                        City = db.GetField("City", row).ToString(),
+                        PostalCode = db.GetField("PostalCode", row).ToString(),
+                        State = db.GetField("State", row).ToString()
+                    },
+                    Organization = db.GetField("Organization", row).ToString(),
+                    ProfilePhotoURL = db.GetField("URL", row).ToString(),
+                    Settings = (UserSettings)binaryFormatter.Deserialize(ms),
+                };
+                return user;
+            }
         }
     }
 }

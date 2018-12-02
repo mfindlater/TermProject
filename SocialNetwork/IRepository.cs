@@ -13,5 +13,6 @@ namespace SocialNetwork
         List<User> FindUsersByName(string name);
         List<User> FindUsersByLocation(string city, string state);
         List<User> FindUsersByOrganization(string orgnanization);
+        List<Friend> GetFriends(string email);
     }
 }
