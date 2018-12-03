@@ -55,7 +55,12 @@ namespace TermProjectWS.Controllers
         [HttpGet("profile")]
         public User GetProfile([FromQuery]string requestingUsername, [FromQuery]string requestedUsername, [FromQuery]string verificationToken)
         {
-            return null;
+            if (socialNetworkManager.AreFriends(requestingUsername, requestedUsername, Guid.Parse(verificationToken)))
+            {
+                return socialNetworkManager.GetUser(requestedUsername);
+            }
+
+            return null; 
         }
 
         [HttpGet("photos")] 
