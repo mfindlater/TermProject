@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Data.SqlClient;
 using System.Data;
-using System.IO;
-using Utilities;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using Utilities;
 
 namespace SocialNetwork
 {
@@ -32,7 +31,7 @@ namespace SocialNetwork
             command.Parameters.AddWithValue("@RequestEmail", requestEmail);
 
             int result = db.DoUpdateUsingCmdObj(command);
-   
+
             return (result != -1);
         }
 
@@ -45,7 +44,7 @@ namespace SocialNetwork
                     var command = new SqlCommand("TP_CreateUser") { CommandType = CommandType.StoredProcedure };
 
                     command.Parameters.AddWithValue("@Password", EncryptionManager.Encrypt(registerInfo.Password));
-                    command.Parameters.AddWithValue("@Name", registerInfo.Name); 
+                    command.Parameters.AddWithValue("@Name", registerInfo.Name);
                     command.Parameters.AddWithValue("@Email", registerInfo.ContactInfo.Email);
                     command.Parameters.AddWithValue("@Phone", registerInfo.ContactInfo.Phone);
                     command.Parameters.AddWithValue("@AddressLine1", registerInfo.Address.AddressLine1);
@@ -70,7 +69,8 @@ namespace SocialNetwork
                     return (result != -1);
 
                 }
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
@@ -107,7 +107,7 @@ namespace SocialNetwork
 
                 if (ds.Tables[0].Rows.Count > 0)
                 {
-                    for(int i=0; i < ds.Tables[0].Rows.Count; i++)
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
                         var user = GetUserFromRow(i);
                         users.Add(user);
@@ -240,13 +240,13 @@ namespace SocialNetwork
                 var ds = db.GetDataSetUsingCmdObj(command);
 
 
-                if(ds.Tables[0].Rows.Count > 0)
+                if (ds.Tables[0].Rows.Count > 0)
                 {
                     string password = EncryptionManager.Decrypt(db.GetField("Password", 0).ToString());
                     return password;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
@@ -265,7 +265,7 @@ namespace SocialNetwork
 
             var ds = db.GetDataSetUsingCmdObj(command);
 
-            if(ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables[0].Rows.Count > 0)
             {
                 byte[] settings = (byte[])db.GetField("Settings", 0);
 
@@ -280,14 +280,21 @@ namespace SocialNetwork
             return null;
         }
 
-        public bool IsFriend(string user1Email, string user2Email, string verificationToken)
+        public bool IsFriend(string user1Email, string user2Email, Guid verificationToken)
         {
-            var command = new SqlCommand("TP_IsFriend", db.GetConnection()) { CommandType = CommandType.StoredProcedure };
+
+            var command = new SqlCommand("TP_IsFriend") { CommandType = CommandType.StoredProcedure };
+
             command.Parameters.AddWithValue("@User1Email", user1Email);
             command.Parameters.AddWithValue("@User2Email", user2Email);
-            command.Parameters.AddWithValue("@VerificationToken", Guid.Parse(verificationToken));
+            command.Parameters.AddWithValue("@VerificationToken", verificationToken);
 
-            bool result = (bool)command.ExecuteScalar();
+            var isFriendParam = new SqlParameter("@IsFriend", SqlDbType.Bit) { Direction = ParameterDirection.ReturnValue };
+            command.Parameters.Add(isFriendParam);
+
+            db.GetDataSetUsingCmdObj(command);
+
+            bool result = Convert.ToBoolean(isFriendParam.Value);
 
             return result;
         }
@@ -300,12 +307,12 @@ namespace SocialNetwork
                 {
                     var command = new SqlCommand("TP_UpdateUser") { CommandType = CommandType.StoredProcedure };
 
-                    command.Parameters.AddWithValue("@Name", user.Name); 
+                    command.Parameters.AddWithValue("@Name", user.Name);
                     command.Parameters.AddWithValue("@Email", user.ContactInfo.Email);
                     command.Parameters.AddWithValue("@Phone", user.ContactInfo.Phone);
                     command.Parameters.AddWithValue("@AddressLine1", user.Address.AddressLine1);
                     command.Parameters.AddWithValue("@AddressLine2", user.Address.AddressLine2);
-                    command.Parameters.AddWithValue("@City",  user.Address.City);
+                    command.Parameters.AddWithValue("@City", user.Address.City);
                     command.Parameters.AddWithValue("@State", user.Address.State);
                     command.Parameters.AddWithValue("@PostalCode", user.Address.PostalCode);
                     command.Parameters.AddWithValue("@Organization", user.Organization);

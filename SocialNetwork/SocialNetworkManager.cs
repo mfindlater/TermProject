@@ -86,5 +86,10 @@ namespace SocialNetwork
         {
             return repository.GetFriends(email);
         }
+
+        public bool AreFriends(string userEmail1, string userEmail2, Guid verificationToken)
+        {
+            return repository.IsFriend(userEmail1, userEmail2, verificationToken);
+        }
     }
 }

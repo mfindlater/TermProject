@@ -10,12 +10,12 @@ namespace TermProjectWS.Controllers
 {
     [Produces("application/json")]
     [Route("api/SocialNetworkService")]
-    public class UsersController : Controller
+    public class SocialNetworkServiceController : Controller
     {
         private readonly IRepository repository;
         private readonly SocialNetworkManager socialNetworkManager;
         
-        public UsersController(IRepository repository)
+        public SocialNetworkServiceController(IRepository repository)
         {
             this.repository = repository;
             socialNetworkManager = new SocialNetworkManager(repository);
@@ -42,10 +42,13 @@ namespace TermProjectWS.Controllers
         [HttpGet("friends")]
         public List<Friend> GetFriends([FromQuery]string requestingUsername, [FromQuery]string requestedUsername, [FromQuery]string verificationToken)
         {
-            var requestedUser = socialNetworkManager.GetUser(requestedUsername);
+            var friends = new List<Friend>();
 
-            var friends = socialNetworkManager.GetFriends(requestedUsername);
-      
+            if(socialNetworkManager.AreFriends(requestingUsername, requestedUsername, Guid.Parse(verificationToken)))
+            {
+                friends = socialNetworkManager.GetFriends(requestedUsername);
+            }
+
             return friends;
         }
 
@@ -56,7 +59,7 @@ namespace TermProjectWS.Controllers
         }
 
         [HttpGet("photos")] 
-        public IEnumerator<object> GetPhotos([FromQuery]string requestingUsername, [FromQuery]string requestedUsername, [FromQuery]string verificationToken)
+        public List<Photo> GetPhotos([FromQuery]string requestingUsername, [FromQuery]string requestedUsername, [FromQuery]string verificationToken)
         {
             return null;
         }
