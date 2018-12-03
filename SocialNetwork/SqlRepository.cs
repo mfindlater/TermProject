@@ -274,6 +274,7 @@ namespace SocialNetwork
                     var binaryFormatter = new BinaryFormatter();
 
                     var user = GetUserFromRow(0);
+                 
                     return user;
                 }
             }
@@ -338,6 +339,36 @@ namespace SocialNetwork
             return false;
         }
 
+        private List<Photo> GetPhotos(string email)
+        {
+            var command = new SqlCommand("TP_GetPhotos")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+
+            var ds = db.GetDataSetUsingCmdObj(command);
+
+            var photos = new List<Photo>();
+
+            for(int i=0; i < ds.Tables[0].Rows.Count;i++)
+            {
+                var photo = new Photo()
+                {
+                    PhotoID = Convert.ToInt32(db.GetField("PhotoID", i)),
+                    UserID = Convert.ToInt32(db.GetField("UserID", i)),
+                    URL = db.GetField("URL", 0).ToString(),
+                    Description = db.GetField("Description", 0).ToString(),
+                    PostedDate = DateTime.Parse(db.GetField("PostedDate",i).ToString())
+                };
+                photos.Add(photo);
+            }
+
+            return photos;
+
+        }
+
         private User GetUserFromRow(int row)
         {
             byte[] settings = (byte[])db.GetField("Settings", row);
@@ -369,6 +400,8 @@ namespace SocialNetwork
                     ProfilePhotoURL = db.GetField("URL", row).ToString(),
                     Settings = (UserSettings)binaryFormatter.Deserialize(ms),
                 };
+
+                user.Photos = GetPhotos(user.ContactInfo.Email);
                 return user;
             }
         }

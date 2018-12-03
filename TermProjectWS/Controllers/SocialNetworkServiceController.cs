@@ -66,7 +66,14 @@ namespace TermProjectWS.Controllers
         [HttpGet("photos")] 
         public List<Photo> GetPhotos([FromQuery]string requestingUsername, [FromQuery]string requestedUsername, [FromQuery]string verificationToken)
         {
-            return null;
+            var photos = new List<Photo>();
+
+            if (socialNetworkManager.AreFriends(requestingUsername, requestedUsername, Guid.Parse(verificationToken)))
+            {
+                photos = socialNetworkManager.GetUser(requestedUsername).Photos;
+            }
+
+            return photos;
         }
 
         [HttpGet("newsfeed")]
