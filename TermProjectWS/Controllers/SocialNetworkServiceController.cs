@@ -77,9 +77,16 @@ namespace TermProjectWS.Controllers
         }
 
         [HttpGet("newsfeed")]
-        public IEnumerator<object> GetNewsFeed([FromQuery]string requestingUsername, [FromQuery]string requestedUsername, [FromQuery]string verificationToken)
+        public List<NewsFeedPost> GetNewsFeed([FromQuery]string requestingUsername, [FromQuery]string requestedUsername, [FromQuery]string verificationToken)
         {
-            return null;
+            var newsFeed = new List<NewsFeedPost>();
+
+            if (socialNetworkManager.AreFriends(requestingUsername, requestedUsername, Guid.Parse(verificationToken)))
+            {
+                newsFeed = socialNetworkManager.GetNewsFeed(requestedUsername);
+            }
+
+            return newsFeed;
         }
     }
 }

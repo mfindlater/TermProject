@@ -18,5 +18,6 @@ namespace SocialNetwork
         bool AcceptFriendRequest(string userEmail, string requestEmail);
         bool DeclineFriendRequest(string userEmail, string requestEmail);
         bool IsFriend(string user1Email, string user2Email, Guid verificationToken);
+        List<NewsFeedPost> GetNewsFeed(string email);
     }
 }

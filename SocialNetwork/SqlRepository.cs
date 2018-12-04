@@ -226,6 +226,13 @@ namespace SocialNetwork
             return friends;
         }
 
+        public List<NewsFeedPost> GetNewsFeed(string email)
+        {
+            var newsFeed = new List<NewsFeedPost>();
+
+            return newsFeed;
+        }
+
         public string GetPassword(string email)
         {
             try

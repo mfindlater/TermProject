@@ -129,5 +129,15 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public bool IsFriend(string user1Email, string user2Email, Guid verificationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<NewsFeedPost> GetNewsFeed(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
