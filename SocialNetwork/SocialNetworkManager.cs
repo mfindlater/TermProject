@@ -92,9 +92,10 @@ namespace SocialNetwork
             return repository.IsFriend(userEmail1, userEmail2, verificationToken);
         }
 
-        public List<NewsFeedPost> GetNewsFeed(string email)
+        public List<Post> GetNewsFeed(string email)
         {
             return repository.GetNewsFeed(email);
         }
+
     }
 }

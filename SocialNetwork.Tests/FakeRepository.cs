@@ -135,7 +135,7 @@ namespace SocialNetwork.Tests
             throw new NotImplementedException();
         }
 
-        public List<NewsFeedPost> GetNewsFeed(string email)
+        public List<Post> GetNewsFeed(string email)
         {
             throw new NotImplementedException();
         }

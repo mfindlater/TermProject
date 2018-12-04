@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork
 {
-    public class NewsFeedPost
+    public class Post
     {
-        public int NewsFeedPostID { get; set; }
+        public int PostID { get; set; }
         public int UserID { get; set; }
         public string Content { get; set; }
         public DateTime PostedDate { get; set; }
+        public string PhotoURL { get; set; }
     }
 }

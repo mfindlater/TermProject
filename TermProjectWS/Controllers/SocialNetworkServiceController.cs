@@ -77,9 +77,9 @@ namespace TermProjectWS.Controllers
         }
 
         [HttpGet("newsfeed")]
-        public List<NewsFeedPost> GetNewsFeed([FromQuery]string requestingUsername, [FromQuery]string requestedUsername, [FromQuery]string verificationToken)
+        public List<Post> GetNewsFeed([FromQuery]string requestingUsername, [FromQuery]string requestedUsername, [FromQuery]string verificationToken)
         {
-            var newsFeed = new List<NewsFeedPost>();
+            var newsFeed = new List<Post>();
 
             if (socialNetworkManager.AreFriends(requestingUsername, requestedUsername, Guid.Parse(verificationToken)))
             {
