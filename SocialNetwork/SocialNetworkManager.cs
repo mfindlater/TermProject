@@ -94,9 +94,7 @@ namespace SocialNetwork
 
         public List<NewsFeedPost> GetNewsFeed(string email)
         {
-            var newsFeed = new List<NewsFeedPost>();
-
-            return newsFeed;
+            return repository.GetNewsFeed(email);
         }
     }
 }

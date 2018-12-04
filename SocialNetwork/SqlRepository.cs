@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Web;
 using Utilities;
 
 namespace SocialNetwork
@@ -228,8 +229,30 @@ namespace SocialNetwork
 
         public List<NewsFeedPost> GetNewsFeed(string email)
         {
+
+            var command = new SqlCommand("TP_GetNewsFeed")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+
+            var ds = db.GetDataSetUsingCmdObj(command);
+
             var newsFeed = new List<NewsFeedPost>();
 
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                var newsFeedPost = new NewsFeedPost()
+                {
+                    NewsFeedPostID = Convert.ToInt32(db.GetField("NewsFeedPostID", i)),
+                    UserID = Convert.ToInt32(db.GetField("UserID", i)),
+                    PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString()),
+                    Content = HttpUtility.HtmlEncode(db.GetField("Content",i))
+                };
+                newsFeed.Add(newsFeedPost);
+            }
+      
             return newsFeed;
         }
 
