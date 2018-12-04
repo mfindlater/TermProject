@@ -139,5 +139,10 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public List<Post> GetWall(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

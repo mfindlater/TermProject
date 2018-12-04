@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Util
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork", "SocialNetwork\SocialNetwork.csproj", "{62F36A5A-2AFA-4465-ABC6-3812AB945C57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TermProjectWS", "TermProjectWS\TermProjectWS.csproj", "{50E03E7D-E757-4E6A-9F18-047B7F7CEB98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TermProjectWS", "TermProjectWS\TermProjectWS.csproj", "{50E03E7D-E757-4E6A-9F18-047B7F7CEB98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
