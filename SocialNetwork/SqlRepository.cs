@@ -240,7 +240,7 @@ namespace SocialNetwork
             return friends;
         }
 
-        public List<NewsFeedPost> GetNewsFeed(string email)
+        public List<Post> GetNewsFeed(string email)
         {
 
             var command = new SqlCommand("TP_GetNewsFeed")
@@ -252,13 +252,13 @@ namespace SocialNetwork
 
             var ds = db.GetDataSetUsingCmdObj(command);
 
-            var newsFeed = new List<NewsFeedPost>();
+            var newsFeed = new List<Post>();
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                var newsFeedPost = new NewsFeedPost()
+                var newsFeedPost = new Post()
                 {
-                    NewsFeedPostID = Convert.ToInt32(db.GetField("NewsFeedPostID", i)),
+                    PostID = Convert.ToInt32(db.GetField("PostID", i)),
                     UserID = Convert.ToInt32(db.GetField("UserID", i)),
                     PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString()),
                     Content = HttpUtility.HtmlEncode(db.GetField("Content", i))
@@ -527,6 +527,11 @@ namespace SocialNetwork
                 user.ProfilePhotoURL = db.GetField("URL", row).ToString();
             }
             return user;
+        }
+
+        public List<Post> GetWall(string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }

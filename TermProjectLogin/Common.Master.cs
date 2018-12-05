@@ -36,6 +36,7 @@ namespace TermProjectLogin
                     {
                         user = (User)Session[Constants.UserSession];
                         lblName.Text = user.Name;
+                        imgBtnProfilePhoto.ImageUrl = user.ProfilePhotoURL;
                     }
                     
                     isLoggedIn = user != null;
