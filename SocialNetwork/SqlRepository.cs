@@ -513,8 +513,8 @@ namespace SocialNetwork
                     PostalCode = db.GetField("PostalCode", row).ToString(),
                     State = db.GetField("State", row).ToString()
                 },
-                //Organization = db.GetField("Organization", row).ToString(),
-                //ProfilePhotoURL = db.GetField("URL", row).ToString(),
+                Organization = db.GetField("Organization", row).ToString(),
+                ProfilePhotoURL = db.GetField("URL", row).ToString(),
                 Settings = uSettings,
             };
 
@@ -532,6 +532,24 @@ namespace SocialNetwork
         public List<Post> GetWall(string email)
         {
             throw new NotImplementedException();
+        }
+
+        public Notification CreateNotification(Notification notification)
+        {
+            var command = new SqlCommand("TP_CreateNotification")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@UserID", notification.UserID);
+            command.Parameters.AddWithValue("@URL", notification.URL);
+            command.Parameters.AddWithValue("@Description", notification.Description);
+
+            db.GetDataSetUsingCmdObj(command);
+            notification.NotificationID = Convert.ToInt32(db.GetField("NotificationID", 0));
+            notification.NotificationDate = Convert.ToDateTime(db.GetField("NotificationDate", 0));
+
+            return notification;
         }
     }
 }

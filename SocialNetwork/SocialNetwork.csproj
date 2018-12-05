@@ -48,6 +48,7 @@
     <Compile Include="FriendRequestStatus.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="LoginSettingType.cs" />
+    <Compile Include="Notification.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="PrivacySettingType.cs" />

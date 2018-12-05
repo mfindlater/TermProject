@@ -20,5 +20,6 @@ namespace SocialNetwork
         bool IsFriend(string user1Email, string user2Email, Guid verificationToken);
         List<Post> GetNewsFeed(string email);
         List<Post> GetWall(string email);
+        Notification CreateNotification(Notification notification);
     }
 }
