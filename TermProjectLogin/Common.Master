@@ -34,6 +34,8 @@
                     <asp:ListItem>Name</asp:ListItem>
                     <asp:ListItem>City & State</asp:ListItem>
                     <asp:ListItem>Organization</asp:ListItem>
+                    <asp:ListItem>Likes</asp:ListItem>
+                    <asp:ListItem>Dislikes</asp:ListItem>
                 </asp:DropDownList>
                 <asp:TextBox ID="txtSearch1" runat="server"></asp:TextBox>
                 <asp:TextBox ID="txtSearch2" runat="server" Visible="false"></asp:TextBox>

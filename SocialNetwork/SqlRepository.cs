@@ -487,7 +487,7 @@ namespace SocialNetwork
 
         private User GetUserFromRow(int row)
         {
-            byte[] settings = db.GetBytes("Settings", row);
+            byte[] settings = (byte[])db.GetField("Settings", row);
 
             var ms = new MemoryStream(settings);
 
