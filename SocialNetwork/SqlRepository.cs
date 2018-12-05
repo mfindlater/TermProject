@@ -577,5 +577,52 @@ namespace SocialNetwork
 
             return (result != -1);
         }
+
+        public Notification CreateNotification(Notification notification, string email)
+        {
+            var command = new SqlCommand("TP_CreateNotification")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@URL", notification.URL);
+            command.Parameters.AddWithValue("@Description", notification.Description);
+
+            db.GetDataSetUsingCmdObj(command);
+            notification.NotificationID = Convert.ToInt32(db.GetField("NotificationID", 0));
+            notification.NotificationDate = Convert.ToDateTime(db.GetField("NotificationDate", 0));
+            notification.UserID = Convert.ToInt32(db.GetField("UserID", 0));
+
+            return notification;
+        }
+
+        public List<Notification> GetNotifications(string email)
+        {
+            List<Notification> notifications = new List<Notification>();
+
+            var command = new SqlCommand("TP_GetNotifications")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+            var ds = db.GetDataSetUsingCmdObj(command);
+
+            for(int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                Notification notification = new Notification();
+                notification.NotificationID = Convert.ToInt32(db.GetField("NotificationID", i));
+                notification.UserID = Convert.ToInt32(db.GetField("UserID", i));
+                notification.URL = db.GetField("URL", i).ToString();
+                notification.Description = db.GetField("Description", i).ToString();
+                notification.ReadStatus = Convert.ToBoolean(db.GetField("ReadStatus", i));
+                notification.NotificationDate = Convert.ToDateTime(db.GetField("NotificationDate", i));
+
+                notifications.Add(notification);
+            }
+
+            return notifications;
+        }
     }
 }

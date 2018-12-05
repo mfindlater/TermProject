@@ -23,5 +23,7 @@ namespace SocialNetwork
         bool DeleteLikesDislikes(string email);
         bool AddLike(string email, string text);
         bool AddDislike(string email, string text);
+        Notification CreateNotification(Notification notification, string email);
+        List<Notification> GetNotifications(string email);
     }
 }

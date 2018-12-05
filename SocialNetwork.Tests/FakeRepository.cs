@@ -159,5 +159,15 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public Notification CreateNotification(Notification notification, string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Notification> GetNotifications(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
