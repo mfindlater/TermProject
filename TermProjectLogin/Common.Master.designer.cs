@@ -157,13 +157,22 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.DropDownList ddlSearch;
         
         /// <summary>
-        /// txtSearch control.
+        /// txtSearch1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        protected global::System.Web.UI.WebControls.TextBox txtSearch1;
+        
+        /// <summary>
+        /// txtSearch2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearch2;
         
         /// <summary>
         /// btnSearch control.

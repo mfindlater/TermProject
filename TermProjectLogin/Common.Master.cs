@@ -163,27 +163,69 @@ namespace TermProjectLogin
             Response.Redirect("ForgotPasswordPage.aspx");
         }
 
+        protected void ddlSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlSearch.SelectedValue == "City & State")
+            {
+                txtSearch2.Visible = true;
+            }
+            else
+            {
+                txtSearch2.Visible = false;
+            }
+        }
+
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            string search = txtSearch.Text;
-            if (!string.IsNullOrEmpty(search))
+            string search = ddlSearch.SelectedValue;
+            string requestUriString = "";
+            string input1 = txtSearch1.Text;
+            string input2 = "";
+
+            switch (search)
             {
-                WebRequest request = WebRequest.Create(Constants.RequestUriString + search);
-                WebResponse response = request.GetResponse();
-
-                Stream theDataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(theDataStream);
-                String data = reader.ReadToEnd();
-                reader.Close();
-                response.Close();
-
-                JavaScriptSerializer js = new JavaScriptSerializer();
-                List<User> userList = js.Deserialize<List<User>>(data);
-
-                gvSearchResult.DataSource = userList;
-                gvSearchResult.DataBind();
-                gvSearchResult.Visible = true;
+                case "Name":
+                    requestUriString = Constants.RequestUriByName;
+                    break;
+                case "City & State":
+                    input2 = txtSearch2.Text;
+                    requestUriString = Constants.RequestUriByLocation;
+                    break;
+                case "Organization":
+                    requestUriString = Constants.RequestUriByOrganization;
+                    break;
             }
+
+            WebRequest request = null;
+
+            if (search == "Name" || search == "Organization")
+            {
+                if (!string.IsNullOrEmpty(input1))
+                {
+                    request = WebRequest.Create(requestUriString + input1);
+                }
+            }
+            else if (search == "City & State")
+            {
+                if (!string.IsNullOrEmpty(input1) && !string.IsNullOrEmpty(input2))
+                {
+                    request = WebRequest.Create(requestUriString + input1 + "/" + input2);
+                }
+            }
+            WebResponse response = request.GetResponse();
+
+            Stream theDataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(theDataStream);
+            String data = reader.ReadToEnd();
+            reader.Close();
+            response.Close();
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            List<User> userList = js.Deserialize<List<User>>(data);
+
+            gvSearchResult.DataSource = userList;
+            gvSearchResult.DataBind();
+            gvSearchResult.Visible = true;
         }
     }
 }

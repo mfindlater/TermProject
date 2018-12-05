@@ -92,7 +92,8 @@ namespace SocialNetwork
 
         public List<User> FindUsersByLocation(string city, string state)
         {
-            var users = new List<User>();
+            return FindUsersByLocationTwo(city, state);
+            /*var users = new List<User>();
 
             try
             {
@@ -113,6 +114,10 @@ namespace SocialNetwork
                         var user = GetUserFromRow(i);
                         users.Add(user);
                     }
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        users[i].Photos = GetPhotos(users[i].ContactInfo.Email);
+                    }
                 }
             }
             catch (Exception ex)
@@ -120,7 +125,7 @@ namespace SocialNetwork
                 Debug.WriteLine(ex);
             }
 
-            return users;
+            return users;*/
         }
 
         public List<User> FindUsersByName(string name)
@@ -144,6 +149,10 @@ namespace SocialNetwork
                     {
                         var user = GetUserFromRow(i);
                         users.Add(user);
+                    }
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        users[i].Photos = GetPhotos(users[i].ContactInfo.Email);
                     }
                 }
             }
@@ -176,6 +185,10 @@ namespace SocialNetwork
                     {
                         var user = GetUserFromRow(i);
                         users.Add(user);
+                    }
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        users[i].Photos = GetPhotos(users[i].ContactInfo.Email);
                     }
                 }
             }
@@ -248,11 +261,11 @@ namespace SocialNetwork
                     NewsFeedPostID = Convert.ToInt32(db.GetField("NewsFeedPostID", i)),
                     UserID = Convert.ToInt32(db.GetField("UserID", i)),
                     PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString()),
-                    Content = HttpUtility.HtmlEncode(db.GetField("Content",i))
+                    Content = HttpUtility.HtmlEncode(db.GetField("Content", i))
                 };
                 newsFeed.Add(newsFeedPost);
             }
-      
+
             return newsFeed;
         }
 
@@ -304,7 +317,8 @@ namespace SocialNetwork
                     var binaryFormatter = new BinaryFormatter();
 
                     var user = GetUserFromRow(0);
-                 
+                    user.Photos = GetPhotos(user.ContactInfo.Email);
+
                     return user;
                 }
             }
@@ -382,7 +396,7 @@ namespace SocialNetwork
 
             var photos = new List<Photo>();
 
-            for(int i=0; i < ds.Tables[0].Rows.Count;i++)
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 var photo = new Photo()
                 {
@@ -390,7 +404,7 @@ namespace SocialNetwork
                     UserID = Convert.ToInt32(db.GetField("UserID", i)),
                     URL = db.GetField("URL", 0).ToString(),
                     Description = db.GetField("Description", 0).ToString(),
-                    PostedDate = DateTime.Parse(db.GetField("PostedDate",i).ToString())
+                    PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString())
                 };
                 photos.Add(photo);
             }
@@ -399,41 +413,120 @@ namespace SocialNetwork
 
         }
 
-        private User GetUserFromRow(int row)
+        public List<User> FindUsersByLocationTwo(string city, string state)
         {
-            byte[] settings = (byte[])db.GetField("Settings", row);
+            var users = new List<User>();
 
-            using (var ms = new MemoryStream(settings))
+            try
             {
-                var binaryFormatter = new BinaryFormatter();
-
-                var user = new User()
+                var connection = db.GetConnection();
+                var command = new SqlCommand("TP_FindUsersByLocation", connection)
                 {
-                    UserId = Convert.ToInt32(db.GetField("UserID", row)),
-                    Name = db.GetField("Name", row).ToString(),
-                    EncryptedPassword = db.GetField("Password", row).ToString(),
-                    BirthDate = DateTime.Parse(db.GetField("BirthDate", row).ToString()),
-                    ContactInfo = new ContactInfo()
-                    {
-                        Email = db.GetField("Email", row).ToString(),
-                        Phone = db.GetField("Phone", row).ToString()
-                    },
-                    Address = new Address()
-                    {
-                        AddressLine1 = db.GetField("AddressLine1", row).ToString(),
-                        AddressLine2 = db.GetField("AddressLine2", row).ToString(),
-                        City = db.GetField("City", row).ToString(),
-                        PostalCode = db.GetField("PostalCode", row).ToString(),
-                        State = db.GetField("State", row).ToString()
-                    },
-                    Organization = db.GetField("Organization", row).ToString(),
-                    ProfilePhotoURL = db.GetField("URL", row).ToString(),
-                    Settings = (UserSettings)binaryFormatter.Deserialize(ms),
+                    CommandType = CommandType.StoredProcedure
                 };
 
-                user.Photos = GetPhotos(user.ContactInfo.Email);
-                return user;
+                command.Parameters.AddWithValue("@City", city);
+                command.Parameters.AddWithValue("@State", state);
+                connection.Open();
+
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var user = GetUserFromRow(reader);
+                    users.Add(user);
+                }
+                reader.Close();
+                connection.Close();
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return users;
+        }
+
+        private User GetUserFromRow(SqlDataReader reader)
+        {
+
+            //byte[] settings = (byte[])reader.GetValue(12);
+
+            //var ms = new MemoryStream(settings);
+            var stream = reader.GetStream(12);
+
+            var binaryFormatter = new BinaryFormatter();
+            long count = stream.Length;
+            var uSettings = (UserSettings)binaryFormatter.Deserialize(stream);
+
+            var user = new User()
+            {
+                UserId = Convert.ToInt32(reader["UserID"]),
+                Name = reader["Name"].ToString(),
+                EncryptedPassword = reader["Password"].ToString(),
+                BirthDate = DateTime.Parse(reader["BirthDate"].ToString()),
+                ContactInfo = new ContactInfo()
+                {
+                    Email = reader["Email"].ToString(),
+                    Phone = reader["Phone"].ToString()
+                },
+                Address = new Address()
+                {
+                    AddressLine1 = reader["AddressLine1"].ToString(),
+                    AddressLine2 = reader["AddressLine2"].ToString(),
+                    City = reader["City"].ToString(),
+                    PostalCode = reader["PostalCode"].ToString(),
+                    State = reader["State"].ToString()
+                },
+                Organization = reader["Organization"].ToString(),
+                ProfilePhotoURL = reader["URL"].ToString(),
+                Settings = uSettings,
+            };
+            return user;
+        }
+
+        private User GetUserFromRow(int row)
+        {
+            byte[] settings = db.GetBytes("Settings", row);
+
+            var ms = new MemoryStream(settings);
+
+            var binaryFormatter = new BinaryFormatter();
+            var uSettings = (UserSettings)binaryFormatter.Deserialize(ms);
+
+            var user = new User()
+            {
+                UserId = Convert.ToInt32(db.GetField("UserID", row)),
+                Name = db.GetField("Name", row).ToString(),
+                EncryptedPassword = db.GetField("Password", row).ToString(),
+                BirthDate = DateTime.Parse(db.GetField("BirthDate", row).ToString()),
+                ContactInfo = new ContactInfo()
+                {
+                    Email = db.GetField("Email", row).ToString(),
+                    Phone = db.GetField("Phone", row).ToString()
+                },
+                Address = new Address()
+                {
+                    AddressLine1 = db.GetField("AddressLine1", row).ToString(),
+                    AddressLine2 = db.GetField("AddressLine2", row).ToString(),
+                    City = db.GetField("City", row).ToString(),
+                    PostalCode = db.GetField("PostalCode", row).ToString(),
+                    State = db.GetField("State", row).ToString()
+                },
+                //Organization = db.GetField("Organization", row).ToString(),
+                //ProfilePhotoURL = db.GetField("URL", row).ToString(),
+                Settings = uSettings,
+            };
+
+            if (db.GetField("Organization", row) != null)
+            {
+                user.Organization = db.GetField("Organization", row).ToString();
+            }
+            if (db.GetField("URL", row) != null)
+            {
+                user.ProfilePhotoURL = db.GetField("URL", row).ToString();
+            }
+            return user;
         }
     }
 }

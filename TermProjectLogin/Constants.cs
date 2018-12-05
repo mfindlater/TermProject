@@ -20,6 +20,8 @@ namespace TermProjectLogin
         public static string[] SecurityQuestion3 = { "What is your favorite team?", "What was your childhood nickname?",
             "In what city was your first full time job?", "What primary school did you attend?", "What is your oldest sibling's middle name?" };
 
-        public const string RequestUriString = "http://localhost:49884/api/SocialNetworkService/searchByName/";
+        public const string RequestUriByName = "http://localhost:49884/api/SocialNetworkService/searchByName/";
+        public const string RequestUriByLocation = "http://localhost:49884/api/SocialNetworkService/searchByLocation/";
+        public const string RequestUriByOrganization = "http://localhost:49884/api/SocialNetworkService/searchByOrganization/";
     }
 }
