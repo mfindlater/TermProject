@@ -27,6 +27,7 @@
             <asp:Panel ID="pnLoggedIn" runat="server" Visible="False">
                 <asp:ImageButton ID="imgBtnProfilePhoto" runat="server" ImageUrl="~/img/person_temp.jpg" OnClick="imgBtnProfilePhoto_Click" Width="100px" Height="130px"/>
                 <asp:Label ID="lblName" runat="server"></asp:Label>
+                <asp:Button ID="btnNotification" runat="server" Text="Notification" OnClick="btnNotification_Click" />
                 <asp:Button ID="btnSettings" runat="server" Text="Settings" OnClick="btnSettings_Click" />
                 <asp:Button ID="btnLogOut" runat="server" Text="Log Out" OnClick="btnLogOut_Click" />
             </asp:Panel>

@@ -229,5 +229,10 @@ namespace TermProjectLogin
             gvSearchResult.DataBind();
             gvSearchResult.Visible = true;
         }
+
+        protected void btnNotification_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("NotificationPage.aspx");
+        }
     }
 }
