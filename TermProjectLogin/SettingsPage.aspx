@@ -16,12 +16,27 @@
         <asp:TextBox ID="txtState" runat="server"></asp:TextBox><br />
         <asp:Label ID="lblPostalCode" runat="server" Text="Postal Code:"></asp:Label>
         <asp:TextBox ID="txtPostalCode" runat="server"></asp:TextBox><br />
+        <asp:Panel ID="pnProfile" runat="server">
+            <asp:Label ID="lblOrganization" runat="server" Text="Organization:"></asp:Label>
+            <br />
+            <asp:TextBox ID="txtOrganization" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="lblLikes" runat="server" Text="Likes:"></asp:Label>
+            <br />
+            <asp:TextBox ID="txtLikes" runat="server" TextMode="MultiLine"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="lblDislike" runat="server" Text="Dislikes:"></asp:Label>
+            <br />
+            <asp:TextBox ID="txtDislikes" runat="server" TextMode="MultiLine"></asp:TextBox>
+        </asp:Panel>
         <br />
         <asp:Label ID="lblSecurityQuestion" runat="server" Text="Security Question"></asp:Label><br />
         <asp:DropDownList ID="ddlSecurityQuestion1" runat="server"></asp:DropDownList><br />
         <asp:Label ID="lblAnswer1" runat="server" Text="Answer:"></asp:Label>
         <asp:TextBox ID="txtSecurityQuestion1" runat="server"></asp:TextBox><br />
-        <asp:DropDownList ID="ddlSecurityQuestion2" runat="server"></asp:DropDownList><br />
+        <asp:DropDownList ID="ddlSecurityQuestion2" runat="server"></asp:DropDownList>&nbsp;<br />
         <asp:Label ID="lblAnswer2" runat="server" Text="Answer:"></asp:Label>
         <asp:TextBox ID="txtSecurityQuestion2" runat="server"></asp:TextBox><br />
         <asp:DropDownList ID="ddlSecurityQuestion3" runat="server"></asp:DropDownList><br />

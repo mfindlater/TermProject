@@ -27,6 +27,7 @@ namespace TermProjectLogin
                 txtPostalCode.Text = user.Address.PostalCode;
                 txtState.Text = user.Address.State;
                 txtPhone.Text = user.ContactInfo.Phone;
+                txtOrganization.Text = user.Organization;
 
                 var privacyNames = Enum.GetNames(typeof(PrivacySettingType));
                 var privacyValues = Enum.GetValues(typeof(PrivacySettingType));
@@ -80,6 +81,7 @@ namespace TermProjectLogin
                 user.Address.PostalCode = txtPostalCode.Text;
                 user.Address.State = txtState.Text;
                 user.ContactInfo.Phone = txtPhone.Text;
+                user.Organization = txtOrganization.Text;
 
                 var sq1 = new SecurityQuestion()
                 {

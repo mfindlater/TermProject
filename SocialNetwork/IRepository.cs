@@ -20,5 +20,8 @@ namespace SocialNetwork
         bool IsFriend(string user1Email, string user2Email, Guid verificationToken);
         List<Post> GetNewsFeed(string email);
         List<Post> GetWall(string email);
+        bool DeleteLikesDislikes(string email);
+        bool AddLike(string email, string text);
+        bool AddDislike(string email, string text);
     }
 }

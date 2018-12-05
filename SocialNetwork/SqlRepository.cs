@@ -513,8 +513,8 @@ namespace SocialNetwork
                     PostalCode = db.GetField("PostalCode", row).ToString(),
                     State = db.GetField("State", row).ToString()
                 },
-                //Organization = db.GetField("Organization", row).ToString(),
-                //ProfilePhotoURL = db.GetField("URL", row).ToString(),
+                Organization = db.GetField("Organization", row).ToString(),
+                ProfilePhotoURL = db.GetField("URL", row).ToString(),
                 Settings = uSettings,
             };
 
@@ -532,6 +532,50 @@ namespace SocialNetwork
         public List<Post> GetWall(string email)
         {
             throw new NotImplementedException();
+        }
+
+        public bool DeleteLikesDislikes(string email)
+        {
+            var command = new SqlCommand("TP_DeleteLikesDislikes")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return (result != -1);
+        }
+
+        public bool AddLike(string email, string text)
+        {
+            var command = new SqlCommand("TP_AddLike")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Text", text);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return (result != -1);
+        }
+
+        public bool AddDislike(string email, string text)
+        {
+            var command = new SqlCommand("TP_AddDislike")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Text", text);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return (result != -1);
         }
     }
 }

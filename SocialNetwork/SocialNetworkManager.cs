@@ -97,5 +97,23 @@ namespace SocialNetwork
             return repository.GetNewsFeed(email);
         }
 
+        public void UpdateLikesDislikes(string email, string[] likes, string[] dislikes)
+        {
+                if (repository.DeleteLikesDislikes(email))
+                {
+                    foreach (var like in likes)
+                    {
+                        repository.AddLike(email, like);
+                    }
+
+                    foreach (var dislike in dislikes)
+                    {
+                        repository.AddDislike(email, dislike);
+                    }
+                }
+        }
+
+       
+
     }
 }

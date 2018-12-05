@@ -144,5 +144,20 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public bool DeleteLikesDislikes(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddLike(string email, string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddDislike(string email, string text)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
