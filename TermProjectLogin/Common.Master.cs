@@ -35,6 +35,7 @@ namespace TermProjectLogin
                     if (Session[Constants.UserSession] != null)
                     {
                         user = (User)Session[Constants.UserSession];
+                        lblName.Text = user.Name;
                     }
                     
                     isLoggedIn = user != null;
