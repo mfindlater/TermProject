@@ -27,5 +27,6 @@ namespace SocialNetwork
         string GetDislikes(string email);
         Notification CreateNotification(Notification notification, string email);
         List<Notification> GetNotifications(string email);
+        bool ReadNotification(int notificationID);
     }
 }

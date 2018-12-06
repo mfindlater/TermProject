@@ -115,5 +115,10 @@ namespace SocialNetwork
                     }
                 }
         }
+
+        public bool ReadNotification(int notificationID)
+        {
+            return repository.ReadNotification(notificationID);
+        }
     }
 }

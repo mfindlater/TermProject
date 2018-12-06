@@ -677,5 +677,18 @@ namespace SocialNetwork
 
             return dislikes;
         }
+
+        public bool ReadNotification(int notificationID)
+        {
+            var command = new SqlCommand("TP_ReadNotification")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@NotificationID", notificationID);
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return result != -1;
+        }
     }
 }
