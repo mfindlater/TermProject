@@ -93,7 +93,6 @@ namespace TermProjectLogin
                 user.Address.State = txtState.Text;
                 user.ContactInfo.Phone = txtPhone.Text;
                 user.Organization = txtOrganization.Text;
-               
 
                 var sq1 = new SecurityQuestion()
                 {
@@ -171,8 +170,9 @@ namespace TermProjectLogin
                 photo.URL = Constants.StorageURL + filename;
                 photo.Description = "Profile Photo";
 
-                socialNetworkManager.AddPhoto(photo, user.ContactInfo.Email);
-
+                photo = socialNetworkManager.AddPhoto(photo, user.ContactInfo.Email);
+                user.ProfilePhotoID = photo.PhotoID;
+                Session.SetUser(user);
             }
             else
             {
