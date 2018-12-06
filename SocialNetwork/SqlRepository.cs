@@ -92,8 +92,7 @@ namespace SocialNetwork
 
         public List<User> FindUsersByLocation(string city, string state)
         {
-            return FindUsersByLocationTwo(city, state);
-            /*var users = new List<User>();
+            var users = new List<User>();
 
             try
             {
@@ -125,7 +124,7 @@ namespace SocialNetwork
                 Debug.WriteLine(ex);
             }
 
-            return users;*/
+            return users;
         }
 
         public List<User> FindUsersByName(string name)
@@ -724,14 +723,76 @@ namespace SocialNetwork
             return email;
         }
 
-        public List<User> FindUsersByLikes(string like)
+        public List<User> FindUsersByLike(string like)
         {
-            throw new NotImplementedException();
+            var users = new List<User>();
+
+            try
+            {
+                var command = new SqlCommand("TP_FindUsersByLike")
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddWithValue("@Text", like);
+
+                var ds = db.GetDataSetUsingCmdObj(command);
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        var user = GetUserFromRow(i);
+                        users.Add(user);
+                    }
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        users[i].Photos = GetPhotos(users[i].ContactInfo.Email);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return users;
         }
 
-        public List<User> FindUsersByDislikes(string dislike)
+        public List<User> FindUsersByDislike(string dislike)
         {
-            throw new NotImplementedException();
+            var users = new List<User>();
+
+            try
+            {
+                var command = new SqlCommand("TP_FindUsersByDislike")
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddWithValue("@Text", dislike);
+
+                var ds = db.GetDataSetUsingCmdObj(command);
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        var user = GetUserFromRow(i);
+                        users.Add(user);
+                    }
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        users[i].Photos = GetPhotos(users[i].ContactInfo.Email);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return users;
         }
 
         public List<Friend> GetIncomingFriendRequests(string email)
@@ -856,22 +917,68 @@ namespace SocialNetwork
 
         public bool FollowUser(string email, string followerEmail)
         {
-            throw new NotImplementedException();
+            var command = new SqlCommand("TP_FollowUser")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@ToEmail",followerEmail);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return (result != -1);
         }
 
         public bool UnfollowUser(string email, string followerEmail)
         {
-            throw new NotImplementedException();
+            var command = new SqlCommand("TP_UnfollowUser")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@ToEmail", followerEmail);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return (result != -1);
         }
 
         public Chat CreateChat(string fromEmail, string toEmail)
         {
-            throw new NotImplementedException();
+            var command = new SqlCommand("TP_CreateChat")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            var parameter = new SqlParameter("@ChatID", SqlDbType.Int);
+           
+            db.DoUpdateUsingCmdObj(command);
+
+            Chat chat = new Chat
+            {
+                ChatID = Convert.ToInt32(parameter.Value)
+            };
+
+            return chat;
         }
 
         public bool SendMessage(ChatMessage message)
         {
-            throw new NotImplementedException();
+            var command = new SqlCommand("TP_SendMessage")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@ChatID", message.ChatID);
+            command.Parameters.AddWithValue("@FromEmail", message.FromEmail);
+            command.Parameters.AddWithValue("@ToEmail", message.ToEmail);
+            command.Parameters.AddWithValue("@Message", message.Message);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return (result != -1);
         }
 
         public bool DeleteMessage(string email, int messageID)

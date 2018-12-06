@@ -12,6 +12,8 @@ namespace SocialNetwork
         public int ChatID { get; set; }
         public int FromUserID { get; set; }
         public int ToUserID { get; set; }
+        public string FromEmail { get; set; }
+        public string ToEmail{ get; set; }
         public string Message { get; set; }
         public DateTime MessageDate { get; set; }
     }

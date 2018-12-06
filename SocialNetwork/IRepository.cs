@@ -13,8 +13,8 @@ namespace SocialNetwork
         List<User> FindUsersByName(string name);
         List<User> FindUsersByLocation(string city, string state);
         List<User> FindUsersByOrganization(string orgnanization);
-        List<User> FindUsersByLikes(string like);
-        List<User> FindUsersByDislikes(string dislike);
+        List<User> FindUsersByLike(string like);
+        List<User> FindUsersByDislike(string dislike);
         List<Friend> GetFriends(string email);
         List<Friend> GetIncomingFriendRequests(string email);
         List<Friend> GetOutgoingFriendRequests(string email);
