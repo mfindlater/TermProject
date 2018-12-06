@@ -161,9 +161,23 @@ namespace TermProjectLogin
             var user = Session.GetUser();
             string filename = "";
 
-            filename = user.UserId + "_" + Path.GetFileName(profilePhotoUpload.PostedFile.FileName);
-            profilePhotoUpload.SaveAs(Constants.StoragePath + filename);
-            lblMsg.Text = "File Uploaded Successfully";
+            if (profilePhotoUpload.HasFile)
+            {
+                filename = user.UserId + "_" + Path.GetFileName(profilePhotoUpload.PostedFile.FileName);
+                profilePhotoUpload.SaveAs(Constants.StoragePath + filename);
+                lblMsg.Text = "File Uploaded Successfully";
+
+                Photo photo = new Photo();
+                photo.URL = Constants.StorageURL + filename;
+                photo.Description = "Profile Photo";
+
+                socialNetworkManager.AddPhoto(photo, user.ContactInfo.Email);
+
+            }
+            else
+            {
+                lblMsg.Text = "Please select a file";
+            }
         }
     }
 }

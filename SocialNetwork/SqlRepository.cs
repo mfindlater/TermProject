@@ -690,5 +690,23 @@ namespace SocialNetwork
 
             return result != -1;
         }
+
+        public Photo AddPhoto(Photo photo, string email)
+        {
+            var command = new SqlCommand("TP_AddPhoto")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@URL", photo.URL);
+            command.Parameters.AddWithValue("@Description", photo.Description);
+
+            db.GetDataSetUsingCmdObj(command);
+            photo.PhotoID = Convert.ToInt32(db.GetField("PhotoID", 0));
+            photo.PostedDate = Convert.ToDateTime(db.GetField("PostedDate", 0));
+
+            return photo;
+        }
     }
 }
