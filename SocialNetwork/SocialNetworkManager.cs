@@ -85,6 +85,16 @@ namespace SocialNetwork
             return repository.FindUsersByOrganization(organization);
         }
 
+        public List<User> FindUsersByLike(string like)
+        {
+            return repository.FindUsersByLike(like);
+        }
+
+        public List<User> FindUsersByDislike(string dislike)
+        {
+            return repository.FindUsersByDislike(dislike);
+        }
+
         public List<Friend> GetFriends(string email)
         {
             return repository.GetFriends(email);
