@@ -4,6 +4,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h1>Account Setting</h1>
     <asp:Panel ID="pnlMoreInfo" runat="server">
+        <asp:FileUpload ID="profilePhotoUpload" runat="server" />
+        <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
+        <asp:Label ID="lblMsg" runat="server"></asp:Label><br />
+        <br />
         <asp:Label ID="lblPhone" runat="server" Text="Phone:"></asp:Label>
         <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox><br />
         <asp:Label ID="lblAddressLine1" runat="server" Text="Address Line 1:"></asp:Label>

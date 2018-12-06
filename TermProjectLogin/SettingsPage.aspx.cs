@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace TermProjectLogin
 {
@@ -153,6 +154,16 @@ namespace TermProjectLogin
                     lblMessage.Text = "User Settings Saved!";
                 }
             }
+        }
+
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            var user = Session.GetUser();
+            string filename = "";
+
+            filename = user.UserId + "_" + Path.GetFileName(profilePhotoUpload.PostedFile.FileName);
+            profilePhotoUpload.SaveAs(Constants.StoragePath + filename);
+            lblMsg.Text = "File Uploaded Successfully";
         }
     }
 }

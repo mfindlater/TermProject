@@ -23,5 +23,6 @@ namespace TermProjectLogin
         public const string RequestUriByName = "http://localhost:49884/api/SocialNetworkService/searchByName/";
         public const string RequestUriByLocation = "http://localhost:49884/api/SocialNetworkService/searchByLocation/";
         public const string RequestUriByOrganization = "http://localhost:49884/api/SocialNetworkService/searchByOrganization/";
+        public const string StoragePath = @"W:\TermProject\Storage\";
     }
 }
