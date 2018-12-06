@@ -11,13 +11,10 @@ namespace TermProjectLogin
 {
     public partial class Common : System.Web.UI.MasterPage
     {
-        private SqlRepository sqlRepository = new SqlRepository();
-        private SocialNetworkManager socialNetworkManager;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             lblMessage.Text = "";
-            socialNetworkManager = new SocialNetworkManager(sqlRepository);
+            var socialNetworkManager = Session.GetSocialNetworkManager();
 
             if (!IsPostBack)
             {
@@ -98,8 +95,10 @@ namespace TermProjectLogin
         private void HandleLogin(string email, string password)
         {
             HttpCookie userCookie = new HttpCookie(Constants.UserCookie);
-        
-            if(Request.Cookies[Constants.UserCookie] != null)
+
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+
+            if (Request.Cookies[Constants.UserCookie] != null)
             {
                 userCookie = Request.Cookies[Constants.UserCookie];
             }
