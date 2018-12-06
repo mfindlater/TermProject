@@ -52,7 +52,10 @@ namespace SocialNetwork
 
         public User GetUser(string email)
         {
-            return repository.GetUser(email);
+            var user = repository.GetUser(email);
+            user.Likes = repository.GetLikes(email);
+            user.Dislikes = repository.GetDislikes(email);
+            return user;
         }
 
         public SecurityQuestion GetRandomQuestion(string email)
@@ -112,8 +115,5 @@ namespace SocialNetwork
                     }
                 }
         }
-
-       
-
     }
 }

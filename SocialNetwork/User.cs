@@ -12,6 +12,8 @@ namespace SocialNetwork
         public UserSettings Settings { get; set; }
         public List<Photo> Photos { get; set; }
         public string EncryptedPassword { get; set; }
+        public string Likes { get; set; }
+        public string Dislikes { get; set; }
 
         public User FilterByPrivacy(PrivacySettingType privacyLevel)
         {

@@ -609,7 +609,7 @@ namespace SocialNetwork
             command.Parameters.AddWithValue("@Email", email);
             var ds = db.GetDataSetUsingCmdObj(command);
 
-            for(int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 Notification notification = new Notification();
                 notification.NotificationID = Convert.ToInt32(db.GetField("NotificationID", i));
@@ -623,6 +623,55 @@ namespace SocialNetwork
             }
 
             return notifications;
+        }
+
+        public string GetLikes(string email)
+        {
+            string likes = "";
+
+            var command = new SqlCommand("TP_GetLikes")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            var ds = db.GetDataSetUsingCmdObj(command);
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                likes += db.GetField("Text", i);
+
+                if (i != ds.Tables[0].Rows.Count - 1)
+                {
+                    likes += ", ";
+                }
+            }
+
+            return likes;
+
+        }
+
+        public string GetDislikes(string email)
+        {
+            string dislikes = "";
+
+            var command = new SqlCommand("TP_GetDislikes")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            var ds = db.GetDataSetUsingCmdObj(command);
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                dislikes += db.GetField("Text", i);
+
+                if (i != ds.Tables[0].Rows.Count - 1)
+                {
+                    dislikes += ", ";
+                }
+            }
+
+            return dislikes;
         }
     }
 }

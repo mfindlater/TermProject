@@ -169,5 +169,15 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public string GetLikes(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetDislikes(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

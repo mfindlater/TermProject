@@ -28,6 +28,8 @@ namespace TermProjectLogin
                 txtState.Text = user.Address.State;
                 txtPhone.Text = user.ContactInfo.Phone;
                 txtOrganization.Text = user.Organization;
+                txtLikes.Text = user.Likes;
+                txtDislikes.Text = user.Dislikes;
 
                 var privacyNames = Enum.GetNames(typeof(PrivacySettingType));
                 var privacyValues = Enum.GetValues(typeof(PrivacySettingType));
@@ -69,6 +71,14 @@ namespace TermProjectLogin
             }
         }
 
+
+        private void UpdateLikesDislikes(string email)
+        {
+            string[] likes = txtLikes.Text.Split(',').Select(s => s.Trim()).ToArray();
+            string[] dislikes = txtDislikes.Text.Split(',').Select(s => s.Trim()).ToArray();
+            socialNetworkManager.UpdateLikesDislikes(email, likes, dislikes);
+        }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             if (Session[Constants.UserSession] != null)
@@ -82,6 +92,7 @@ namespace TermProjectLogin
                 user.Address.State = txtState.Text;
                 user.ContactInfo.Phone = txtPhone.Text;
                 user.Organization = txtOrganization.Text;
+               
 
                 var sq1 = new SecurityQuestion()
                 {
@@ -134,6 +145,8 @@ namespace TermProjectLogin
                 Response.Cookies.Add(userCookie);
 
                 bool result = socialNetworkManager.UpdateUser(user);
+                UpdateLikesDislikes(user.ContactInfo.Email);
+               
 
                 if(result)
                 {
