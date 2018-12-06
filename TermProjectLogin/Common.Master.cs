@@ -34,7 +34,14 @@ namespace TermProjectLogin
 
                     if (Session[Constants.UserSession] != null)
                     {
-                        user = (User)Session[Constants.UserSession];
+                        user = Session.GetUser();
+
+                        // Get Updated User
+                        user = socialNetworkManager.GetUser(user.ContactInfo.Email);
+
+                        // Reset Session
+                        Session.SetUser(user);
+
                         lblName.Text = user.Name;
                         imgBtnProfilePhoto.ImageUrl = user.ProfilePhotoURL;
                     }

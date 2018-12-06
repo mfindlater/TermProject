@@ -13,5 +13,10 @@ namespace TermProjectLogin
         {
             return (User)session[Constants.UserSession];
         }
+
+        public static void SetUser(this HttpSessionState session, User user)
+        {
+            session[Constants.UserSession] = user;
+        }
     }
 }

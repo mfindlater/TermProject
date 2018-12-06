@@ -634,6 +634,8 @@ namespace SocialNetwork
                 CommandType = CommandType.StoredProcedure
             };
 
+            command.Parameters.AddWithValue("@Email", email);
+
             var ds = db.GetDataSetUsingCmdObj(command);
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -658,6 +660,8 @@ namespace SocialNetwork
             {
                 CommandType = CommandType.StoredProcedure
             };
+
+            command.Parameters.AddWithValue("@Email", email);
 
             var ds = db.GetDataSetUsingCmdObj(command);
 

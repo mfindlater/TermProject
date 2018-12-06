@@ -146,10 +146,10 @@ namespace TermProjectLogin
 
                 bool result = socialNetworkManager.UpdateUser(user);
                 UpdateLikesDislikes(user.ContactInfo.Email);
-               
 
                 if(result)
                 {
+                    Session.SetUser(user);
                     lblMessage.Text = "User Settings Saved!";
                 }
             }
