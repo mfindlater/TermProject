@@ -219,14 +219,7 @@ namespace SocialNetwork
                 {
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
-                        var user = GetUserFromRow(i);
-
-                        var friend = new Friend()
-                        {
-                            Name = user.Name,
-                            ProfilePhotoURL = user.ProfilePhotoURL,
-                            UserId = user.UserId
-                        };
+                        var friend = GetFriendFromRow(i);
 
                         friends.Add(friend);
                     }
@@ -709,6 +702,239 @@ namespace SocialNetwork
             photo.PostedDate = Convert.ToDateTime(db.GetField("PostedDate", 0));
 
             return photo;
+        }
+
+        private string GetEmail(int userID)
+        {
+            var connection = db.GetConnection();
+
+            var command = new SqlCommand("dbo.TP_GetUserID", connection)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@UserID", userID);
+
+            connection.Open();
+
+            string email = (string)command.ExecuteScalar();
+
+            connection.Close();
+
+            return email;
+        }
+
+        public List<User> FindUsersByLikes(string like)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> FindUsersByDislikes(string dislike)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Friend> GetIncomingFriendRequests(string email)
+        {
+            var friends = new List<Friend>();
+
+            try
+            {
+                var command = new SqlCommand("TP_GetIncomingFriendRequests")
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddWithValue("@Email", email);
+
+                var ds = db.GetDataSetUsingCmdObj(command);
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        var friend = GetFriendFromRow(i);
+
+                        friends.Add(friend);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return friends;
+        }
+
+        public List<Friend> GetOutgoingFriendRequests(string email)
+        {
+            var friends = new List<Friend>();
+
+            try
+            {
+                var command = new SqlCommand("TP_GetOutgoingFriendRequests")
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddWithValue("@Email", email);
+
+                var ds = db.GetDataSetUsingCmdObj(command);
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        var friend = GetFriendFromRow(i);
+
+                        friends.Add(friend);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return friends;
+        }
+
+        public bool AddPhotoToPhotoAlbum(Photo photo, PhotoAlbum photoAlbum)
+        {
+            var command = new SqlCommand("TP_AddPhotoToPhotoAlbum")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@PhotoAlbumID", photoAlbum.PhotoAlbumID);
+            command.Parameters.AddWithValue("@PhotoID", photo.PhotoID);
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return result != -1;
+        }
+
+        public bool TagPhoto(int photoID, string email)
+        {
+            var command = new SqlCommand("TP_TagPhoto")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@PTaggedUserEmail", email);
+            command.Parameters.AddWithValue("@PhotoID", photoID);
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return result != -1;
+        }
+
+        public Post CreatePost(Post post, string email)
+        {
+            var command = new SqlCommand("TP_CreatePost")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@PosterEmail", email);
+
+            if(post.Photo != null)
+            {
+                command.Parameters.AddWithValue("@PhotoID", post.Photo.PhotoID);
+            }
+          
+            command.Parameters.AddWithValue("@Content", post.Content);
+
+            var postIdParam = new SqlParameter("@PhotoAlbumID", SqlDbType.Int);
+            command.Parameters.Add(postIdParam);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            post.PostID = Convert.ToInt32(postIdParam.Value);
+
+            return post;
+        }
+
+        public bool FollowUser(string email, string followerEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UnfollowUser(string email, string followerEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Chat CreateChat(string fromEmail, string toEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SendMessage(ChatMessage message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteMessage(string email, int messageID)
+        {
+            var command = new SqlCommand("TP_DeleteMessage")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@MessageID", messageID);
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return result != -1;
+        }
+
+        public bool SetOnlineStatus(string email,bool online)
+        {
+            var command = new SqlCommand("TP_SetOnlineStatus")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@OnlineStatus", online);
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return result != -1;
+        }
+
+        public PhotoAlbum CreatePhotoAlbum(PhotoAlbum photoAlbum, string email)
+        {
+            var command = new SqlCommand("TP_CreatePhotoAlbum")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Name", photoAlbum.Name);
+            command.Parameters.AddWithValue("@Description", photoAlbum.Description);
+            command.Parameters.AddWithValue("@UserID", photoAlbum.UserID);
+
+            var photoIdParam = new SqlParameter("@PhotoAlbumID", SqlDbType.Int);
+            command.Parameters.Add(photoIdParam);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            photoAlbum.PhotoAlbumID = Convert.ToInt32(photoIdParam.Value);
+
+            return photoAlbum;
+        }
+
+        private Friend GetFriendFromRow(int row)
+        {
+            var user = GetUserFromRow(row);
+
+            var friend = new Friend()
+            {
+                Name = user.Name,
+                ProfilePhotoURL = user.ProfilePhotoURL,
+                UserId = user.UserId,
+                FriendRequestStatus = (FriendRequestStatus)Convert.ToUInt32(db.GetField("FriendRequestStatusID", row))
+            };
+
+            return friend;
         }
     }
 }

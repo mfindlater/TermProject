@@ -12,6 +12,6 @@ namespace SocialNetwork
         public int UserID { get; set; }
         public string Content { get; set; }
         public DateTime PostedDate { get; set; }
-        public string PhotoURL { get; set; }
+        public Photo Photo { get; set; }
     }
 }

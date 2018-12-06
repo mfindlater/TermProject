@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="Chat.cs" />
+    <Compile Include="ChatMessage.cs" />
     <Compile Include="ContactInfo.cs" />
     <Compile Include="EncryptionManager.cs" />
     <Compile Include="Friend.cs" />
@@ -49,6 +51,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="LoginSettingType.cs" />
     <Compile Include="Notification.cs" />
+    <Compile Include="PhotoAlbum.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="PrivacySettingType.cs" />

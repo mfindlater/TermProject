@@ -179,5 +179,85 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public List<User> FindUsersByLikes(string like)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> FindUsersByDislikes(string dislike)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Friend> GetIncomingFriendRequests(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Friend> GetOutgoingFriendRequests(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ReadNotification(int notificationID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Photo AddPhoto(Photo photo, string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PhotoAlbum CreatePhotoAlbum(PhotoAlbum photoAlbum, string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddPhotoToPhotoAlbum(Photo photo, PhotoAlbum photoAlbum)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TagPhoto(int photoID, string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Post CreatePost(Post post, string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool FollowUser(string email, string followerEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UnfollowUser(string email, string followerEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Chat CreateChat(string fromEmail, string toEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SendMessage(ChatMessage message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteMessage(string email, int messageID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SetOnlineStatus(string email, bool online)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

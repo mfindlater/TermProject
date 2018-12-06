@@ -9,5 +9,6 @@ namespace SocialNetwork
         public int UserId { get; set; }
         public string Name { get; set; }
         public string ProfilePhotoURL { get; set; }
+        public FriendRequestStatus FriendRequestStatus { get; set; }
     }
 }
