@@ -361,6 +361,7 @@ namespace SocialNetwork
                     command.Parameters.AddWithValue("@State", user.Address.State);
                     command.Parameters.AddWithValue("@PostalCode", user.Address.PostalCode);
                     command.Parameters.AddWithValue("@Organization", user.Organization);
+                    command.Parameters.AddWithValue("@ProfilePhotoID", user.ProfilePhotoID);
 
                     var binaryFormatter = new BinaryFormatter();
                     binaryFormatter.Serialize(ms, user.Settings);
