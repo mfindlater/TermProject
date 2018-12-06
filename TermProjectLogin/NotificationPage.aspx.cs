@@ -22,7 +22,7 @@ namespace TermProjectLogin
                 var user = Session.GetUser();
 
                 List<Notification> notifications = sqlRepository.GetNotifications(user.ContactInfo.Email);
-                gvNotification.DataKeyNames = new string[] { "NotificationID" };
+                gvNotification.DataKeyNames = new string[] { "NotificationID", "URL" };
 
                 gvNotification.DataSource = notifications;
                 gvNotification.DataBind();
@@ -35,10 +35,11 @@ namespace TermProjectLogin
 
             int index = Convert.ToInt32(linkButton.CommandArgument);
             int notificationID = Convert.ToInt32(gvNotification.DataKeys[index].Value);
+            string URL = gvNotification.DataKeys[index].Values[1].ToString();
 
             socialNetworkManager.ReadNotification(notificationID);
 
-            Response.Redirect(linkButton.Text);
+            Response.Redirect(URL);
         }
     }
 }

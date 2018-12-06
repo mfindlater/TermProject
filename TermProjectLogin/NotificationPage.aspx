@@ -6,15 +6,14 @@
     <h1>Notification Center</h1>
     <asp:GridView ID="gvNotification" runat="server" AutoGenerateColumns="false">
         <Columns>
-            <asp:BoundField DataField="UserID" HeaderText="User ID" />
             <asp:TemplateField HeaderText="URL">
                 <ItemTemplate>
-                    <asp:LinkButton ID="lbtnURL" runat="server" Text='<%# Bind("URL") %>' OnClick="lbtnURL_Click" CommandArgument="<%# Container.DataItemIndex %>"></asp:LinkButton>
+                    <asp:LinkButton ID="lbtnURL" runat="server" Text="View" OnClick="lbtnURL_Click" CommandArgument="<%# Container.DataItemIndex %>"></asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="Description" HeaderText="Description" />
-            <asp:BoundField DataField="ReadStatus" HeaderText="Read Status" />
-            <asp:BoundField DataField="NotificationDate" HeaderText="Notification Date" />
+            <asp:BoundField DataField="ReadStatus" HeaderText="Read" />
+            <asp:BoundField DataField="NotificationDate" DataFormatString="{0:d}" HeaderText="Date" />
         </Columns>
     </asp:GridView>
 </asp:Content>
