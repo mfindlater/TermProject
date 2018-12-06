@@ -18,5 +18,10 @@ namespace TermProjectLogin
         {
             session[Constants.UserSession] = user;
         }
+
+        public static SocialNetworkManager SocialNetworkManager(this HttpSessionState session)
+        {
+            return (SocialNetworkManager)session[Constants.ManagerSession];
+        }
     }
 }

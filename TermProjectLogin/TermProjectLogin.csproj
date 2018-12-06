@@ -77,6 +77,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="ForgotPasswordPage.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="img\person_temp.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -137,6 +138,9 @@
     </Compile>
     <Compile Include="ForgotPasswordPage.aspx.designer.cs">
       <DependentUpon>ForgotPasswordPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MainPage.aspx.cs">
       <DependentUpon>MainPage.aspx</DependentUpon>

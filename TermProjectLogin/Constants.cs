@@ -25,5 +25,6 @@ namespace TermProjectLogin
         public const string RequestUriByOrganization = "http://localhost:49884/api/SocialNetworkService/searchByOrganization/";
         public const string StoragePath = @"W:\TermProject\Storage\";
         public const string StorageURL = "http://cis-iis2.temple.edu/Fall2018/CIS3342_tug98770/TermProject/Storage/";
+        public const string ManagerSession = "ManagerSession";
     }
 }
