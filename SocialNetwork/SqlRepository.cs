@@ -516,6 +516,7 @@ namespace SocialNetwork
                 },
                 Organization = db.GetField("Organization", row).ToString(),
                 ProfilePhotoURL = db.GetField("URL", row).ToString(),
+                ProfilePhotoID = Convert.ToInt32(db.GetField("ProfilePhotoID", row)),
                 Settings = uSettings,
             };
 
