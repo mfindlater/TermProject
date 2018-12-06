@@ -160,6 +160,7 @@
     <Compile Include="RegistrationPage.aspx.designer.cs">
       <DependentUpon>RegistrationPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SessionExtensions.cs" />
     <Compile Include="SettingsPage.aspx.cs">
       <DependentUpon>SettingsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
