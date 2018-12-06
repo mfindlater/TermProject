@@ -10,18 +10,16 @@ namespace TermProjectLogin
 {
     public partial class NotificationPage : System.Web.UI.Page
     {
-        private SqlRepository sqlRepository = new SqlRepository();
-        private SocialNetworkManager socialNetworkManager;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            socialNetworkManager = new SocialNetworkManager(sqlRepository);
+            var socialNetworkManager = Session.GetSocialNetworkManager();
 
             if (!IsPostBack && Session[Constants.UserSession] != null)
             {
                 var user = Session.GetUser();
 
-                List<Notification> notifications = sqlRepository.GetNotifications(user.ContactInfo.Email);
+                List<Notification> notifications = socialNetworkManager.GetNotifications(user.ContactInfo.Email);
                 gvNotification.DataKeyNames = new string[] { "NotificationID", "URL" };
 
                 gvNotification.DataSource = notifications;
@@ -31,6 +29,8 @@ namespace TermProjectLogin
 
         protected void lbtnURL_Click(object sender, EventArgs e)
         {
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+
             LinkButton linkButton = (LinkButton)sender;
 
             int index = Convert.ToInt32(linkButton.CommandArgument);

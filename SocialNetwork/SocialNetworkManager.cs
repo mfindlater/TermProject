@@ -125,5 +125,10 @@ namespace SocialNetwork
         {
             return repository.AddPhoto(photo, email);
         }
+
+        public List<Notification> GetNotifications(string email)
+        {
+            return repository.GetNotifications(email);
+        }
     }
 }
