@@ -801,7 +801,7 @@ namespace SocialNetwork
 
             try
             {
-                var command = new SqlCommand("TP_GetIncomingFriendRequests")
+                var command = new SqlCommand("TP_GetIncomingFriendRequest")
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -834,7 +834,7 @@ namespace SocialNetwork
 
             try
             {
-                var command = new SqlCommand("TP_GetOutgoingFriendRequests")
+                var command = new SqlCommand("TP_GetOutgoingFriendRequest")
                 {
                     CommandType = CommandType.StoredProcedure
                 };
