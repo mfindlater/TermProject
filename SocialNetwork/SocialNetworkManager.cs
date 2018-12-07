@@ -126,6 +126,11 @@ namespace SocialNetwork
                 }
         }
 
+        public Notification CreateNotification(Notification notification, string email)
+        {
+            return repository.CreateNotification(notification, email);
+        }
+
         public bool ReadNotification(int notificationID)
         {
             return repository.ReadNotification(notificationID);
