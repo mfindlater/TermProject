@@ -100,5 +100,13 @@ namespace TermProjectWS.Controllers
 
             return newsFeed;
         }
+
+        [HttpGet("unread/{email}")]
+        public int UnreadNotification(string email)
+        {
+            var notifications = socialNetworkManager.GetNotifications(email);
+            int count = notifications.Where(n => n.ReadStatus == false).Count();
+            return count;
+        }
     }
 }
