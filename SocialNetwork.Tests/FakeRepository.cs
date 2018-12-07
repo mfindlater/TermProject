@@ -274,5 +274,15 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public bool CancelFriendRequest(string userEmail, string requestEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RemoveFriend(string userEmail, string requestEmail)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
