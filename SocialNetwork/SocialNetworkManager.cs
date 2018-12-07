@@ -140,5 +140,30 @@ namespace SocialNetwork
         {
             return repository.GetNotifications(email);
         }
+
+        public bool CreateFriendRequest(string fromEmail, string toEmail)
+        {
+            return repository.CreateFriendRequest(fromEmail, toEmail);
+        }
+
+        public bool AcceptFriendRequest(string fromEmail, string toEmail)
+        {
+            return repository.AcceptFriendRequest(fromEmail, toEmail);
+        }
+
+        public bool DeclineFriendRequest(string fromEmail, string toEmail)
+        {
+            return repository.DeclineFriendRequest(fromEmail, toEmail);
+        }
+
+        public List<Friend> GetIncomingFriendRequests(string email)
+        {
+            return repository.GetIncomingFriendRequests(email);
+        }
+
+        public List<Friend> GetOutgoingFriendRequests(string email)
+        {
+            return repository.GetOutgoingFriendRequests(email);
+        }
     }
 }
