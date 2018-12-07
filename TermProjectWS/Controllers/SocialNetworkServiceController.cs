@@ -38,7 +38,19 @@ namespace TermProjectWS.Controllers
         {
             return socialNetworkManager.FindUsersByOrganization(organization); ;
         }
-        
+
+        [HttpGet("searchByLike/{like}")]
+        public List<User> FindUsersByLike(string like)
+        {
+            return socialNetworkManager.FindUsersByLike(like); ;
+        }
+
+        [HttpGet("searchByDislike/{dislike}")]
+        public List<User> FindUsersByDislike(string dislike)
+        {
+            return socialNetworkManager.FindUsersByDislike(dislike); ;
+        }
+
         [HttpGet("friends")]
         public List<Friend> GetFriends([FromQuery]string requestingUsername, [FromQuery]string requestedUsername, [FromQuery]string verificationToken)
         {
