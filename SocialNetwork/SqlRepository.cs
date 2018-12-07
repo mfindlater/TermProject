@@ -310,7 +310,7 @@ namespace SocialNetwork
 
                     var user = GetUserFromRow(0);
                     user.Photos = GetPhotos(user.ContactInfo.Email);
-
+                    user.Friends = GetFriends(user.ContactInfo.Email);
                     return user;
                 }
             }
@@ -404,78 +404,6 @@ namespace SocialNetwork
 
             return photos;
 
-        }
-
-        public List<User> FindUsersByLocationTwo(string city, string state)
-        {
-            var users = new List<User>();
-
-            try
-            {
-                var connection = db.GetConnection();
-                var command = new SqlCommand("TP_FindUsersByLocation", connection)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-
-                command.Parameters.AddWithValue("@City", city);
-                command.Parameters.AddWithValue("@State", state);
-                connection.Open();
-
-                var reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    var user = GetUserFromRow(reader);
-                    users.Add(user);
-                }
-                reader.Close();
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-
-            return users;
-        }
-
-        private User GetUserFromRow(SqlDataReader reader)
-        {
-
-            //byte[] settings = (byte[])reader.GetValue(12);
-
-            //var ms = new MemoryStream(settings);
-            var stream = reader.GetStream(12);
-
-            var binaryFormatter = new BinaryFormatter();
-            long count = stream.Length;
-            var uSettings = (UserSettings)binaryFormatter.Deserialize(stream);
-
-            var user = new User()
-            {
-                UserId = Convert.ToInt32(reader["UserID"]),
-                Name = reader["Name"].ToString(),
-                EncryptedPassword = reader["Password"].ToString(),
-                BirthDate = DateTime.Parse(reader["BirthDate"].ToString()),
-                ContactInfo = new ContactInfo()
-                {
-                    Email = reader["Email"].ToString(),
-                    Phone = reader["Phone"].ToString()
-                },
-                Address = new Address()
-                {
-                    AddressLine1 = reader["AddressLine1"].ToString(),
-                    AddressLine2 = reader["AddressLine2"].ToString(),
-                    City = reader["City"].ToString(),
-                    PostalCode = reader["PostalCode"].ToString(),
-                    State = reader["State"].ToString()
-                },
-                Organization = reader["Organization"].ToString(),
-                ProfilePhotoURL = reader["URL"].ToString(),
-                Settings = uSettings,
-            };
-            return user;
         }
 
         private User GetUserFromRow(int row)
@@ -1060,6 +988,28 @@ namespace SocialNetwork
             bool result = Convert.ToBoolean(isFriendParam.Value);
 
             return result;
+        }
+
+        public bool CancelFriendRequest(string userEmail, string requestEmail)
+        {
+            var command = new SqlCommand("TP_CancelFriendRequest") { CommandType = CommandType.StoredProcedure };
+            command.Parameters.AddWithValue("@UserEmail", userEmail);
+            command.Parameters.AddWithValue("@RequestEmail", requestEmail);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return (result != -1);
+        }
+
+        public bool RemoveFriend(string userEmail, string requestEmail)
+        {
+            var command = new SqlCommand("TP_RemoveFriend") { CommandType = CommandType.StoredProcedure };
+            command.Parameters.AddWithValue("@UserEmail", userEmail);
+            command.Parameters.AddWithValue("@RequestEmail", requestEmail);
+
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return (result != -1);
         }
     }
 }

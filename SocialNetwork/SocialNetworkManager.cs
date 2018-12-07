@@ -166,6 +166,16 @@ namespace SocialNetwork
             return repository.DeclineFriendRequest(fromEmail, toEmail);
         }
 
+        public bool CancelFriendRequest(string fromEmail, string toEmail)
+        {
+            return repository.CancelFriendRequest(fromEmail, toEmail);
+        }
+
+        public bool RemoveFriend(string fromEmail, string toEmail)
+        {
+            return repository.RemoveFriend(fromEmail, toEmail);
+        }
+
         public List<Friend> GetIncomingFriendRequests(string email)
         {
             return repository.GetIncomingFriendRequests(email);
