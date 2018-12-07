@@ -1043,5 +1043,22 @@ namespace SocialNetwork
 
             return friend;
         }
+
+        public bool AreFriends(string emailA, string emailB)
+        {
+            var command = new SqlCommand("TP_AreFriendsSP") { CommandType = CommandType.StoredProcedure };
+
+            command.Parameters.AddWithValue("@User1Email", emailA);
+            command.Parameters.AddWithValue("@User2Email", emailB);
+
+            var isFriendParam = new SqlParameter("@IsFriend", SqlDbType.Bit) { Direction = ParameterDirection.ReturnValue };
+            command.Parameters.Add(isFriendParam);
+
+            db.GetDataSetUsingCmdObj(command);
+
+            bool result = Convert.ToBoolean(isFriendParam.Value);
+
+            return result;
+        }
     }
 }

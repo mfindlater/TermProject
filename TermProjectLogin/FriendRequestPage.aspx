@@ -13,6 +13,11 @@
             </asp:TemplateField>
             <asp:BoundField DataField="Name" HeaderText="Name" />
             <asp:BoundField DataField="FriendRequestStatus" HeaderText="Status" />
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:Button ID="btnAccept" runat="server" Text="Accept" CommandArgument="<%# Container.DataItemIndex %>" />
+                </ItemTemplate>
+            </asp:TemplateField>
          </Columns>     
     </asp:GridView>
     <br />

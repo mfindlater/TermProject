@@ -259,5 +259,20 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public List<User> FindUsersByLike(string like)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> FindUsersByDislike(string dislike)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AreFriends(string emailA, string emailB)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
