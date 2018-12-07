@@ -15,6 +15,7 @@ namespace SocialNetwork
         public string EncryptedPassword { get; set; }
         public string Likes { get; set; }
         public string Dislikes { get; set; }
+        public string Email => ContactInfo.Email;
 
         public User FilterByPrivacy(PrivacySettingType privacyLevel)
         {

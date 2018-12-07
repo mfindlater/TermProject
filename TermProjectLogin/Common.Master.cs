@@ -237,15 +237,24 @@ namespace TermProjectLogin
 
             JavaScriptSerializer js = new JavaScriptSerializer();
             List<User> userList = js.Deserialize<List<User>>(data);
-            gvSearchResult.DataKeyNames = new string[] { "ContactInfo.Email" };
+            gvSearchResult.DataKeyNames = new string[] { "Email" };
 
             gvSearchResult.DataSource = userList;
             gvSearchResult.DataBind();
 
+            User user = Session.GetUser();
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+
             for (int i = 0; i < gvSearchResult.Rows.Count; i++)
             {
                 Button button = (Button)gvSearchResult.Rows[i].FindControl("btnAddFriend");
+                string email = gvSearchResult.DataKeys[i].Value.ToString();
+                /*if (socialNetworkManager.AreFriends(user.ContactInfo.Email, email))
+                {
+
+                }*/
             }
+
 
             gvSearchResult.Visible = true;
         }
@@ -264,7 +273,7 @@ namespace TermProjectLogin
 
             Button button = (Button)sender;
             int index = Convert.ToInt32(button.CommandArgument);
-            string email = gvSearchResult.DataKeys[index].Values[1].ToString();
+            string email = gvSearchResult.DataKeys[index].Value.ToString();
 
             notification.URL = "FriendRequestPage.aspx";
             notification.Description = user.Name + " sent you a friend request.";
