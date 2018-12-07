@@ -15,7 +15,7 @@
             <asp:BoundField DataField="FriendRequestStatus" HeaderText="Status" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Button ID="btnAccept" runat="server" Text="Accept" CommandArgument="<%# Container.DataItemIndex %>" />
+                    <asp:Button ID="btnAccept" runat="server" Text="Accept" CommandArgument="<%# Container.DataItemIndex %>" OnClick="btnAccept_Click" />
                 </ItemTemplate>
             </asp:TemplateField>
          </Columns>     

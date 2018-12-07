@@ -7,6 +7,7 @@ namespace SocialNetwork
     public class Friend
     {
         public int UserId { get; set; }
+        public string Email { get; set; }
         public string Name { get; set; }
         public string ProfilePhotoURL { get; set; }
         public FriendRequestStatus FriendRequestStatus { get; set; }

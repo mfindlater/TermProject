@@ -1035,6 +1035,7 @@ namespace SocialNetwork
 
             var friend = new Friend()
             {
+                Email = user.ContactInfo.Email,
                 Name = user.Name,
                 ProfilePhotoURL = user.ProfilePhotoURL,
                 UserId = user.UserId,
