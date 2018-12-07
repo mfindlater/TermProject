@@ -175,5 +175,10 @@ namespace SocialNetwork
         {
             return repository.GetOutgoingFriendRequests(email);
         }
+
+        public bool SetOnlineStatus(string email, bool online)
+        {
+            return repository.SetOnlineStatus(email, online);
+        }
     }
 }
