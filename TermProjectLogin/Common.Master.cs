@@ -277,12 +277,10 @@ namespace TermProjectLogin
             string email = gvSearchResult.DataKeys[index].Value.ToString();
 
             notification.URL = "FriendRequestPage.aspx";
-            notification.Description = user.Name + " sent you a friend request.";
+            notification.Description = user.Name + " sent you a friend request!";
 
             socialNetworkManager.CreateFriendRequest(user.ContactInfo.Email, email);
             socialNetworkManager.CreateNotification(notification, email);
-
-
         }
     }
 }
