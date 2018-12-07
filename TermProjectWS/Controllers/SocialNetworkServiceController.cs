@@ -102,7 +102,7 @@ namespace TermProjectWS.Controllers
         }
 
         [HttpGet("unread/{email}")]
-        public int UnreadNotification(string email)
+        public int UnreadNotifications(string email)
         {
             var notifications = socialNetworkManager.GetNotifications(email);
             int count = notifications.Where(n => n.ReadStatus == false).Count();

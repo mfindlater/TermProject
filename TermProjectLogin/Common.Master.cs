@@ -276,11 +276,21 @@ namespace TermProjectLogin
             int index = Convert.ToInt32(button.CommandArgument);
             string email = gvSearchResult.DataKeys[index].Value.ToString();
 
+
             notification.URL = "FriendRequestPage.aspx";
             notification.Description = user.Name + " sent you a friend request!";
 
             socialNetworkManager.CreateFriendRequest(user.ContactInfo.Email, email);
             socialNetworkManager.CreateNotification(notification, email);
+        }
+
+        protected void imgProfile_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+        {
+            ImageButton button = (ImageButton)sender;
+            int index = Convert.ToInt32(button.CommandArgument);
+            string email = gvSearchResult.DataKeys[index].Value.ToString();
+
+            Response.Redirect($"MainPage.aspx?Email={email}");
         }
     }
 }

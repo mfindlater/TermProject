@@ -434,20 +434,26 @@ namespace SocialNetwork
                     PostalCode = db.GetField("PostalCode", row).ToString(),
                     State = db.GetField("State", row).ToString()
                 },
-                Organization = db.GetField("Organization", row).ToString(),
-                ProfilePhotoURL = db.GetField("URL", row).ToString(),
-                ProfilePhotoID = Convert.ToInt32(db.GetField("ProfilePhotoID", row)),
                 Settings = uSettings,
             };
 
-            if (db.GetField("Organization", row) != null)
+            user.ProfilePhotoURL = "~/img/person_temp.jpg";
+
+            if (db.GetField("Organization", row) != DBNull.Value)
             {
                 user.Organization = db.GetField("Organization", row).ToString();
             }
-            if (db.GetField("URL", row) != null)
+
+            if(db.GetField("ProfilePhotoID", row) != DBNull.Value)
+            {
+                user.ProfilePhotoID = Convert.ToInt32(db.GetField("ProfilePhotoID", row));
+            }
+
+            if (db.GetField("URL", row) != DBNull.Value)
             {
                 user.ProfilePhotoURL = db.GetField("URL", row).ToString();
             }
+
             return user;
         }
 
