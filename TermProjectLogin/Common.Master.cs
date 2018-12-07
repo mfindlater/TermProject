@@ -7,6 +7,7 @@ using System.Web.Script.Serialization;  // needed for JSON serializers
 using System.IO;                        // needed for Stream and Stream Reader
 using System.Net;                       // needed for the Web Request
 using System.Web.UI.WebControls;
+using System.Linq;
 
 namespace TermProjectLogin
 {
@@ -235,26 +236,26 @@ namespace TermProjectLogin
             reader.Close();
             response.Close();
 
+            User user = Session.GetUser();
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+
             JavaScriptSerializer js = new JavaScriptSerializer();
             List<User> userList = js.Deserialize<List<User>>(data);
             gvSearchResult.DataKeyNames = new string[] { "Email" };
+            userList = userList.Where(u => u.Email != user.Email).ToList();
 
             gvSearchResult.DataSource = userList;
             gvSearchResult.DataBind();
-
-            User user = Session.GetUser();
-            var socialNetworkManager = Session.GetSocialNetworkManager();
 
             for (int i = 0; i < gvSearchResult.Rows.Count; i++)
             {
                 Button button = (Button)gvSearchResult.Rows[i].FindControl("btnAddFriend");
                 string email = gvSearchResult.DataKeys[i].Value.ToString();
-                /*if (socialNetworkManager.AreFriends(user.ContactInfo.Email, email))
+                if (socialNetworkManager.AreFriends(user.ContactInfo.Email, email))
                 {
-
-                }*/
+                    button.Enabled = false;
+                }
             }
-
 
             gvSearchResult.Visible = true;
         }
