@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;  // needed for JSON serializers
 using System.IO;                        // needed for Stream and Stream Reader
 using System.Net;                       // needed for the Web Request
+using System.Web.UI.WebControls;
 
 namespace TermProjectLogin
 {
@@ -202,11 +203,17 @@ namespace TermProjectLogin
                 case "Organization":
                     requestUriString = Constants.RequestUriByOrganization;
                     break;
+                case "Like":
+                    requestUriString = Constants.RequestUriByLike;
+                    break;
+                case "Dislike":
+                    requestUriString = Constants.RequestUriByDislike;
+                    break;
             }
 
             WebRequest request = null;
 
-            if (search == "Name" || search == "Organization")
+            if (search == "Name" || search == "Organization" || search == "Like" || search == "Dislike")
             {
                 if (!string.IsNullOrEmpty(input1))
                 {
@@ -230,15 +237,42 @@ namespace TermProjectLogin
 
             JavaScriptSerializer js = new JavaScriptSerializer();
             List<User> userList = js.Deserialize<List<User>>(data);
+            gvSearchResult.DataKeyNames = new string[] { "ContactInfo.Email" };
 
             gvSearchResult.DataSource = userList;
             gvSearchResult.DataBind();
+
+            for (int i = 0; i < gvSearchResult.Rows.Count; i++)
+            {
+                Button button = (Button)gvSearchResult.Rows[i].FindControl("btnAddFriend");
+            }
+
             gvSearchResult.Visible = true;
         }
 
         protected void btnNotification_Click(object sender, EventArgs e)
         {
             Response.Redirect("NotificationPage.aspx");
+        }
+
+        protected void btnAddFriend_Click(object sender, EventArgs e)
+        {
+            var user = Session.GetUser();
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+
+            Notification notification = new Notification();
+
+            Button button = (Button)sender;
+            int index = Convert.ToInt32(button.CommandArgument);
+            string email = gvSearchResult.DataKeys[index].Values[1].ToString();
+
+            notification.URL = "FriendRequestPage.aspx";
+            notification.Description = user.Name + " sent you a friend request.";
+
+            socialNetworkManager.CreateFriendRequest(user.ContactInfo.Email, email);
+            socialNetworkManager.CreateNotification(notification, email);
+
+
         }
     }
 }
