@@ -225,5 +225,10 @@ namespace SocialNetwork
         {
             return repository.GetFollowers(email);
         }
+
+        public List<Post> GetWall(string email)
+        {
+            return repository.GetWall(email);
+        }
     }
 }

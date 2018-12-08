@@ -251,7 +251,7 @@ namespace SocialNetwork
                 var newsFeedPost = new Post()
                 {
                     PostID = Convert.ToInt32(db.GetField("PostID", i)),
-                    UserID = Convert.ToInt32(db.GetField("UserID", i)),
+                    PosterID = Convert.ToInt32(db.GetField("PosterID", i)),
                     PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString()),
                     Content = HttpUtility.HtmlEncode(db.GetField("Content", i))
                 };
@@ -403,7 +403,6 @@ namespace SocialNetwork
             }
 
             return photos;
-
         }
 
         private User GetUserFromRow(int row)
@@ -459,7 +458,39 @@ namespace SocialNetwork
 
         public List<Post> GetWall(string email)
         {
-            throw new NotImplementedException();
+            var command = new SqlCommand("TP_GetUserPosts")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+
+            var ds = db.GetDataSetUsingCmdObj(command);
+
+            var posts = new List<Post>();
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                var post = new Post()
+                {
+                    PostID = Convert.ToInt32(db.GetField("PostID", i)),
+                    PosterID = Convert.ToInt32(db.GetField("PosterID", i)),
+                    Content = db.GetField("Content", i).ToString(),
+                    PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString())
+                };
+
+                if (db.GetField("PhotoID", i) != DBNull.Value)
+                {
+                    post.Photo = new Photo()
+                    {
+                        PhotoID = Convert.ToInt32(db.GetField("PhotoID", i)),
+                        URL = db.GetField("URL", i).ToString()
+                    };
+                }
+                posts.Add(post);
+            }
+
+            return posts;
         }
 
         public bool DeleteLikesDislikes(string email)
@@ -834,7 +865,7 @@ namespace SocialNetwork
             
             if(toEmail != null)
             {
-                command.Parameters.AddWithValue("@FromEmail", toEmail);
+                command.Parameters.AddWithValue("@ToEmail", toEmail);
             }
 
             if(post.Photo != null)

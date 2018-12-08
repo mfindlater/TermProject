@@ -148,6 +148,24 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.Label lblMsg;
         
         /// <summary>
+        /// pnWall control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnWall;
+        
+        /// <summary>
+        /// rptWall control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptWall;
+        
+        /// <summary>
         /// pnPhotos control.
         /// </summary>
         /// <remarks>
@@ -290,14 +308,5 @@ namespace TermProjectLogin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBtnFriend6;
-        
-        /// <summary>
-        /// pnWall control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnWall;
     }
 }

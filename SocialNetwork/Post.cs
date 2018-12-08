@@ -9,7 +9,7 @@ namespace SocialNetwork
     public class Post
     {
         public int PostID { get; set; }
-        public int UserID { get; set; }
+        public int PosterID { get; set; }
         public string Content { get; set; }
         public DateTime PostedDate { get; set; }
         public Photo Photo { get; set; }

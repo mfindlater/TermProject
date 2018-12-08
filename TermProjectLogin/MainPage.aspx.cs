@@ -55,6 +55,16 @@ namespace TermProjectLogin
                     }
 
                     pnUploadPhoto.Visible = false;
+
+                    if (viewingUser != null)
+                    {
+                        rptWall.DataSource = socialNetworkManager.GetWall(viewingUser.Email);
+                    }
+                    else
+                    {
+                        rptWall.DataSource = socialNetworkManager.GetWall(currentUser.Email);
+                    }
+                    rptWall.DataBind();
                 }
             }
         }
@@ -118,8 +128,43 @@ namespace TermProjectLogin
         {
             currentUser = Session.GetUser();
             socialNetworkManager = Session.GetSocialNetworkManager();
+            viewingUser = GetViewingUser();
 
-            if (!string.IsNullOrEmpty(txtContent.Text))
+            if (viewingUser == null)
+            {
+                if (!string.IsNullOrEmpty(txtContent.Text))
+                {
+                    Post post = new Post();
+
+                    if (photoUpload.HasFile)
+                    {
+                        string filename = currentUser.UserId + "_" + Path.GetFileName(photoUpload.PostedFile.FileName);
+                        photoUpload.SaveAs(Constants.StoragePath + filename);
+
+                        Photo photo = new Photo();
+                        photo.URL = Constants.StorageURL + filename;
+                        photo.Description = txtPhotoDescription.Text;
+
+                        photo = socialNetworkManager.AddPhoto(photo, currentUser.Email);
+                        post.Photo = photo;
+                    }
+
+                    post.Content = txtContent.Text;
+                    post = socialNetworkManager.CreatePost(post, currentUser.Email);
+                    lblMsg.Text = "Posted!";
+
+                    List<User> followers = socialNetworkManager.GetFollowers(currentUser.Email);
+                    for (int i = 0; i < followers.Count; i++)
+                    {
+                        Notification notification = new Notification();
+                        notification.Description = $"{currentUser.Name} shared a post.";
+                        notification.URL = $"MainPage.aspx?Email={currentUser.Email}";
+
+                        socialNetworkManager.CreateNotification(notification, followers[i].Email);
+                    }
+                }
+            }
+            else
             {
                 Post post = new Post();
 
@@ -137,18 +182,25 @@ namespace TermProjectLogin
                 }
 
                 post.Content = txtContent.Text;
-                post = socialNetworkManager.CreatePost(post, currentUser.Email);
+                post = socialNetworkManager.CreatePost(post, currentUser.Email, viewingUser.Email);
                 lblMsg.Text = "Posted!";
 
                 List<User> followers = socialNetworkManager.GetFollowers(currentUser.Email);
+                followers = followers.Where(u => u.Email != viewingUser.Email).ToList();
+
                 for (int i = 0; i < followers.Count; i++)
                 {
                     Notification notification = new Notification();
-                    notification.Description = $"{currentUser.Name} shared a post.";
-                    notification.URL = $"MainPage.aspx?Email={currentUser.Email}";
+                    notification.Description = $"{currentUser.Name} shared a post on {viewingUser.Name}'s wall.";
+                    notification.URL = $"MainPage.aspx?Email={viewingUser.Email}";
 
                     socialNetworkManager.CreateNotification(notification, followers[i].Email);
                 }
+
+                Notification notificationTwo = new Notification();
+                notificationTwo.Description = $"{currentUser.Name} shared a post on your wall.";
+                notificationTwo.URL = $"MainPage.aspx?Email={viewingUser.Email}";
+                socialNetworkManager.CreateNotification(notificationTwo, viewingUser.Email);
             }
         }
     }
