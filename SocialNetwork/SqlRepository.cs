@@ -844,7 +844,8 @@ namespace SocialNetwork
           
             command.Parameters.AddWithValue("@Content", post.Content);
 
-            var postIdParam = new SqlParameter("@PhotoAlbumID", SqlDbType.Int);
+            var postIdParam = new SqlParameter("@PostID", SqlDbType.Int);
+            postIdParam.Direction = ParameterDirection.ReturnValue;
             command.Parameters.Add(postIdParam);
 
             int result = db.DoUpdateUsingCmdObj(command);
@@ -956,9 +957,10 @@ namespace SocialNetwork
 
             command.Parameters.AddWithValue("@Name", photoAlbum.Name);
             command.Parameters.AddWithValue("@Description", photoAlbum.Description);
-            command.Parameters.AddWithValue("@UserID", photoAlbum.UserID);
+            command.Parameters.AddWithValue("@Email", email);
 
             var photoIdParam = new SqlParameter("@PhotoAlbumID", SqlDbType.Int);
+            photoIdParam.Direction = ParameterDirection.ReturnValue;
             command.Parameters.Add(photoIdParam);
 
             int result = db.DoUpdateUsingCmdObj(command);

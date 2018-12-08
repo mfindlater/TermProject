@@ -216,6 +216,11 @@ namespace SocialNetwork
             return repository.CreatePost(post, fromEmail, toEmail);
         }
 
+        public PhotoAlbum CreatePhotoAlbum(PhotoAlbum photoAlbum, string email)
+        {
+            return repository.CreatePhotoAlbum(photoAlbum, email);
+        }
+
         public List<User> GetFollowers(string email)
         {
             return repository.GetFollowers(email);
