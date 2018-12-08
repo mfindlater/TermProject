@@ -105,7 +105,7 @@ namespace TermProjectLogin
                 lblMsg.Text = "Canceled Friend Request.";
 
                 PopulateFriendRequests();
-                socialNetworkManager.CreateNotification(notification, fromEmail);
+                socialNetworkManager.CreateNotification(notification, toEmail);
             }
         }
 
