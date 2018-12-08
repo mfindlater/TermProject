@@ -30,12 +30,34 @@ namespace TermProjectLogin
                             email += item;
                         }
 
-                       viewingUser = socialNetworkManager.GetUser(email);
+                        viewingUser = socialNetworkManager.GetUser(email);
 
                         lblStatus.Text += $"<br/> {viewingUser.Name}";
                     }
+
+                    pnUploadPhoto.Visible = false;
                 }
             }
+        }
+
+        protected void lbtnPost_Click(object sender, EventArgs e)
+        {
+            pnUploadPhoto.Visible = false;
+        }
+
+        protected void lbtnPhoto_Click(object sender, EventArgs e)
+        {
+            pnUploadPhoto.Visible = true;
+        }
+
+        protected void lbtnPhotos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("PhotoPage.aspx");
+        }
+
+        protected void lbtnFriends_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("FriendPage.aspx");
         }
     }
 }
