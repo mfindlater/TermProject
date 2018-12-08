@@ -12,10 +12,10 @@ namespace SocialNetwork
         public int PosterID { get; set; }
         public string Content { get; set; }
         public DateTime PostedDate { get; set; }
-        public Photo Photo { get; set; }
+        public Photo Photo { get; set; } = new Photo();
         public bool HasPhoto
         {
-            get { return Photo != null; }
+            get { return Photo != null && string.IsNullOrEmpty(Photo.URL); }
         }
     }
 }
