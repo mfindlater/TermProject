@@ -22,6 +22,9 @@ namespace TermProjectLogin
         {
             socialNetworkManager = new SocialNetworkManager(sqlRepository);
             Session[Constants.ManagerSession] = socialNetworkManager;
+           
+           
+
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
@@ -41,7 +44,9 @@ namespace TermProjectLogin
 
         protected void Session_End(object sender, EventArgs e)
         {
-
+            var user = Session.GetUser();
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+            socialNetworkManager.SetOnlineStatus(user.Email, false);
         }
 
         protected void Application_End(object sender, EventArgs e)

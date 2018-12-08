@@ -42,6 +42,8 @@ namespace TermProjectLogin
                         // Reset Session
                         Session.SetUser(user);
 
+                        socialNetworkManager.SetOnlineStatus(user.Email, true);
+
                         lblName.Text = user.Name;
                         imgBtnProfilePhoto.ImageUrl = user.ProfilePhotoURL;
                     }
