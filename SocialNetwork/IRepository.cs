@@ -43,6 +43,8 @@ namespace SocialNetwork
         bool FollowUser(string email, string followerEmail);
         bool UnfollowUser(string email, string followerEmail);
         bool IsFollowing(string email, string followerEmail);
+        List<User> GetFollowers(string email);
+
         Chat CreateChat(string fromEmail, string toEmail);
         bool SendMessage(ChatMessage message);
         bool DeleteMessage(string email,int messageID);
