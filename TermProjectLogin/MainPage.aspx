@@ -25,7 +25,7 @@
             <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Width="400px"></asp:TextBox><br />
             <br />
         </asp:Panel>
-        <asp:Button ID="btnPost" runat="server" Text="Post" />
+        <asp:Button ID="btnPost" runat="server" Text="Post" OnClick="btnPost_Click" />
     </asp:Panel>
     <asp:Panel ID="pnPhotos" runat="server">
         <asp:LinkButton ID="lbtnPhotos" runat="server" Text="Photos" OnClick="lbtnPhotos_Click"></asp:LinkButton>
