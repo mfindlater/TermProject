@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace TermProjectLogin
 {
@@ -115,9 +116,29 @@ namespace TermProjectLogin
 
         protected void btnPost_Click(object sender, EventArgs e)
         {
+            currentUser = Session.GetUser();
+            socialNetworkManager = Session.GetSocialNetworkManager();
+
             if (!string.IsNullOrEmpty(txtContent.Text))
             {
+                Post post = new Post();
 
+                if (photoUpload.HasFile)
+                {
+                    string filename = currentUser.UserId + "_" + Path.GetFileName(photoUpload.PostedFile.FileName);
+                    photoUpload.SaveAs(Constants.StoragePath + filename);
+
+                    Photo photo = new Photo();
+                    photo.URL = Constants.StorageURL + filename;
+                    photo.Description = txtPhotoDescription.Text;
+
+                    photo = socialNetworkManager.AddPhoto(photo, currentUser.Email);
+                    post.Photo = photo;
+                }
+
+                post.Content = txtContent.Text;
+                post = socialNetworkManager.CreatePost(post, currentUser.Email);
+                lblMsg.Text = "Posted!";
             }
         }
     }

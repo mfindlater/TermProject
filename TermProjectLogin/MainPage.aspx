@@ -17,15 +17,12 @@
         <asp:Panel ID="pnUploadPhoto" runat="server">
             <br />
             <asp:FileUpload ID="photoUpload" runat="server" /><br />
-            <asp:Label ID="lblAlbumName" runat="server" Text="Album Name:"></asp:Label>
-            <asp:TextBox ID="txtAlbumName" runat="server"></asp:TextBox>
+            <asp:Label ID="lblPhotoDescription" runat="server" Text="Photo Description:"></asp:Label>
             <br />
-            <asp:Label ID="lblDescription" runat="server" Text="Description:"></asp:Label>
-            <br />
-            <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Width="400px"></asp:TextBox><br />
-            <br />
+            <asp:TextBox ID="txtPhotoDescription" runat="server" TextMode="MultiLine" Width="400px"></asp:TextBox><br />
         </asp:Panel>
         <asp:Button ID="btnPost" runat="server" Text="Post" OnClick="btnPost_Click" />
+        <asp:Label ID="lblMsg" runat="server"></asp:Label>
     </asp:Panel>
     <asp:Panel ID="pnPhotos" runat="server">
         <asp:LinkButton ID="lbtnPhotos" runat="server" Text="Photos" OnClick="lbtnPhotos_Click"></asp:LinkButton>
