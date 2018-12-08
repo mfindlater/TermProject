@@ -39,7 +39,7 @@ namespace SocialNetwork
         PhotoAlbum CreatePhotoAlbum(PhotoAlbum photoAlbum, string email);
         bool AddPhotoToPhotoAlbum(Photo photo, PhotoAlbum photoAlbum);
         bool TagPhoto(int photoID, string email);
-        Post CreatePost(Post post, string email);
+        Post CreatePost(Post post, string fromEmail, string toEmail);
         bool FollowUser(string email, string followerEmail);
         bool UnfollowUser(string email, string followerEmail);
         bool IsFollowing(string email, string followerEmail);

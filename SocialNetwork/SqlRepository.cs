@@ -823,14 +823,19 @@ namespace SocialNetwork
             return result != -1;
         }
 
-        public Post CreatePost(Post post, string email)
+        public Post CreatePost(Post post, string fromEmail, string toEmail)
         {
             var command = new SqlCommand("TP_CreatePost")
             {
                 CommandType = CommandType.StoredProcedure
             };
 
-            command.Parameters.AddWithValue("@PosterEmail", email);
+            command.Parameters.AddWithValue("@FromEmail", fromEmail);
+            
+            if(toEmail != null)
+            {
+                command.Parameters.AddWithValue("@FromEmail", toEmail);
+            }
 
             if(post.Photo != null)
             {

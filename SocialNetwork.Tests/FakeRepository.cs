@@ -284,5 +284,15 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public Post CreatePost(Post post, string fromEmail, string toEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsFollowing(string email, string followerEmail)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

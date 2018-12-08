@@ -208,7 +208,12 @@ namespace SocialNetwork
 
         public Post CreatePost(Post post, string email)
         {
-            return repository.CreatePost(post, email);
+            return repository.CreatePost(post, email,null);
+        }
+
+        public Post CreatePost(Post post, string fromEmail, string toEmail)
+        {
+            return repository.CreatePost(post, fromEmail, toEmail);
         }
     }
 }
