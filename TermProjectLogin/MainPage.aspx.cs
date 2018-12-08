@@ -112,5 +112,13 @@ namespace TermProjectLogin
 
             return null;
         }
+
+        protected void btnPost_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtContent.Text))
+            {
+
+            }
+        }
     }
 }
