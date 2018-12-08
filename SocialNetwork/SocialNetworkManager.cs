@@ -205,5 +205,10 @@ namespace SocialNetwork
         {
             return repository.UnfollowUser(email, followerEmail);
         }
+
+        public Post CreatePost(Post post, string email)
+        {
+            return repository.CreatePost(post, email);
+        }
     }
 }
