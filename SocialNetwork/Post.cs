@@ -15,7 +15,7 @@ namespace SocialNetwork
         public Photo Photo { get; set; } = new Photo();
         public bool HasPhoto
         {
-            get { return Photo != null && string.IsNullOrEmpty(Photo.URL); }
+            get { return Photo != null && !string.IsNullOrEmpty(Photo.URL); }
         }
     }
 }
