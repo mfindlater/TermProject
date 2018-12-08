@@ -139,6 +139,16 @@ namespace TermProjectLogin
                 post.Content = txtContent.Text;
                 post = socialNetworkManager.CreatePost(post, currentUser.Email);
                 lblMsg.Text = "Posted!";
+
+                List<User> followers = socialNetworkManager.GetFollowers(currentUser.Email);
+                for (int i = 0; i < followers.Count; i++)
+                {
+                    Notification notification = new Notification();
+                    notification.Description = $"{currentUser.Name} shared a post.";
+                    notification.URL = $"MainPage.aspx?Email={currentUser.Email}";
+
+                    socialNetworkManager.CreateNotification(notification, followers[i].Email);
+                }
             }
         }
     }
