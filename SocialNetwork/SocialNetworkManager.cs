@@ -215,5 +215,10 @@ namespace SocialNetwork
         {
             return repository.CreatePost(post, fromEmail, toEmail);
         }
+
+        public List<User> GetFollowers(string email)
+        {
+            return repository.GetFollowers(email);
+        }
     }
 }
