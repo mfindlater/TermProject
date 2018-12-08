@@ -13,5 +13,9 @@ namespace SocialNetwork
         public string Content { get; set; }
         public DateTime PostedDate { get; set; }
         public Photo Photo { get; set; }
+        public bool HasPhoto
+        {
+            get { return Photo != null; }
+        }
     }
 }
