@@ -834,7 +834,7 @@ namespace SocialNetwork
             
             if(toEmail != null)
             {
-                command.Parameters.AddWithValue("@FromEmail", toEmail);
+                command.Parameters.AddWithValue("@ToEmail", toEmail);
             }
 
             if(post.Photo != null)
