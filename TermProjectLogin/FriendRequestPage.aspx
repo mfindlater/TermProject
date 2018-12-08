@@ -11,7 +11,7 @@
         <Columns>
            <asp:TemplateField>
                <ItemTemplate>
-                   <asp:ImageButton ID="imgProfile" runat="server" ImageUrl='<%# Bind("ProfilePhotoURL") %>' Width="70px" Height="100px"/>
+                   <asp:ImageButton ID="imgIProfile" runat="server" ImageUrl='<%# Bind("ProfilePhotoURL") %>' Width="70px" Height="100px" OnClick="imgIProfile_Click"/>
                </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="Name" HeaderText="Name" />
@@ -31,7 +31,7 @@
             <Columns>
            <asp:TemplateField>
                <ItemTemplate>
-                   <asp:ImageButton ID="imgProfile" runat="server" ImageUrl='<%# Bind("ProfilePhotoURL") %>' Width="70px" Height="100px"/>
+                   <asp:ImageButton ID="imgOProfile" runat="server" ImageUrl='<%# Bind("ProfilePhotoURL") %>' Width="70px" Height="100px" OnClick="imgOProfile_Click"/>
                </ItemTemplate>
             </asp:TemplateField>
                 <asp:BoundField DataField="Name" HeaderText="Name" />

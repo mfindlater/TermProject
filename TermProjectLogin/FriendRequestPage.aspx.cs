@@ -108,5 +108,25 @@ namespace TermProjectLogin
                 socialNetworkManager.CreateNotification(notification, fromEmail);
             }
         }
+
+        protected void imgIProfile_Click(object sender, ImageClickEventArgs e)
+        {
+            var user = Session.GetUser();
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+            Button button = (Button)sender;
+            int index = Convert.ToInt32(button.CommandArgument);
+            string email = gvIncomingFriendRequests.DataKeys[index].Value.ToString();
+            Response.Redirect($"MainPage.aspx?Email={email}");
+        }
+
+        protected void imgOProfile_Click(object sender, ImageClickEventArgs e)
+        {
+            var user = Session.GetUser();
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+            Button button = (Button)sender;
+            int index = Convert.ToInt32(button.CommandArgument);
+            string email = gvOutgoingFriendRequests.DataKeys[index].Value.ToString();
+            Response.Redirect($"MainPage.aspx?Email={email}");
+        }
     }
 }

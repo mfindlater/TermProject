@@ -24,6 +24,7 @@ namespace TermProjectLogin
                 pnLoggedIn.Visible = false;
 
                 bool isLoggedIn = false;
+                
 
                 if(Request.Cookies[Constants.UserCookie] != null)
                 {
@@ -84,6 +85,8 @@ namespace TermProjectLogin
                     }
                 }
             }
+
+            DisableControls();
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -247,17 +250,29 @@ namespace TermProjectLogin
             gvSearchResult.DataSource = userList;
             gvSearchResult.DataBind();
 
+            DisableControls();
+            gvSearchResult.Visible = true;
+        }
+
+        private void DisableControls()
+        {
+            User user = Session.GetUser();
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+
             for (int i = 0; i < gvSearchResult.Rows.Count; i++)
             {
                 Button button = (Button)gvSearchResult.Rows[i].FindControl("btnAddFriend");
                 string email = gvSearchResult.DataKeys[i].Value.ToString();
-                if (socialNetworkManager.AreFriends(user.ContactInfo.Email, email))
+                var friendRequests = new List<Friend>();
+                friendRequests.AddRange(socialNetworkManager.GetIncomingFriendRequests(user.Email));
+                friendRequests.AddRange(socialNetworkManager.GetOutgoingFriendRequests(user.Email));
+                bool friendRequestSent = friendRequests.Where(f => f.Email == email).Count() > 0;
+
+                if (socialNetworkManager.AreFriends(user.ContactInfo.Email, email) || friendRequestSent)
                 {
                     button.Enabled = false;
                 }
             }
-
-            gvSearchResult.Visible = true;
         }
 
         protected void btnNotification_Click(object sender, EventArgs e)
@@ -282,6 +297,9 @@ namespace TermProjectLogin
 
             socialNetworkManager.CreateFriendRequest(user.ContactInfo.Email, email);
             socialNetworkManager.CreateNotification(notification, email);
+
+            button.Enabled = false;
+
         }
 
         protected void imgProfile_Click(object sender, System.Web.UI.ImageClickEventArgs e)
