@@ -3,11 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
-    <asp:Label ID="lblStatus" runat="server" Text="You have logged in"></asp:Label>
-    <br />
-    <asp:Button ID="btnAddFriend" runat="server" Text="Add Friend" />
-    <asp:Button ID="btnFollow" runat="server" Text="Follow" />
-    <asp:Button ID="btnChat" runat="server" Text="Chat" /><br />
+    <asp:Image ID="imgProfilePhoto" ImageUrl="~/img/person_temp.jpg" runat="server" Width="80px" Height="110px"/>
+    <asp:Label ID="lblName" runat="server"></asp:Label>
+    <asp:Button ID="btnAddFriend" runat="server" Text="Add Friend" Visible="false"/>
+    <asp:Button ID="btnFollow" runat="server" Text="Follow" Visible="false" OnClick="btnFollow_Click" />
+    <asp:Button ID="btnChat" runat="server" Visible="false" Text="Chat" /><br />
     <br />
     <asp:Panel ID="pnCreatePost" runat="server">
         <asp:LinkButton ID="lbtnPost" runat="server" Text="Post" OnClick="lbtnPost_Click"></asp:LinkButton>

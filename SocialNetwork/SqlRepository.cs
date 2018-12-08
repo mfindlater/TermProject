@@ -857,7 +857,7 @@ namespace SocialNetwork
             };
 
             command.Parameters.AddWithValue("@Email", email);
-            command.Parameters.AddWithValue("@ToEmail",followerEmail);
+            command.Parameters.AddWithValue("@FollowerEmail",followerEmail);
 
             int result = db.DoUpdateUsingCmdObj(command);
 
@@ -872,7 +872,7 @@ namespace SocialNetwork
             };
 
             command.Parameters.AddWithValue("@Email", email);
-            command.Parameters.AddWithValue("@ToEmail", followerEmail);
+            command.Parameters.AddWithValue("@FollowerEmail", followerEmail);
 
             int result = db.DoUpdateUsingCmdObj(command);
 
@@ -1016,6 +1016,22 @@ namespace SocialNetwork
             int result = db.DoUpdateUsingCmdObj(command);
 
             return (result != -1);
+        }
+
+        public bool IsFollowing(string email, string followerEmail)
+        {
+            var command = new SqlCommand("TP_IsFollowing") { CommandType = CommandType.StoredProcedure };
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@FollowerEmail", followerEmail);
+
+            SqlParameter parameter = new SqlParameter("@Result", SqlDbType.Bit);
+            parameter.Direction = ParameterDirection.ReturnValue;
+            command.Parameters.Add(parameter);
+
+            db.GetDataSetUsingCmdObj(command);
+
+            bool result = Convert.ToBoolean(parameter.Value);
+            return result;
         }
     }
 }

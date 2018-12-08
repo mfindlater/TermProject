@@ -13,13 +13,22 @@ namespace TermProjectLogin {
     public partial class MainPage {
         
         /// <summary>
-        /// lblStatus control.
+        /// imgProfilePhoto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatus;
+        protected global::System.Web.UI.WebControls.Image imgProfilePhoto;
+        
+        /// <summary>
+        /// lblName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblName;
         
         /// <summary>
         /// btnAddFriend control.

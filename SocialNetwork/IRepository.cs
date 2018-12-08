@@ -42,6 +42,7 @@ namespace SocialNetwork
         Post CreatePost(Post post, string email);
         bool FollowUser(string email, string followerEmail);
         bool UnfollowUser(string email, string followerEmail);
+        bool IsFollowing(string email, string followerEmail);
         Chat CreateChat(string fromEmail, string toEmail);
         bool SendMessage(ChatMessage message);
         bool DeleteMessage(string email,int messageID);

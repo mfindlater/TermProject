@@ -190,5 +190,20 @@ namespace SocialNetwork
         {
             return repository.SetOnlineStatus(email, online);
         }
+
+        public bool FollowUser(string email, string followerEmail)
+        {
+            return repository.FollowUser(email, followerEmail);
+        }
+
+        public bool IsFollowing(string email, string followerEmail)
+        {
+            return repository.IsFollowing(email, followerEmail);
+        }
+
+        public bool UnfollowUser(string email, string followerEmail)
+        {
+            return repository.UnfollowUser(email, followerEmail);
+        }
     }
 }
