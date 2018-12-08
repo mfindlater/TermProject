@@ -32,8 +32,8 @@
             <ItemTemplate>
                 <li>
                     <div>
-                        <%# DataBinder.Eval(Container.DataItem, "Content") %>
-                        
+                        <%# DataBinder.Eval(Container.DataItem, "Content") %><br />
+                        <asp:Image ID="imgPhoto" runat="server" ImageUrl='<%# Eval("Photo.URL") %>' Visible='<%# Eval("HasPhoto") %>' Width="300px" Height="200px"/>
                     </div>
                 </li>
             </ItemTemplate>
