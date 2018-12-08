@@ -220,5 +220,10 @@ namespace SocialNetwork
         {
             return repository.CreatePhotoAlbum(photoAlbum, email);
         }
+
+        public List<User> GetFollowers(string email)
+        {
+            return repository.GetFollowers(email);
+        }
     }
 }
