@@ -1050,7 +1050,7 @@ namespace SocialNetwork
 
             var ds = db.GetDataSetUsingCmdObj(command);
 
-            for(int i=0; i < ds.Tables[0].Rows.Count;i++)
+            for(int i=0; i < ds.Tables.Count;i++)
             {
                 var follower = GetUserFromRow(i);
                 followers.Add(follower);
