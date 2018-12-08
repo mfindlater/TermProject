@@ -310,5 +310,15 @@ namespace TermProjectLogin
 
             Response.Redirect($"MainPage.aspx?Email={email}");
         }
+
+        protected void timNotification_Tick(object sender, EventArgs e)
+        {
+            var user = Session.GetUser();
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+
+            int count = socialNetworkManager.GetNotifications(user.Email).Where(n => n.ReadStatus == false).Count();
+
+            btnNotification.Text = $"Notifications ({count})";
+        }
     }
 }

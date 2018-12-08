@@ -15,6 +15,8 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:ScriptManager ID="scrManager" runat="server">
+            </asp:ScriptManager>
             <asp:Panel ID="pnLogin" runat="server">
                 <asp:Label ID="lblEmail" runat="server" Text="Email"></asp:Label>
                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
@@ -25,11 +27,23 @@
                 <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
             </asp:Panel>
             <asp:Panel ID="pnLoggedIn" runat="server" Visible="False">
-                <asp:ImageButton ID="imgBtnProfilePhoto" runat="server" ImageUrl="~/img/person_temp.jpg" OnClick="imgBtnProfilePhoto_Click" Width="100px" Height="130px"/>
+                <asp:ImageButton ID="imgBtnProfilePhoto" runat="server" ImageUrl="~/img/person_temp.jpg" OnClick="imgBtnProfilePhoto_Click" Width="100px" Height="130px" />
                 <asp:Label ID="lblName" runat="server"></asp:Label>
-                <asp:Button ID="btnNotification" runat="server" Text="Notification" OnClick="btnNotification_Click" />
-                <asp:Button ID="btnSettings" runat="server" Text="Settings" OnClick="btnSettings_Click" />
-                <asp:Button ID="btnLogOut" runat="server" Text="Log Out" OnClick="btnLogOut_Click" />
+                <div style="display: inline">
+                    <asp:UpdatePanel ID="upPanel" runat="server">
+                        <ContentTemplate>
+                            <asp:Button ID="btnNotification" runat="server" OnClick="btnNotification_Click" Text="Notifications (0)" />
+                            <asp:Button ID="btnSettings" runat="server" Text="Settings" OnClick="btnSettings_Click" />
+                            <asp:Button ID="btnLogOut" runat="server" Text="Log Out" OnClick="btnLogOut_Click" />
+                            <asp:Timer runat="server" Interval="1000" ID="timNotification" OnTick="timNotification_Tick"></asp:Timer>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="timNotification" EventName="Tick" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                </div>
+
+
             </asp:Panel>
             <asp:Panel ID="pnSearch" runat="server" Visible="False">
                 <asp:DropDownList ID="ddlSearch" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlSearch_SelectedIndexChanged">
@@ -46,7 +60,7 @@
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:ImageButton ID="imgProfile" runat="server" ImageUrl='<%# Bind("ProfilePhotoURL") %>' CommandArgument="<%# Container.DataItemIndex %>" Width="70px" Height="100px" OnClick="imgProfile_Click"/>
+                                <asp:ImageButton ID="imgProfile" runat="server" ImageUrl='<%# Bind("ProfilePhotoURL") %>' CommandArgument="<%# Container.DataItemIndex %>" Width="70px" Height="100px" OnClick="imgProfile_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="UserID" HeaderText="User ID" />
@@ -55,7 +69,7 @@
                         <asp:BoundField DataField="Birthdate" HeaderText="Birthdate" />
                         <asp:TemplateField HeaderText="Add">
                             <ItemTemplate>
-                                <asp:Button ID="btnAddFriend" runat="server" Text="Add Friend" CommandArgument="<%# Container.DataItemIndex %>" OnClick="btnAddFriend_Click"/>
+                                <asp:Button ID="btnAddFriend" runat="server" Text="Add Friend" CommandArgument="<%# Container.DataItemIndex %>" OnClick="btnAddFriend_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

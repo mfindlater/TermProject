@@ -31,6 +31,15 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// scrManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scrManager;
+        
+        /// <summary>
         /// pnLogin control.
         /// </summary>
         /// <remarks>
@@ -130,6 +139,15 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.Label lblName;
         
         /// <summary>
+        /// upPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upPanel;
+        
+        /// <summary>
         /// btnNotification control.
         /// </summary>
         /// <remarks>
@@ -155,6 +173,15 @@ namespace TermProjectLogin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnLogOut;
+        
+        /// <summary>
+        /// timNotification control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer timNotification;
         
         /// <summary>
         /// pnSearch control.
