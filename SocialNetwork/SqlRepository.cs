@@ -395,8 +395,8 @@ namespace SocialNetwork
                 {
                     PhotoID = Convert.ToInt32(db.GetField("PhotoID", i)),
                     UserID = Convert.ToInt32(db.GetField("UserID", i)),
-                    URL = db.GetField("URL", 0).ToString(),
-                    Description = db.GetField("Description", 0).ToString(),
+                    URL = db.GetField("URL", i).ToString(),
+                    Description = db.GetField("Description", i).ToString(),
                     PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString())
                 };
                 photos.Add(photo);
