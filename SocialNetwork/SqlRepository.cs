@@ -255,8 +255,26 @@ namespace SocialNetwork
                     PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString()),
                     Content = HttpUtility.HtmlEncode(db.GetField("Content", i))
                 };
+
+                if (db.GetField("PhotoID", i) != DBNull.Value)
+                {
+                    newsFeedPost.Photo = new Photo()
+                    {
+                        PhotoID = Convert.ToInt32(db.GetField("PhotoID", i)),
+                        URL = db.GetField("URL", i).ToString()
+                    };
+                }
+
+                newsFeedPost.Email = db.GetField("Email", i).ToString();
                 newsFeed.Add(newsFeedPost);
             }
+
+
+            foreach (var post in newsFeed)
+            {
+                post.Poster = GetUser(post.Email);
+            }
+
 
             return newsFeed;
         }
@@ -487,7 +505,15 @@ namespace SocialNetwork
                         URL = db.GetField("URL", i).ToString()
                     };
                 }
+
+                post.Email = db.GetField("Email", i).ToString();
+
                 posts.Add(post);
+            }
+
+            foreach(var post in posts)
+            {
+                post.Poster = GetUser(post.Email);
             }
 
             return posts;

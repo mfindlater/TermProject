@@ -9,6 +9,8 @@ namespace SocialNetwork
     public class Post
     {
         public int PostID { get; set; }
+        public User Poster { get; set; }
+        public string Email { get; set; }
         public int PosterID { get; set; }
         public string Content { get; set; }
         public DateTime PostedDate { get; set; }
