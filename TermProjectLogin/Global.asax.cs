@@ -47,6 +47,7 @@ namespace TermProjectLogin
             var user = Session.GetUser();
             var socialNetworkManager = Session.GetSocialNetworkManager();
             socialNetworkManager.SetOnlineStatus(user.Email, false);
+            socialNetworkManager.UpdateUser(user);
         }
 
         protected void Application_End(object sender, EventArgs e)
