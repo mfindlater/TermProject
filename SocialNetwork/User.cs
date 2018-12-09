@@ -12,6 +12,7 @@ namespace SocialNetwork
         public List<Friend> Friends { get; set; }
         public UserSettings Settings { get; set; }
         public List<Photo> Photos { get; set; }
+        public List<PhotoAlbum> PhotoAlbums { get; set; }
         public string EncryptedPassword { get; set; }
         public string Likes { get; set; }
         public string Dislikes { get; set; }

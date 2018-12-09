@@ -329,6 +329,7 @@ namespace SocialNetwork
                     var user = GetUserFromRow(0);
                     user.Photos = GetPhotos(user.ContactInfo.Email);
                     user.Friends = GetFriends(user.ContactInfo.Email);
+                    user.PhotoAlbums = GetPhotoAlbums(user.ContactInfo.Email);
                     return user;
                 }
             }
@@ -421,6 +422,63 @@ namespace SocialNetwork
             }
 
             return photos;
+        }
+
+        private List<PhotoAlbum> GetPhotoAlbums(string email)
+        {
+            var command = new SqlCommand("TP_GetPhotoAlbums")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@Email", email);
+
+            var ds = db.GetDataSetUsingCmdObj(command);
+
+            var photoAlbums = new List<PhotoAlbum>();
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                var photoAlbum = new PhotoAlbum()
+                {
+                    PhotoAlbumID = Convert.ToInt32(db.GetField("PhotoAlbumID", i)),
+                    Name = db.GetField("Name", i).ToString(),
+                    Description = db.GetField("Description", i).ToString(),
+                    UserID = Convert.ToInt32(db.GetField("UserID", i))
+                };
+                photoAlbums.Add(photoAlbum);
+            }
+            
+            for (int i = 0; i < photoAlbums.Count; i++)
+            {
+                command = new SqlCommand("TP_GetPhotoAlbumPhotos")
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddWithValue("@PhotoAlbumID", photoAlbums[i].PhotoAlbumID);
+
+                ds = db.GetDataSetUsingCmdObj(command);
+
+                var photos = new List<Photo>();
+
+                for (int j = 0; i < ds.Tables[0].Rows.Count; j++)
+                {
+                    var photo = new Photo()
+                    {
+                        PhotoID = Convert.ToInt32(db.GetField("PhotoID", i)),
+                        UserID = Convert.ToInt32(db.GetField("UserID", i)),
+                        URL = db.GetField("URL", i).ToString(),
+                        Description = db.GetField("Description", i).ToString(),
+                        PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString())
+                    };
+                    photos.Add(photo);
+                }
+
+                photoAlbums[i].Photos = photos;
+            }
+
+            return photoAlbums;
         }
 
         private User GetUserFromRow(int row)
