@@ -462,15 +462,15 @@ namespace SocialNetwork
 
                 var photos = new List<Photo>();
 
-                for (int j = 0; i < ds.Tables[0].Rows.Count; j++)
+                for (int j = 0; j < ds.Tables[0].Rows.Count; j++)
                 {
                     var photo = new Photo()
                     {
-                        PhotoID = Convert.ToInt32(db.GetField("PhotoID", i)),
-                        UserID = Convert.ToInt32(db.GetField("UserID", i)),
-                        URL = db.GetField("URL", i).ToString(),
-                        Description = db.GetField("Description", i).ToString(),
-                        PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString())
+                        PhotoID = Convert.ToInt32(db.GetField("PhotoID", j)),
+                        UserID = Convert.ToInt32(db.GetField("UserID", j)),
+                        URL = db.GetField("URL", j).ToString(),
+                        Description = db.GetField("Description", j).ToString(),
+                        PostedDate = DateTime.Parse(db.GetField("PostedDate", j).ToString())
                     };
                     photos.Add(photo);
                 }
