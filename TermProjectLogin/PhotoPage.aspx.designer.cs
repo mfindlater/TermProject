@@ -22,6 +22,15 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.Panel pnPhoto;
         
         /// <summary>
+        /// lblAllPhotos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAllPhotos;
+        
+        /// <summary>
         /// rptPhoto control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,33 @@ namespace TermProjectLogin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnCreateAlbum;
+        
+        /// <summary>
+        /// photoUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload photoUpload;
+        
+        /// <summary>
+        /// lblPhotoDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPhotoDescription;
+        
+        /// <summary>
+        /// txtPhotoDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPhotoDescription;
         
         /// <summary>
         /// lblAlbumName control.
@@ -85,22 +121,13 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.Button btnCreate;
         
         /// <summary>
-        /// lbtnAlbum control.
+        /// lblMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnAlbum;
-        
-        /// <summary>
-        /// lbtnPhoto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnPhoto;
+        protected global::System.Web.UI.WebControls.Label lblMsg;
         
         /// <summary>
         /// pnAlbum control.
@@ -110,6 +137,15 @@ namespace TermProjectLogin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnAlbum;
+        
+        /// <summary>
+        /// lblAlbum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAlbum;
         
         /// <summary>
         /// rptAlbum control.
@@ -128,6 +164,15 @@ namespace TermProjectLogin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnAlbumPhoto;
+        
+        /// <summary>
+        /// lblAlbumPhotos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAlbumPhotos;
         
         /// <summary>
         /// rptAlbumPhoto control.

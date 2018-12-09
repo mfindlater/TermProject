@@ -1082,6 +1082,11 @@ namespace SocialNetwork
 
             photoAlbum.PhotoAlbumID = Convert.ToInt32(photoIdParam.Value);
 
+            foreach(var photo in photoAlbum.Photos)
+            {
+                AddPhotoToPhotoAlbum(photo, photoAlbum);
+            }
+
             return photoAlbum;
         }
 
