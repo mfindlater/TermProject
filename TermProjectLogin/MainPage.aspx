@@ -24,26 +24,6 @@
         <asp:Button ID="btnPost" runat="server" Text="Post" OnClick="btnPost_Click" />
         <asp:Label ID="lblMsg" runat="server"></asp:Label>
     </asp:Panel>
-    <asp:Panel ID="pnWall" runat="server">
-        <asp:Repeater ID="rptWall" runat="server">
-            <HeaderTemplate>
-                <ul>
-            </HeaderTemplate>
-            <ItemTemplate>
-                <li>
-                    <div>
-                        <asp:Image ID="imgProfilePhoto" runat="server" ImageUrl='<%# Eval("Poster.ProfilePhotoURL") %>' Width="50px" Height="70px"/>
-                        <asp:LinkButton ID="lbtnName" runat="server" Text='<%# Eval("Poster.Name") %>' CommandArgument='<%# Eval("Poster.Email") %>' OnClick="lbtnName_Click"></asp:LinkButton>
-                        <%# DataBinder.Eval(Container.DataItem, "Content") %><br />
-                        <asp:Image ID="imgPhoto" runat="server" ImageUrl='<%# Eval("Photo.URL") %>' Visible='<%# Eval("HasPhoto") %>' Width="300px" Height="200px"/>
-                    </div>
-                </li>
-            </ItemTemplate>
-            <FooterTemplate>
-                </ul>
-            </FooterTemplate>
-        </asp:Repeater>
-    </asp:Panel>
     <asp:Panel ID="pnPhotos" runat="server">
         <asp:LinkButton ID="lbtnPhotos" runat="server" Text="Photos" OnClick="lbtnPhotos_Click"></asp:LinkButton>
         <br />
@@ -53,12 +33,12 @@
                     <div class="row">
             </HeaderTemplate>
             <ItemTemplate>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                            <asp:Image ID="imgPhoto" runat="server" ImageUrl='<%# Eval("URL") %>' Width="100px" Height="130px"/>
-                        </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <asp:Image ID="imgPhoto" runat="server" ImageUrl='<%# Eval("URL") %>' Width="100px" Height="130px" />
+                </div>
             </ItemTemplate>
             <FooterTemplate>
-                    </div>
+                </div>
                 </div>
             </FooterTemplate>
         </asp:Repeater>
@@ -72,13 +52,35 @@
                     <div class="row">
             </HeaderTemplate>
             <ItemTemplate>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                            <asp:ImageButton ID="imgFriend" runat="server" ImageUrl='<%# Eval("ProfilePhotoURL") %>' OnClick="imgFriend_Click" CommandArgument='<%# Eval("Email") %>' Width="100px" Height="130px"/>
-                        </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <asp:ImageButton ID="imgFriend" runat="server" ImageUrl='<%# Eval("ProfilePhotoURL") %>' OnClick="imgFriend_Click" CommandArgument='<%# Eval("Email") %>' Width="100px" Height="130px" />
+                </div>
             </ItemTemplate>
             <FooterTemplate>
-                    </div>
                 </div>
+                </div>
+            </FooterTemplate>
+        </asp:Repeater>
+    </asp:Panel>
+    <asp:Panel ID="pnWallNewsFeed" runat="server">
+        <asp:LinkButton ID="lbtnWall" runat="server" Text="Wall" OnClick="lbtnWall_Click"></asp:LinkButton>
+        <asp:LinkButton ID="lbtnNewsFeed" runat="server" Text="News Feed" OnClick="lbtnNewsFeed_Click"></asp:LinkButton>
+        <asp:Repeater ID="rptWall" runat="server">
+            <HeaderTemplate>
+                <ul>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <li>
+                    <div>
+                        <asp:Image ID="imgProfilePhoto" runat="server" ImageUrl='<%# Eval("Poster.ProfilePhotoURL") %>' Width="50px" Height="70px" />
+                        <asp:LinkButton ID="lbtnName" runat="server" Text='<%# Eval("Poster.Name") %>' CommandArgument='<%# Eval("Poster.Email") %>' OnClick="lbtnName_Click"></asp:LinkButton>
+                        <%# DataBinder.Eval(Container.DataItem, "Content") %><br />
+                        <asp:Image ID="imgPhoto" runat="server" ImageUrl='<%# Eval("Photo.URL") %>' Visible='<%# Eval("HasPhoto") %>' Width="300px" Height="200px" />
+                    </div>
+                </li>
+            </ItemTemplate>
+            <FooterTemplate>
+                </ul>
             </FooterTemplate>
         </asp:Repeater>
     </asp:Panel>

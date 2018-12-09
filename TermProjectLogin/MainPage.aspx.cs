@@ -58,15 +58,26 @@ namespace TermProjectLogin
 
                     if (viewingUser != null)
                     {
-                        rptWall.DataSource = socialNetworkManager.GetWall(viewingUser.Email);
                         rptPhoto.DataSource = viewingUser.Photos;
                         rptFriend.DataSource = viewingUser.Friends;
+                        lbtnNewsFeed.Visible = false;
+
+                        rptWall.DataSource = socialNetworkManager.GetWall(viewingUser.Email);
                     }
                     else
                     {
-                        rptWall.DataSource = socialNetworkManager.GetWall(currentUser.Email);
                         rptPhoto.DataSource = currentUser.Photos;
                         rptFriend.DataSource = currentUser.Friends;
+                        lbtnNewsFeed.Visible = true;
+
+                        if (ViewState["ViewMode"] == null || ViewState["ViewMode"].ToString() == "Wall")
+                        {
+                            rptWall.DataSource = socialNetworkManager.GetWall(currentUser.Email);
+                        }
+                        else
+                        {
+                            rptWall.DataSource = socialNetworkManager.GetNewsFeed(currentUser.Email);
+                        }
                     }
                     rptWall.DataBind();
                     rptPhoto.DataBind();
@@ -234,6 +245,36 @@ namespace TermProjectLogin
             string email = linkButton.CommandArgument;
 
             Response.Redirect($"MainPage.aspx?Email={ email }");
+        }
+
+        protected void lbtnWall_Click(object sender, EventArgs e)
+        {
+            socialNetworkManager = Session.GetSocialNetworkManager();
+            currentUser = Session.GetUser();
+            viewingUser = GetViewingUser();
+
+            ViewState["ViewMode"] = "Wall";
+
+            if (viewingUser == null)
+            {
+                rptWall.DataSource = socialNetworkManager.GetWall(currentUser.Email);
+            }
+            else
+            {
+                rptWall.DataSource = socialNetworkManager.GetWall(viewingUser.Email);
+            }
+            rptWall.DataBind();
+        }
+
+        protected void lbtnNewsFeed_Click(object sender, EventArgs e)
+        {
+            socialNetworkManager = Session.GetSocialNetworkManager();
+            currentUser = Session.GetUser();
+
+            ViewState["ViewMode"] = "NewsFeed";
+
+            rptWall.DataSource = socialNetworkManager.GetNewsFeed(currentUser.Email);
+            rptWall.DataBind();
         }
     }
 }
