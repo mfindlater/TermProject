@@ -24,6 +24,7 @@ namespace SocialNetwork
         bool CancelFriendRequest(string userEmail, string requestEmail);
         bool RemoveFriend(string userEmail, string requestEmail);
         bool IsFriend(string user1Email, string user2Email, Guid verificationToken);
+        bool IsFriendOfFriend(string emailA, string emailB);
         bool AreFriends(string emailA, string emailB);
         List<Post> GetNewsFeed(string email);
         List<Post> GetWall(string email);

@@ -1116,6 +1116,20 @@ namespace SocialNetwork
             return followers;
         }
 
+        public bool IsFriendOfFriend(string email, string friendEmail)
+        {
+            var command = new SqlCommand("TP_IsFriendOfFriend") { CommandType = CommandType.StoredProcedure };
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@FriendEmail", friendEmail);
 
+            SqlParameter parameter = new SqlParameter("@Result", SqlDbType.Bit);
+            parameter.Direction = ParameterDirection.ReturnValue;
+            command.Parameters.Add(parameter);
+
+            db.GetDataSetUsingCmdObj(command);
+
+            bool result = Convert.ToBoolean(parameter.Value);
+            return result;
+        }
     }
 }

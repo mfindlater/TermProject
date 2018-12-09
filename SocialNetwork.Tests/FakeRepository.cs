@@ -294,5 +294,15 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public bool IsFriendOfFriend(string emailA, string emailB)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> GetFollowers(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
