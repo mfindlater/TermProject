@@ -227,5 +227,13 @@ namespace TermProjectLogin
 
             Response.Redirect($"MainPage.aspx?Email={ email }");
         }
+
+        protected void lbtnName_Click(object sender, EventArgs e)
+        {
+            LinkButton linkButton = (LinkButton)sender;
+            string email = linkButton.CommandArgument;
+
+            Response.Redirect($"MainPage.aspx?Email={ email }");
+        }
     }
 }
