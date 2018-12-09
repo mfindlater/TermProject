@@ -11,7 +11,7 @@
     <br />
     <asp:Panel ID="pnCreatePost" runat="server">
         <asp:LinkButton ID="lbtnPost" runat="server" Text="Post" OnClick="lbtnPost_Click"></asp:LinkButton>
-        <asp:LinkButton ID="lbtnPhoto" runat="server" Text="Photo/Album" OnClick="lbtnPhoto_Click"></asp:LinkButton>
+        <asp:LinkButton ID="lbtnPhoto" runat="server" Text="Photo" OnClick="lbtnPhoto_Click"></asp:LinkButton>
         <br />
         <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Width="400px"></asp:TextBox><br />
         <asp:Panel ID="pnUploadPhoto" runat="server">
@@ -45,23 +45,39 @@
     <asp:Panel ID="pnPhotos" runat="server">
         <asp:LinkButton ID="lbtnPhotos" runat="server" Text="Photos" OnClick="lbtnPhotos_Click"></asp:LinkButton>
         <br />
-        <asp:ImageButton ID="imgBtnPhoto1" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
-        <asp:ImageButton ID="imgBtnPhoto2" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
-        <asp:ImageButton ID="imgBtnPhoto3" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
-        <br />
-        <asp:ImageButton ID="imgBtnPhoto4" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
-        <asp:ImageButton ID="imgBtnPhoto5" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
-        <asp:ImageButton ID="imgBtnPhoto6" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
+        <asp:Repeater ID="rptPhoto" runat="server">
+            <HeaderTemplate>
+                <div class="container">
+                    <div class="row">
+            </HeaderTemplate>
+            <ItemTemplate>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <asp:Image ID="imgPhoto" runat="server" ImageUrl='<%# Eval("URL") %>' Width="100px" Height="130px"/>
+                        </div>
+            </ItemTemplate>
+            <FooterTemplate>
+                    </div>
+                </div>
+            </FooterTemplate>
+        </asp:Repeater>
     </asp:Panel>
     <asp:Panel ID="pnFriends" runat="server">
         <asp:LinkButton ID="lbtnFriends" runat="server" Text="Friends" OnClick="lbtnFriends_Click"></asp:LinkButton>
         <br />
-        <asp:ImageButton ID="imgBtnFriend1" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
-        <asp:ImageButton ID="imgBtnFriend2" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
-        <asp:ImageButton ID="imgBtnFriend3" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
-        <br />
-        <asp:ImageButton ID="imgBtnFriend4" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
-        <asp:ImageButton ID="imgBtnFriend5" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
-        <asp:ImageButton ID="imgBtnFriend6" runat="server" ImageUrl="~/img/person_temp.jpg" Width="100px" Height="130px" />
+        <asp:Repeater ID="rptFriend" runat="server">
+            <HeaderTemplate>
+                <div class="container">
+                    <div class="row">
+            </HeaderTemplate>
+            <ItemTemplate>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <asp:ImageButton ID="imgFriend" runat="server" ImageUrl='<%# Eval("ProfilePhotoURL") %>' OnClick="imgFriend_Click" CommandArgument='<%# Eval("Email") %>' Width="100px" Height="130px"/>
+                        </div>
+            </ItemTemplate>
+            <FooterTemplate>
+                    </div>
+                </div>
+            </FooterTemplate>
+        </asp:Repeater>
     </asp:Panel>
 </asp:Content>

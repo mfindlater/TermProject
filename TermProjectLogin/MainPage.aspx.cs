@@ -59,12 +59,18 @@ namespace TermProjectLogin
                     if (viewingUser != null)
                     {
                         rptWall.DataSource = socialNetworkManager.GetWall(viewingUser.Email);
+                        rptPhoto.DataSource = viewingUser.Photos;
+                        rptFriend.DataSource = viewingUser.Friends;
                     }
                     else
                     {
                         rptWall.DataSource = socialNetworkManager.GetWall(currentUser.Email);
+                        rptPhoto.DataSource = currentUser.Photos;
+                        rptFriend.DataSource = currentUser.Friends;
                     }
                     rptWall.DataBind();
+                    rptPhoto.DataBind();
+                    rptFriend.DataBind();
                 }
             }
         }
@@ -202,6 +208,24 @@ namespace TermProjectLogin
                 notificationTwo.URL = $"MainPage.aspx?Email={viewingUser.Email}";
                 socialNetworkManager.CreateNotification(notificationTwo, viewingUser.Email);
             }
+
+            if (viewingUser != null)
+            {
+                rptWall.DataSource = socialNetworkManager.GetWall(viewingUser.Email);
+            }
+            else
+            {
+                rptWall.DataSource = socialNetworkManager.GetWall(currentUser.Email);
+            }
+            rptWall.DataBind();
+        }
+
+        protected void imgFriend_Click(object sender, ImageClickEventArgs e)
+        {
+            ImageButton imageButton = (ImageButton)sender;
+            string email = imageButton.CommandArgument;
+
+            Response.Redirect($"MainPage.aspx?Email={ email }");
         }
     }
 }

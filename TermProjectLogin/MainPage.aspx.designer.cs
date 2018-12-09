@@ -184,58 +184,13 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.LinkButton lbtnPhotos;
         
         /// <summary>
-        /// imgBtnPhoto1 control.
+        /// rptPhoto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnPhoto1;
-        
-        /// <summary>
-        /// imgBtnPhoto2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnPhoto2;
-        
-        /// <summary>
-        /// imgBtnPhoto3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnPhoto3;
-        
-        /// <summary>
-        /// imgBtnPhoto4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnPhoto4;
-        
-        /// <summary>
-        /// imgBtnPhoto5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnPhoto5;
-        
-        /// <summary>
-        /// imgBtnPhoto6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnPhoto6;
+        protected global::System.Web.UI.WebControls.Repeater rptPhoto;
         
         /// <summary>
         /// pnFriends control.
@@ -256,57 +211,12 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.LinkButton lbtnFriends;
         
         /// <summary>
-        /// imgBtnFriend1 control.
+        /// rptFriend control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnFriend1;
-        
-        /// <summary>
-        /// imgBtnFriend2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnFriend2;
-        
-        /// <summary>
-        /// imgBtnFriend3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnFriend3;
-        
-        /// <summary>
-        /// imgBtnFriend4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnFriend4;
-        
-        /// <summary>
-        /// imgBtnFriend5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnFriend5;
-        
-        /// <summary>
-        /// imgBtnFriend6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnFriend6;
+        protected global::System.Web.UI.WebControls.Repeater rptFriend;
     }
 }
