@@ -115,7 +115,15 @@ namespace TermProjectLogin
 
         protected void lbtnPhotos_Click(object sender, EventArgs e)
         {
-            Response.Redirect("PhotoPage.aspx");
+            viewingUser = GetViewingUser();
+            if (viewingUser != null)
+            {
+                Response.Redirect($"PhotoPage.aspx?Email={viewingUser.Email}");
+            }
+            else
+            {
+                Response.Redirect("PhotoPage.aspx");
+            }
         }
 
         protected void lbtnFriends_Click(object sender, EventArgs e)

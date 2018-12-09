@@ -10,16 +10,25 @@
 namespace TermProjectLogin {
     
     
-    public partial class PhotoPage {
+    public partial class PhotoPage1 {
         
         /// <summary>
-        /// form1 control.
+        /// pnPhoto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Panel pnPhoto;
+        
+        /// <summary>
+        /// rptPhoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptPhoto;
         
         /// <summary>
         /// pnCreateAlbum control.
@@ -76,6 +85,24 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.Button btnCreate;
         
         /// <summary>
+        /// lbtnAlbum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnAlbum;
+        
+        /// <summary>
+        /// lbtnPhoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnPhoto;
+        
+        /// <summary>
         /// pnAlbum control.
         /// </summary>
         /// <remarks>
@@ -94,21 +121,21 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.Repeater rptAlbum;
         
         /// <summary>
-        /// pbPhoto control.
+        /// pnAlbumPhoto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pbPhoto;
+        protected global::System.Web.UI.WebControls.Panel pnAlbumPhoto;
         
         /// <summary>
-        /// rptPhoto control.
+        /// rptAlbumPhoto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptPhoto;
+        protected global::System.Web.UI.WebControls.Repeater rptAlbumPhoto;
     }
 }
