@@ -1001,25 +1001,6 @@ namespace SocialNetwork
             return (result != -1);
         }
 
-        public Chat CreateChat(string fromEmail, string toEmail)
-        {
-            var command = new SqlCommand("TP_CreateChat")
-            {
-                CommandType = CommandType.StoredProcedure
-            };
-
-            var parameter = new SqlParameter("@ChatID", SqlDbType.Int);
-           
-            db.DoUpdateUsingCmdObj(command);
-
-            Chat chat = new Chat
-            {
-                ChatID = Convert.ToInt32(parameter.Value)
-            };
-
-            return chat;
-        }
-
         public bool SendMessage(ChatMessage message)
         {
             var command = new SqlCommand("TP_SendMessage")
@@ -1027,7 +1008,6 @@ namespace SocialNetwork
                 CommandType = CommandType.StoredProcedure
             };
 
-            command.Parameters.AddWithValue("@ChatID", message.ChatID);
             command.Parameters.AddWithValue("@FromEmail", message.FromEmail);
             command.Parameters.AddWithValue("@ToEmail", message.ToEmail);
             command.Parameters.AddWithValue("@Message", message.Message);
@@ -1221,6 +1201,31 @@ namespace SocialNetwork
             }
 
             return themes;
+        }
+
+        public List<ChatMessage> GetMessages(string email1, string email2)
+        {
+            var messages = new List<ChatMessage>();
+
+            var command = new SqlCommand("TP_GetMessages") { CommandType = CommandType.StoredProcedure };
+            command.Parameters.AddWithValue("@Email1", email1);
+            command.Parameters.AddWithValue("@Email2", email2);
+
+            var ds = db.GetDataSetUsingCmdObj(command);
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                var message = new ChatMessage() {
+                    MessageID = Convert.ToInt32(db.GetField("MessageID", i)),
+                    MessageDate = Convert.ToDateTime(db.GetField("MessageDate", i)),
+                    Message = db.GetField("Message", i).ToString(),
+                    FromEmail = db.GetField("FromEmail", i).ToString(),
+                    ToEmail = db.GetField("ToEmail", i).ToString()
+                };
+                messages.Add(message);
+            }
+
+            return messages;
         }
     }
 }

@@ -8,7 +8,6 @@ namespace SocialNetwork
 {
     public class Chat
     {
-        public int ChatID { get; set; }
         public List<ChatMessage> Messages { get; set; }
     }
 }

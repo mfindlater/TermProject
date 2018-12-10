@@ -9,7 +9,6 @@ namespace SocialNetwork
     public class ChatMessage
     {
         public int MessageID { get; set; }
-        public int ChatID { get; set; }
         public int FromUserID { get; set; }
         public int ToUserID { get; set; }
         public string FromEmail { get; set; }

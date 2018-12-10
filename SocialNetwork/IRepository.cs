@@ -46,9 +46,9 @@ namespace SocialNetwork
         bool IsFollowing(string email, string followerEmail);
         List<User> GetFollowers(string email);
         List<Theme> GetThemes();
-        Chat CreateChat(string fromEmail, string toEmail);
         bool SendMessage(ChatMessage message);
         bool DeleteMessage(string email,int messageID);
         bool SetOnlineStatus(string email,bool online);
+        List<ChatMessage> GetMessages(string email1, string email2);
     }
 }

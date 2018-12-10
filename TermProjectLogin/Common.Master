@@ -1,5 +1,8 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Common.master.cs" Inherits="TermProjectLogin.Common" %>
 
+<%@ Register Src="~/ChatControl.ascx" TagPrefix="uc1" TagName="ChatControl" %>
+
+
 <!DOCTYPE html>
 
 <html>
@@ -11,6 +14,14 @@
     <script src="Scripts\jquery-3.0.0.min.js"></script>
     <script src="Scripts\popper.min.js"></script>
     <script src="Scripts\bootstrap.min.js"></script>
+    <style>
+        .list-group{
+            max-height: 300px;
+            margin-bottom: 10px;
+            overflow:scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -77,6 +88,7 @@
             </asp:Panel>
             <asp:ContentPlaceHolder ID="cphContent" runat="server">
             </asp:ContentPlaceHolder>
+            <uc1:ChatControl runat="server" id="chatControl" />
         </div>
     </form>
 </body>

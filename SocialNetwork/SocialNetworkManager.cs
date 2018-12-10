@@ -260,5 +260,20 @@ namespace SocialNetwork
         {
             return GetThemes().Where(t => t.ThemeID == themeID).First();
         }
+
+        public bool SendMessage(ChatMessage message)
+        {
+            return repository.SendMessage(message);
+        }
+
+        public List<ChatMessage> GetMessages(string email1, string email2)
+        {
+            return repository.GetMessages(email1, email2);
+        }
+
+        public bool DeleteMessage(string email, int messageID)
+        {
+            return repository.DeleteMessage(email, messageID);
+        }
     }
 }
