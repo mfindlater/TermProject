@@ -75,7 +75,7 @@
                         <asp:Image ID="imgProfilePhoto" runat="server" ImageUrl='<%# Eval("Poster.ProfilePhotoURL") %>' Width="50px" Height="70px" />
                         <asp:LinkButton ID="lbtnName" runat="server" Text='<%# Eval("Poster.Name") %>' CommandArgument='<%# Eval("Poster.Email") %>' OnClick="lbtnName_Click"></asp:LinkButton>
                         <%# DataBinder.Eval(Container.DataItem, "Content") %><br />
-                        <asp:Image ID="imgPhoto" runat="server" ImageUrl='<%# Eval("Photo.URL") %>' Visible='<%# Eval("HasPhoto") %>' Width="300px" Height="200px" />
+                        <asp:Image ID="imgPhoto" runat="server" ImageUrl='<%# Eval("Photo.URL") %>' Visible='<%# Eval("HasPhoto") %>' Width="250px" Height="324px" />
                     </div>
                 </li>
             </ItemTemplate>
