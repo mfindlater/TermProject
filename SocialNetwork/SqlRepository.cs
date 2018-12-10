@@ -1229,5 +1229,18 @@ namespace SocialNetwork
 
             return messages;
         }
+
+        public bool DeletePhoto(int photoID)
+        {
+            var command = new SqlCommand("TP_DeletePhoto")
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            command.Parameters.AddWithValue("@PhotoID", photoID);
+            int result = db.DoUpdateUsingCmdObj(command);
+
+            return result != -1;
+        }
     }
 }

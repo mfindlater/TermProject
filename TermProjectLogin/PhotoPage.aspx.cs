@@ -53,8 +53,8 @@ namespace TermProjectLogin
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {
-            currentUser = Session.GetUser();
             socialNetworkManager = Session.GetSocialNetworkManager();
+            currentUser = Session.GetUser();
             PhotoAlbum photoAlbum = new PhotoAlbum();
 
             for (int i = 0; i < rptPhoto.Items.Count; i++)
@@ -114,6 +114,52 @@ namespace TermProjectLogin
             rptAlbumPhoto.DataSource = photos;
             rptAlbumPhoto.DataBind();
             pnAlbumPhoto.Visible = true;
+        }
+
+        protected void btnDeletePhoto_Click(object sender, EventArgs e)
+        {
+            List<int> photoIDs = new List<int>();
+
+            for (int i = 0; i < rptPhoto.Items.Count; i++)
+            {
+                CheckBox checkBox = (CheckBox)rptPhoto.Items[i].FindControl("chkPhoto");
+
+                if (checkBox.Checked)
+                {
+                    Label lblPhotoID = (Label)rptPhoto.Items[i].FindControl("lblPhotoID");
+                    int photoID = Convert.ToInt32(lblPhotoID.Text);
+                    photoIDs.Add(photoID);
+                }
+            }
+
+            if (photoIDs.Count > 0)
+            {
+                SocialNetworkManager socialNetworkManager = Session.GetSocialNetworkManager();
+                for (int i = 0; i < photoIDs.Count; i++)
+                {
+                    socialNetworkManager.DeletePhoto(photoIDs[i]);
+                }
+            }
+            else
+            {
+                lblDeleteMsg.Text = "Please select photo to delete.";
+            }
+
+            currentUser = Session.GetUser();
+            viewingUser = Request.GetViewingUser(socialNetworkManager);
+
+            if (viewingUser != null)
+            {
+                rptPhoto.DataSource = viewingUser.Photos;
+                rptAlbum.DataSource = viewingUser.PhotoAlbums;
+            }
+            else
+            {
+                rptPhoto.DataSource = currentUser.Photos;
+                rptAlbum.DataSource = currentUser.PhotoAlbums;
+            }
+            rptPhoto.DataBind();
+            rptAlbum.DataBind();
         }
     }
 }

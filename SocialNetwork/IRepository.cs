@@ -50,5 +50,6 @@ namespace SocialNetwork
         bool DeleteMessage(string email,int messageID);
         bool SetOnlineStatus(string email,bool online);
         List<ChatMessage> GetMessages(string email1, string email2);
+        bool DeletePhoto(int photoID);
     }
 }

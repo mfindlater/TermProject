@@ -275,5 +275,10 @@ namespace SocialNetwork
         {
             return repository.DeleteMessage(email, messageID);
         }
+
+        public bool DeletePhoto(int photoID)
+        {
+            return repository.DeletePhoto(photoID);
+        }
     }
 }

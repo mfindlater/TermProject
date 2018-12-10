@@ -23,6 +23,8 @@
             </FooterTemplate>
         </asp:Repeater>
     </asp:Panel>
+    <asp:Button ID="btnDeletePhoto" runat="server" Text="DeletePhoto" OnClick="btnDeletePhoto_Click" />
+    <asp:Label ID="lblDeleteMsg" runat="server"></asp:Label>
     <asp:Panel ID="pnCreateAlbum" runat="server">
         <asp:FileUpload ID="photoUpload" runat="server" /><br />
         <asp:Label ID="lblPhotoDescription" runat="server" Text="Photo Description:"></asp:Label><br />
