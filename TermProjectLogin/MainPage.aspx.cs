@@ -206,7 +206,15 @@ namespace TermProjectLogin
 
         protected void lbtnFriends_Click(object sender, EventArgs e)
         {
-            Response.Redirect("FriendPage.aspx");
+            viewingUser = GetViewingUser();
+            if (viewingUser != null)
+            {
+                Response.Redirect($"FriendPage.aspx?Email={viewingUser.Email}");
+            }
+            else
+            {
+                Response.Redirect("FriendPage.aspx");
+            }
         }
 
         private User GetViewingUser()
@@ -315,6 +323,9 @@ namespace TermProjectLogin
                 rptWall.DataSource = socialNetworkManager.GetWall(currentUser.Email);
             }
             rptWall.DataBind();
+
+            txtPhotoDescription.Text = "";
+            txtContent.Text = "";
         }
 
         protected void imgFriend_Click(object sender, ImageClickEventArgs e)

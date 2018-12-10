@@ -27,9 +27,7 @@ namespace TermProjectLogin
 
                     if (viewingUser != null)
                     {
-                        
                         rptPhoto.DataSource = viewingUser.Photos;
-
                         pnCreateAlbum.Visible = false;
                         rptAlbum.DataSource = viewingUser.PhotoAlbums;
                     }
