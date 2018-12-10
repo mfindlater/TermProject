@@ -49,6 +49,15 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.LinkButton lbtnName;
         
         /// <summary>
+        /// upnMessages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upnMessages;
+        
+        /// <summary>
         /// rptChat control.
         /// </summary>
         /// <remarks>
@@ -74,5 +83,14 @@ namespace TermProjectLogin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSend;
+        
+        /// <summary>
+        /// timer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer timer;
     }
 }
