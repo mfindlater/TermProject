@@ -27,7 +27,9 @@ namespace TermProjectLogin
 
                     if (viewingUser != null)
                     {
+                        
                         rptPhoto.DataSource = viewingUser.Photos;
+
                         pnCreateAlbum.Visible = false;
                         rptAlbum.DataSource = viewingUser.PhotoAlbums;
                     }
@@ -38,7 +40,56 @@ namespace TermProjectLogin
                     }
                     rptPhoto.DataBind();
                     rptAlbum.DataBind();
+
+                    if (viewingUser != null)
+                    {
+                        for (int i = 0; i < rptPhoto.Items.Count; i++)
+                        {
+                            CheckBox checkBox = (CheckBox)rptPhoto.Items[i].FindControl("chkPhoto");
+                            checkBox.Visible = false;
+                        }
+                    }
                 }
+            }
+        }
+
+        protected void btnCreate_Click(object sender, EventArgs e)
+        {
+            currentUser = Session.GetUser();
+            socialNetworkManager = Session.GetSocialNetworkManager();
+            PhotoAlbum photoAlbum = new PhotoAlbum();
+
+            for (int i = 0; i < rptPhoto.Items.Count; i++)
+            {
+                CheckBox checkBox = (CheckBox)rptPhoto.Items[i].FindControl("chkPhoto");
+
+                if (checkBox.Checked)
+                {
+                    Label lblPhotoID = (Label)rptPhoto.Items[i].FindControl("lblPhotoID");
+                    Photo photo = new Photo();
+                    photo.PhotoID = Convert.ToInt32(lblPhotoID.Text);
+                    photoAlbum.Photos.Add(photo);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(txtAlbumName.Text) && !string.IsNullOrEmpty(txtDescription.Text))
+            {
+                if (photoAlbum.Photos.Count > 0 || photoUpload.HasFile)
+                {
+                    string filename = currentUser.UserId + "_" + Path.GetFileName(photoUpload.PostedFile.FileName);
+                    photoUpload.SaveAs(Constants.StoragePath + filename);
+
+                    Photo photo = new Photo();
+                    photo.URL = Constants.StorageURL + filename;
+                    photo.Description = txtPhotoDescription.Text;
+
+                    photo = socialNetworkManager.AddPhoto(photo, currentUser.Email);
+                    photoAlbum.Name = txtAlbumName.Text;
+                    photoAlbum.Description = txtDescription.Text;
+                    photoAlbum.Photos.Add(photo);
+                }
+                socialNetworkManager.CreatePhotoAlbum(photoAlbum, currentUser.Email);
+                lblMsg.Text = "Album Created!";
             }
         }
 
@@ -47,7 +98,7 @@ namespace TermProjectLogin
             ImageButton imageButton = (ImageButton)sender;
 
             socialNetworkManager = Session.GetSocialNetworkManager();
-            
+
             currentUser = Session.GetUser();
             viewingUser = Request.GetViewingUser(socialNetworkManager);
 
@@ -65,51 +116,6 @@ namespace TermProjectLogin
             rptAlbumPhoto.DataSource = photos;
             rptAlbumPhoto.DataBind();
             pnAlbumPhoto.Visible = true;
-        }
-
-        private User GetViewingUser()
-        {
-            socialNetworkManager = Session.GetSocialNetworkManager();
-
-            if (Request.QueryString["Email"] != null)
-            {
-                string email = "";
-                foreach (var item in Request.QueryString["Email"])
-                {
-                    email += item;
-                }
-
-                return socialNetworkManager.GetUser(email);
-            }
-            return null;
-        }
-
-        protected void btnCreate_Click(object sender, EventArgs e)
-        {
-            currentUser = Session.GetUser();
-            socialNetworkManager = Session.GetSocialNetworkManager();
-
-            if (!string.IsNullOrEmpty(txtAlbumName.Text) && !string.IsNullOrEmpty(txtDescription.Text))
-            {
-                if (photoUpload.HasFile)
-                {
-                    string filename = currentUser.UserId + "_" + Path.GetFileName(photoUpload.PostedFile.FileName);
-                    photoUpload.SaveAs(Constants.StoragePath + filename);
-
-                    Photo photo = new Photo();
-                    photo.URL = Constants.StorageURL + filename;
-                    photo.Description = txtPhotoDescription.Text;
-
-                    PhotoAlbum photoAlbum = new PhotoAlbum();
-                    photo = socialNetworkManager.AddPhoto(photo, currentUser.Email);
-                    photoAlbum.Name = txtAlbumName.Text;
-                    photoAlbum.Description = txtDescription.Text;
-                    photoAlbum.Photos.Add(photo);
-
-                    socialNetworkManager.CreatePhotoAlbum(photoAlbum, currentUser.Email);
-                    lblMsg.Text = "Album Created!";
-                }
-            }
         }
     }
 }
