@@ -12,6 +12,8 @@
             </HeaderTemplate>
             <ItemTemplate>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                        <asp:Label ID="lblPhotoID" runat="server" Text='<%# Eval("PhotoID") %>' Visible="false"></asp:Label>
+                        <asp:CheckBox ID="chkPhoto" runat="server"/>
                         <asp:Image ID="imgPhoto" runat="server" ImageUrl='<%# Eval("URL") %>' Width="100px" Height="130px" />
                     </div>
             </ItemTemplate>

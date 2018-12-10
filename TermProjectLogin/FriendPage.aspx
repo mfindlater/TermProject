@@ -1,15 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FriendPage.aspx.cs" Inherits="TermProjectLogin.FriendPage" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Friends</title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
-</body>
-</html>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Common.Master" AutoEventWireup="true" CodeBehind="FriendPage.aspx.cs" Inherits="TermProjectLogin.FriendPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
+</asp:Content>
