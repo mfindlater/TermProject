@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Common.Master" AutoEventWireup="true" CodeBehind="SettingsPage.aspx.cs" Inherits="TermProjectLogin.WebForm2" %>
+<%@ Register src="ColorPicker.ascx" tagname="ColorPicker" tagprefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
@@ -34,6 +35,27 @@
             <asp:Label ID="lblDislike" runat="server" Text="Dislikes:"></asp:Label>
             <br />
             <asp:TextBox ID="txtDislikes" runat="server" TextMode="MultiLine"></asp:TextBox>
+        </asp:Panel>
+        <asp:Panel ID="pnTheme" runat="server">
+            <asp:Label ID="lblTheme" runat="server" Text="Theme"></asp:Label>
+            <br />
+            <asp:Label ID="lblFontColor" runat="server" Text="Font Color"></asp:Label>
+            <uc1:ColorPicker ID="cpFontColor" runat="server" />
+            <br />
+            <asp:Label ID="lblFontWeight" runat="server" Text="Font Weight"></asp:Label>
+            <asp:DropDownList ID="ddlFontWeight" runat="server">
+                <asp:ListItem>Normal</asp:ListItem>
+                <asp:ListItem>Bold</asp:ListItem>
+                <asp:ListItem>Italics</asp:ListItem>
+            </asp:DropDownList>
+            <br />
+            <asp:Label ID="lblFontSize" runat="server" Text="Font Size"></asp:Label>
+            &nbsp;
+            <asp:TextBox ID="txtFontSize" runat="server" TextMode="Number" Width="70px"></asp:TextBox>
+            <br />
+            <asp:Label ID="lblBackgroundColor" runat="server" Text="Background Color"></asp:Label>
+            <uc1:ColorPicker ID="cpBackgroundColor" runat="server" />
+            <br />
         </asp:Panel>
         <br />
         <asp:CheckBox ID="chkReceiveEmailNotifications" runat="server" />

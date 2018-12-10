@@ -32,7 +32,7 @@ namespace TermProjectLogin
                 txtLikes.Text = user.Likes;
                 txtDislikes.Text = user.Dislikes;
                 chkReceiveEmailNotifications.Checked = user.Settings.ReceiveEmailNotifications;
-
+                
                 var privacyNames = Enum.GetNames(typeof(PrivacySettingType));
                 var privacyValues = Enum.GetValues(typeof(PrivacySettingType));
                 var loginSetting = Enum.GetNames(typeof(LoginSettingType));
@@ -52,6 +52,10 @@ namespace TermProjectLogin
                 ddlPhotoPrivacy.SelectedValue = user.Settings.PhotoPrivacySetting.ToString();
                 ddlProfilePrivacy.SelectedValue = user.Settings.UserInfoSetting.ToString();
                 ddlLoginSetting.SelectedValue = user.Settings.LoginSetting.ToString();
+                cpBackgroundColor.Color = user.Settings.Theme.BackgroundColor;
+                cpFontColor.Color = user.Settings.Theme.FontColor;
+                ddlFontWeight.SelectedValue = user.Settings.Theme.FontWeight;
+                txtFontSize.Text = user.Settings.Theme.FontSize.ToString();
 
                 ddlSecurityQuestion1.DataSource = Constants.SecurityQuestion1;
                 ddlSecurityQuestion2.DataSource = Constants.SecurityQuestion2;
@@ -122,6 +126,12 @@ namespace TermProjectLogin
                 user.Settings.UserInfoSetting = (PrivacySettingType)Enum.Parse(typeof(PrivacySettingType), ddlProfilePrivacy.SelectedValue);
                 user.Settings.LoginSetting = (LoginSettingType)Enum.Parse(typeof(LoginSettingType), ddlLoginSetting.SelectedValue);
                 user.Settings.ReceiveEmailNotifications = chkReceiveEmailNotifications.Checked;
+                ddlLoginSetting.SelectedValue = user.Settings.LoginSetting.ToString();
+                user.Settings.Theme.BackgroundColor = cpBackgroundColor.Color;
+                user.Settings.Theme.FontColor = cpFontColor.Color;
+                user.Settings.Theme.FontWeight = ddlFontWeight.SelectedValue;
+                user.Settings.Theme.FontSize = Convert.ToInt32(txtFontSize.Text); 
+
 
                 HttpCookie userCookie = new HttpCookie(Constants.UserCookie);
 
@@ -181,5 +191,6 @@ namespace TermProjectLogin
                 lblMsg.Text = "Please select a file";
             }
         }
+
     }
 }
