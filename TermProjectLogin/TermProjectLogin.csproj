@@ -70,6 +70,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ChatControl.ascx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -127,6 +128,13 @@
     <Content Include="SettingsPage.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatControl.ascx.cs">
+      <DependentUpon>ChatControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChatControl.ascx.designer.cs">
+      <DependentUpon>ChatControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Common.Master.cs">
       <DependentUpon>Common.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
