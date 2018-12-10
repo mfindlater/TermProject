@@ -1194,5 +1194,31 @@ namespace SocialNetwork
             bool result = Convert.ToBoolean(parameter.Value);
             return result;
         }
+
+        public List<Theme> GetThemes()
+        {
+            var themes = new List<Theme>();
+
+            var command = new SqlCommand("TP_GetThemes") { CommandType = CommandType.StoredProcedure };
+
+            var ds = db.GetDataSetUsingCmdObj(command);
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                var theme = new Theme()
+                {
+                    ThemeID = Convert.ToInt32(db.GetField("ThemeID", i)),
+                    Name = db.GetField("Name",i).ToString(),
+                    BackgroundColor = db.GetField("BackgroundColor", i).ToString(),
+                    FontColor = db.GetField("FontColor",i).ToString(),
+                    FontSize = Convert.ToInt32(db.GetField("FontSize", i)),
+                    FontWeight = db.GetField("FontWeight",i).ToString()
+                };
+
+                themes.Add(theme);
+            }
+
+            return themes;
+        }
     }
 }

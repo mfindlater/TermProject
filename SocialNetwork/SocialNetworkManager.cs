@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Utilities;
+using System.Linq;
 
 namespace SocialNetwork
 {
@@ -248,6 +249,16 @@ namespace SocialNetwork
             {
                 email.SendMail(user.Email, "tuc28686@temple.edu", content, "");
             }
+        }
+
+        public List<Theme> GetThemes()
+        {
+            return repository.GetThemes();
+        }
+
+        public Theme GetTheme(int themeID)
+        {
+            return GetThemes().Where(t => t.ThemeID == themeID).First();
         }
     }
 }

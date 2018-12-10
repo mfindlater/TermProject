@@ -52,10 +52,6 @@ namespace TermProjectLogin
                 ddlPhotoPrivacy.SelectedValue = user.Settings.PhotoPrivacySetting.ToString();
                 ddlProfilePrivacy.SelectedValue = user.Settings.UserInfoSetting.ToString();
                 ddlLoginSetting.SelectedValue = user.Settings.LoginSetting.ToString();
-                cpBackgroundColor.Color = user.Settings.Theme.BackgroundColor;
-                cpFontColor.Color = user.Settings.Theme.FontColor;
-                ddlFontWeight.SelectedValue = user.Settings.Theme.FontWeight;
-                txtFontSize.Text = user.Settings.Theme.FontSize.ToString();
 
                 ddlSecurityQuestion1.DataSource = Constants.SecurityQuestion1;
                 ddlSecurityQuestion2.DataSource = Constants.SecurityQuestion2;
@@ -64,7 +60,14 @@ namespace TermProjectLogin
                 ddlSecurityQuestion2.DataBind();
                 ddlSecurityQuestion3.DataBind();
 
-                if(user.Settings.SecurityQuestions.Count == 3)
+                ApplyTheme(user.Settings.Theme);
+
+                ddlThemePresets.DataSource = socialNetworkManager.GetThemes();
+                ddlThemePresets.DataTextField = "Name";
+                ddlThemePresets.DataValueField = "ThemeID";
+                ddlThemePresets.DataBind();
+
+                if (user.Settings.SecurityQuestions.Count == 3)
                 {
                     ddlSecurityQuestion1.SelectedValue = user.Settings.SecurityQuestions[0].Question;
                     ddlSecurityQuestion2.SelectedValue = user.Settings.SecurityQuestions[1].Question;
@@ -192,5 +195,20 @@ namespace TermProjectLogin
             }
         }
 
+        protected void btnApplyPreset_Click(object sender, EventArgs e)
+        {
+            var socialNetworkManager = Session.GetSocialNetworkManager();
+            int themeId = Convert.ToInt32(ddlThemePresets.SelectedValue);
+            var theme = socialNetworkManager.GetTheme(themeId);
+            ApplyTheme(theme);
+        }
+
+        private void ApplyTheme(Theme theme)
+        {
+            cpBackgroundColor.Color = theme.BackgroundColor;
+            cpFontColor.Color = theme.FontColor;
+            ddlFontWeight.SelectedValue = theme.FontWeight;
+            txtFontSize.Text = theme.FontSize.ToString();
+        }
     }
 }

@@ -39,21 +39,29 @@
         <asp:Panel ID="pnTheme" runat="server">
             <asp:Label ID="lblTheme" runat="server" Text="Theme"></asp:Label>
             <br />
-            <asp:Label ID="lblFontColor" runat="server" Text="Font Color"></asp:Label>
+            <asp:Label ID="lblPreset" runat="server" Text="Presets:"></asp:Label>
+            <br />
+            <asp:DropDownList ID="ddlThemePresets" runat="server">
+            </asp:DropDownList>
+            <br />
+            <asp:Button ID="btnApplyPreset" runat="server" OnClick="btnApplyPreset_Click" Text="Apply Preset" />
+            <br />
+            <br />
+            <asp:Label ID="lblFontColor" runat="server" Text="Font Color:"></asp:Label>
             <uc1:ColorPicker ID="cpFontColor" runat="server" />
             <br />
-            <asp:Label ID="lblFontWeight" runat="server" Text="Font Weight"></asp:Label>
+            <asp:Label ID="lblFontWeight" runat="server" Text="Font Weight:"></asp:Label>
             <asp:DropDownList ID="ddlFontWeight" runat="server">
                 <asp:ListItem>Normal</asp:ListItem>
                 <asp:ListItem>Bold</asp:ListItem>
                 <asp:ListItem>Italics</asp:ListItem>
             </asp:DropDownList>
             <br />
-            <asp:Label ID="lblFontSize" runat="server" Text="Font Size"></asp:Label>
+            <asp:Label ID="lblFontSize" runat="server" Text="Font Size:"></asp:Label>
             &nbsp;
             <asp:TextBox ID="txtFontSize" runat="server" TextMode="Number" Width="70px"></asp:TextBox>
             <br />
-            <asp:Label ID="lblBackgroundColor" runat="server" Text="Background Color"></asp:Label>
+            <asp:Label ID="lblBackgroundColor" runat="server" Text="Background Color:"></asp:Label>
             <uc1:ColorPicker ID="cpBackgroundColor" runat="server" />
             <br />
         </asp:Panel>

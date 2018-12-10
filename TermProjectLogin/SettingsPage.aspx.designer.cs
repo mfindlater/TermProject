@@ -238,6 +238,33 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.Label lblTheme;
         
         /// <summary>
+        /// lblPreset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPreset;
+        
+        /// <summary>
+        /// ddlThemePresets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlThemePresets;
+        
+        /// <summary>
+        /// btnApplyPreset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnApplyPreset;
+        
+        /// <summary>
         /// lblFontColor control.
         /// </summary>
         /// <remarks>

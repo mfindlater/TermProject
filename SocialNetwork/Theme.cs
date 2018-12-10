@@ -7,6 +7,7 @@ namespace SocialNetwork
     [Serializable]
     public class Theme
     {
+        public int ThemeID { get; set; }
         public string Name { get; set; }
         public string FontColor { get; set; }
         public string BackgroundColor { get; set; }
