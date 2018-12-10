@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ChatControl.ascx.cs" Inherits="TermProjectLogin.ChatControl" %>
 
 <asp:Panel ID="pnChat" runat="server">
-    <asp:UpdatePanel ID="upnMessages" runat="server">
+    <asp:UpdatePanel ID="upnMessages" runat="server" ChildrenAsTriggers="true">
         <ContentTemplate>
             <asp:Panel ID="pnUser" runat="server">
                 <asp:Repeater ID="rptUser" runat="server">
@@ -21,7 +21,7 @@
                     </FooterTemplate>
                 </asp:Repeater>
             </asp:Panel>
-            <asp:Repeater ID="rptChat" runat="server">
+            <asp:Repeater ID="rptChat" runat="server" OnItemDataBound="rptChat_ItemDataBound">
                 <HeaderTemplate>
                     <ul class="list-group">
                 </HeaderTemplate>
@@ -38,7 +38,9 @@
             <asp:Timer ID="timer" Interval="1000" runat="server" OnTick="timer_Tick"></asp:Timer>
         </ContentTemplate>
         <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="btnChat" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="timer" EventName="Tick" />
+            <asp:AsyncPostBackTrigger ControlID="btnSend" EventName="Click" />
         </Triggers>
     </asp:UpdatePanel>
     <asp:TextBox ID="txtMessage" runat="server" TextMode="MultiLine"></asp:TextBox>

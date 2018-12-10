@@ -70,5 +70,11 @@ namespace TermProjectLogin
                 GetChat(email);
             }
         }
+
+        protected void rptChat_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Button button = (Button)e.Item.FindControl("btnChat");
+            ScriptManager.GetCurrent(Page).RegisterAsyncPostBackControl(button);
+        }
     }
 }
