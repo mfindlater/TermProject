@@ -496,6 +496,7 @@ namespace SocialNetwork
                 Name = db.GetField("Name", row).ToString(),
                 EncryptedPassword = db.GetField("Password", row).ToString(),
                 BirthDate = DateTime.Parse(db.GetField("BirthDate", row).ToString()),
+                OnlineStatus = Convert.ToBoolean(db.GetField("OnlineStatus",row)),
                 ContactInfo = new ContactInfo()
                 {
                     Email = db.GetField("Email", row).ToString(),
@@ -1100,6 +1101,7 @@ namespace SocialNetwork
                 Name = user.Name,
                 ProfilePhotoURL = user.ProfilePhotoURL,
                 UserId = user.UserId,
+                OnlineStatus = user.OnlineStatus,
                 FriendRequestStatus = (FriendRequestStatus)Convert.ToUInt32(db.GetField("FriendRequestStatusID", row))
             };
 

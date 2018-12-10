@@ -17,6 +17,7 @@ namespace SocialNetwork
         public string Likes { get; set; }
         public string Dislikes { get; set; }
         public string Email => ContactInfo.Email;
+        public bool OnlineStatus { get; set; }
 
         public User FilterByPrivacy(PrivacySettingType privacyLevel)
         {
