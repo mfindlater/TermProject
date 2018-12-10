@@ -41,11 +41,12 @@ namespace TermProjectLogin
                         lblName.Text = viewingUser.Name;
                         btnAddFriend.Visible = true;
                         btnFollow.Visible = true;
-                        btnChat.Visible = true;
+                        btnChat.Visible = false;
 
                         if (socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email))
                         {
                             btnAddFriend.Enabled = false;
+                            btnChat.Visible = true;
                         }
 
                         if (socialNetworkManager.IsFollowing(viewingUser.Email, currentUser.Email))
@@ -58,6 +59,83 @@ namespace TermProjectLogin
 
                     if (viewingUser != null)
                     {
+                        pnPhotos.Visible = true;
+                        pnFriends.Visible = true;
+                        pnWallNewsFeed.Visible = true;
+                        pnCreatePost.Visible = true;
+                        btnFollow.Visible = true;
+
+                        // TODO: Likes/Dislikes Panel
+
+
+                        // Profile
+                        switch (viewingUser.Settings.UserInfoSetting)
+                        {
+                            case PrivacySettingType.Public:
+                                break;
+                            case PrivacySettingType.Friends:
+                                if (!socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email))
+                                {
+                                    pnFriends.Visible = false;
+                                    pnWallNewsFeed.Visible = false;
+                                    pnCreatePost.Visible = false;
+                                    btnFollow.Visible = false;
+                                }
+                                break;
+                            case PrivacySettingType.FriendsOfFriends:
+                                if (!socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email) &&
+                                 !socialNetworkManager.IsFriendOfFriend(currentUser.Email, viewingUser.Email))
+                                {
+                                    pnFriends.Visible = false;
+                                    pnWallNewsFeed.Visible = false;
+                                    pnCreatePost.Visible = false;
+                                    btnFollow.Visible = false;
+                                }
+                                break;
+                        }
+
+                        // Photos
+                        switch(viewingUser.Settings.PhotoPrivacySetting)
+                        {
+                            case PrivacySettingType.Public:
+                                break;
+                            case PrivacySettingType.Friends:
+                                if(!socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email))
+                                {
+                                    pnPhotos.Visible = false;
+                                }
+                                break;
+
+                            case PrivacySettingType.FriendsOfFriends:
+                                if(!socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email) &&
+                                    !socialNetworkManager.IsFriendOfFriend(currentUser.Email, viewingUser.Email))
+                                {
+                                    pnPhotos.Visible = false;
+                                }
+                                break;
+                        }
+
+                        // Contact
+                        switch (viewingUser.Settings.ContactInfoPrivacySetting)
+                        {
+                            case PrivacySettingType.Public:
+                                break;
+                            case PrivacySettingType.Friends:
+                                if (!socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email))
+                                {
+                                    // 
+                                }
+                                break;
+
+                            case PrivacySettingType.FriendsOfFriends:
+                                if (!socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email) &&
+                                    !socialNetworkManager.IsFriendOfFriend(currentUser.Email, viewingUser.Email))
+                                {
+                                    //
+                                }
+                                break;
+                        }
+
                         rptPhoto.DataSource = viewingUser.Photos;
                         rptFriend.DataSource = viewingUser.Friends;
                         lbtnNewsFeed.Visible = false;
