@@ -72,7 +72,10 @@ namespace TermProjectLogin
 
             if (!string.IsNullOrEmpty(txtAlbumName.Text) && !string.IsNullOrEmpty(txtDescription.Text))
             {
-                if (photoAlbum.Photos.Count > 0 || photoUpload.HasFile)
+                photoAlbum.Name = txtAlbumName.Text;
+                photoAlbum.Description = txtDescription.Text;
+
+                if (photoUpload.HasFile)
                 {
                     string filename = currentUser.UserId + "_" + Path.GetFileName(photoUpload.PostedFile.FileName);
                     photoUpload.SaveAs(Constants.StoragePath + filename);
@@ -82,12 +85,17 @@ namespace TermProjectLogin
                     photo.Description = txtPhotoDescription.Text;
 
                     photo = socialNetworkManager.AddPhoto(photo, currentUser.Email);
-                    photoAlbum.Name = txtAlbumName.Text;
-                    photoAlbum.Description = txtDescription.Text;
+
                     photoAlbum.Photos.Add(photo);
                 }
-                socialNetworkManager.CreatePhotoAlbum(photoAlbum, currentUser.Email);
-                lblMsg.Text = "Album Created!";
+
+                if (photoAlbum.Photos.Count > 0)
+                {
+                    socialNetworkManager.CreatePhotoAlbum(photoAlbum, currentUser.Email);
+                    lblMsg.Text = "Album Created!";
+                }
+
+                lblMsg.Text = "Must select or upload at least one photo to create album!";
             }
         }
 
@@ -118,6 +126,8 @@ namespace TermProjectLogin
 
         protected void btnDeletePhoto_Click(object sender, EventArgs e)
         {
+            socialNetworkManager = Session.GetSocialNetworkManager();
+
             List<int> photoIDs = new List<int>();
 
             for (int i = 0; i < rptPhoto.Items.Count; i++)
@@ -134,7 +144,7 @@ namespace TermProjectLogin
 
             if (photoIDs.Count > 0)
             {
-                SocialNetworkManager socialNetworkManager = Session.GetSocialNetworkManager();
+                
                 for (int i = 0; i < photoIDs.Count; i++)
                 {
                     socialNetworkManager.DeletePhoto(photoIDs[i]);
@@ -145,7 +155,7 @@ namespace TermProjectLogin
                 lblDeleteMsg.Text = "Please select photo to delete.";
             }
 
-            currentUser = Session.GetUser();
+            currentUser = socialNetworkManager.GetUser(Session.GetUser().Email);
             viewingUser = Request.GetViewingUser(socialNetworkManager);
 
             if (viewingUser != null)
