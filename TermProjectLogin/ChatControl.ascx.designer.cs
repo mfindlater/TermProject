@@ -40,6 +40,15 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.Repeater rptUser;
         
         /// <summary>
+        /// upnMessages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upnMessages;
+        
+        /// <summary>
         /// rptChat control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace TermProjectLogin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptChat;
+        
+        /// <summary>
+        /// timer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer timer;
         
         /// <summary>
         /// txtMessage control.

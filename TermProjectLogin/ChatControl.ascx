@@ -19,22 +19,22 @@
             </FooterTemplate>
         </asp:Repeater>
     </asp:Panel>
-    <asp:Repeater ID="rptChat" runat="server">
-        <HeaderTemplate>
-            <ul class="list-group">
-        </HeaderTemplate>
-        <ItemTemplate>
-            <li class="list-group-item">
-                <asp:Label ID="lblName" runat="server" Text='<%# Eval("Name") %>'></asp:Label>: 
-                <asp:Label ID="lblMessage" runat="server" Text='<%# Eval("Message") %>'></asp:Label>
-            </li>
-        </ItemTemplate>
-        <FooterTemplate>
-            </ul>
-        </FooterTemplate>
-    </asp:Repeater>
-    <%--<asp:UpdatePanel ID="upnMessages" runat="server">
+    <asp:UpdatePanel ID="upnMessages" runat="server">
         <ContentTemplate>
+            <asp:Repeater ID="rptChat" runat="server">
+                <HeaderTemplate>
+                    <ul class="list-group">
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <li class="list-group-item">
+                        <asp:Label ID="lblName" runat="server" Text='<%# Eval("Name") %>'></asp:Label>: 
+                <asp:Label ID="lblMessage" runat="server" Text='<%# Eval("Message") %>'></asp:Label>
+                    </li>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </ul>
+                </FooterTemplate>
+            </asp:Repeater>
             <asp:Timer ID="timer" Interval="1000" runat="server" OnTick="timer_Tick"></asp:Timer>
         </ContentTemplate>
         <Triggers>
@@ -42,7 +42,7 @@
             <asp:AsyncPostBackTrigger ControlID="timer" EventName="Tick" />
             <asp:AsyncPostBackTrigger ControlID="btnSend" EventName="Click" />
         </Triggers>
-    </asp:UpdatePanel>--%>
+    </asp:UpdatePanel>
     <asp:TextBox ID="txtMessage" runat="server" TextMode="MultiLine"></asp:TextBox>
     <asp:Button ID="btnSend" runat="server" Text="Send" OnClick="btnSend_Click" />
 </asp:Panel>
