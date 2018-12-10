@@ -31,6 +31,7 @@ namespace TermProjectLogin
                 txtOrganization.Text = user.Organization;
                 txtLikes.Text = user.Likes;
                 txtDislikes.Text = user.Dislikes;
+                chkReceiveEmailNotifications.Checked = user.Settings.ReceiveEmailNotifications;
 
                 var privacyNames = Enum.GetNames(typeof(PrivacySettingType));
                 var privacyValues = Enum.GetValues(typeof(PrivacySettingType));
@@ -120,6 +121,7 @@ namespace TermProjectLogin
                 user.Settings.PhotoPrivacySetting = (PrivacySettingType)Enum.Parse(typeof(PrivacySettingType), ddlPhotoPrivacy.SelectedValue);
                 user.Settings.UserInfoSetting = (PrivacySettingType)Enum.Parse(typeof(PrivacySettingType), ddlProfilePrivacy.SelectedValue);
                 user.Settings.LoginSetting = (LoginSettingType)Enum.Parse(typeof(LoginSettingType), ddlLoginSetting.SelectedValue);
+                user.Settings.ReceiveEmailNotifications = chkReceiveEmailNotifications.Checked;
 
                 HttpCookie userCookie = new HttpCookie(Constants.UserCookie);
 

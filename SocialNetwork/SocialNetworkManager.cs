@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Utilities;
 
 namespace SocialNetwork
 {
     public class SocialNetworkManager
     {
         private readonly IRepository repository;
+        private readonly Email email = new Email();
 
         public SocialNetworkManager(IRepository repository)
         {
@@ -133,6 +135,10 @@ namespace SocialNetwork
 
         public Notification CreateNotification(Notification notification, string email)
         {
+            var user = GetUser(email);
+
+            SendEmail(user, notification.Description);
+
             return repository.CreateNotification(notification, email);
         }
 
@@ -234,6 +240,14 @@ namespace SocialNetwork
         public List<Post> GetWall(string email)
         {
             return repository.GetWall(email);
+        }
+
+        public void SendEmail(User user, string content)
+        {
+            if (user.Settings.ReceiveEmailNotifications)
+            {
+                email.SendMail(user.Email, "tuc28686@temple.edu", content, "");
+            }
         }
     }
 }

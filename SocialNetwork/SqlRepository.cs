@@ -952,7 +952,7 @@ namespace SocialNetwork
                 command.Parameters.AddWithValue("@ToEmail", toEmail);
             }
 
-            if(post.Photo != null)
+            if(post.Photo != null && post.Photo.PhotoID != 0)
             {
                 command.Parameters.AddWithValue("@PhotoID", post.Photo.PhotoID);
             }
@@ -1170,7 +1170,7 @@ namespace SocialNetwork
 
             var ds = db.GetDataSetUsingCmdObj(command);
 
-            for(int i=0; i < ds.Tables.Count;i++)
+            for(int i=0; i < ds.Tables[0].Rows.Count;i++)
             {
                 var follower = GetUserFromRow(i);
                 followers.Add(follower);

@@ -36,6 +36,10 @@
             <asp:TextBox ID="txtDislikes" runat="server" TextMode="MultiLine"></asp:TextBox>
         </asp:Panel>
         <br />
+        <asp:CheckBox ID="chkReceiveEmailNotifications" runat="server" />
+        <asp:Label ID="lblReceiveEmailNotifications" runat="server" Text="Receive Email Notifications"></asp:Label>
+        <br />
+        <br />
         <asp:Label ID="lblSecurityQuestion" runat="server" Text="Security Question"></asp:Label><br />
         <asp:DropDownList ID="ddlSecurityQuestion1" runat="server"></asp:DropDownList><br />
         <asp:Label ID="lblAnswer1" runat="server" Text="Answer:"></asp:Label>

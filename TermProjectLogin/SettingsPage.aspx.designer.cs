@@ -220,6 +220,24 @@ namespace TermProjectLogin {
         protected global::System.Web.UI.WebControls.TextBox txtDislikes;
         
         /// <summary>
+        /// chkReceiveEmailNotifications control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkReceiveEmailNotifications;
+        
+        /// <summary>
+        /// lblReceiveEmailNotifications control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblReceiveEmailNotifications;
+        
+        /// <summary>
         /// lblSecurityQuestion control.
         /// </summary>
         /// <remarks>
