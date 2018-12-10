@@ -16,5 +16,6 @@ namespace SocialNetwork
         public string Message { get; set; }
         public DateTime MessageDate { get; set; }
         public string Name { get; set; }
+        public string MessageDateFormat => string.Format("{0:t},{0:d}", MessageDate);
     }
 }

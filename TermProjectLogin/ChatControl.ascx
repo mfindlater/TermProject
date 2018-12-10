@@ -31,6 +31,7 @@
                         <asp:Label ID="lblName" runat="server" Text='<%# Eval("Name") %>'></asp:Label>: 
                 <asp:Label ID="lblMessage" runat="server" Text='<%# Eval("Message") %>'></asp:Label>
                         <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandArgument='<%# Eval("MessageID") %>' OnClick="btnDelete_Click" />
+                        <asp:Label ID="lblMessageDate" runat="server" Text='<%# Eval("MessageDateFormat") %>'></asp:Label>
                     </li>
                 </ItemTemplate>
                 <FooterTemplate>
