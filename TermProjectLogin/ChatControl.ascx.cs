@@ -12,6 +12,7 @@ namespace TermProjectLogin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             var user = Session.GetUser();
             if (user != null)
             {
@@ -59,7 +60,7 @@ namespace TermProjectLogin
             User currentUser = Session.GetUser();
 
             rptChat.DataSource = socialNetworkManager.GetMessages(currentUser.Email, email);
-
+            rptChat.DataBind();
         }
 
         protected void timer_Tick(object sender, EventArgs e)
@@ -71,10 +72,14 @@ namespace TermProjectLogin
             }
         }
 
-        protected void rptChat_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            Button button = (Button)e.Item.FindControl("btnChat");
-            ScriptManager.GetCurrent(Page).RegisterAsyncPostBackControl(button);
-        }
+        //protected void rptChat_ItemCreated(object sender, RepeaterItemEventArgs e)
+        //{
+        //    Button button = (Button)e.Item.FindControl("btnChat");
+        //    if (button != null)
+        //    {
+        //        button.Click += Button_Click;
+        //        ScriptManager.GetCurrent(Page).RegisterAsyncPostBackControl(button);
+        //    }
+        //}
     }
 }

@@ -1220,7 +1220,8 @@ namespace SocialNetwork
                     MessageDate = Convert.ToDateTime(db.GetField("MessageDate", i)),
                     Message = db.GetField("Message", i).ToString(),
                     FromEmail = db.GetField("FromEmail", i).ToString(),
-                    ToEmail = db.GetField("ToEmail", i).ToString()
+                    ToEmail = db.GetField("ToEmail", i).ToString(),
+                    Name = db.GetField("Name", i).ToString()
                 };
                 messages.Add(message);
             }

@@ -1,6 +1,6 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Common.master.cs" Inherits="TermProjectLogin.Common" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Common.master.cs" Inherits="TermProjectLogin.Common"  %>
 
-<%@ Register Src="~/ChatControl.ascx" TagPrefix="uc1" TagName="ChatControl" %>
+
 
 
 <!DOCTYPE html>
@@ -88,7 +88,6 @@
             </asp:Panel>
             <asp:ContentPlaceHolder ID="cphContent" runat="server">
             </asp:ContentPlaceHolder>
-            <uc1:ChatControl runat="server" id="chatControl" />
         </div>
     </form>
 </body>

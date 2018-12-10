@@ -373,5 +373,11 @@ namespace TermProjectLogin
             rptWall.DataSource = socialNetworkManager.GetNewsFeed(currentUser.Email);
             rptWall.DataBind();
         }
+
+        protected override void Render(HtmlTextWriter writer)
+        {
+            Page.ClientScript.RegisterForEventValidation(ChatControl.UniqueID, this.ToString());
+            base.Render(writer);
+        }
     }
 }

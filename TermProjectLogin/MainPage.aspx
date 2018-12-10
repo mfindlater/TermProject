@@ -1,4 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Common.Master" AutoEventWireup="true" CodeBehind="MainPage.aspx.cs" Inherits="TermProjectLogin.MainPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Common.Master" AutoEventWireup="true" CodeBehind="MainPage.aspx.cs" Inherits="TermProjectLogin.MainPage" EnableEventValidation="false" %>
+
+
+<%@ Register Src="~/ChatControl.ascx" TagPrefix="uc1" TagName="ChatControl" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -84,4 +87,5 @@
             </FooterTemplate>
         </asp:Repeater>
     </asp:Panel>
+    <uc1:ChatControl runat="server" ID="ChatControl" />
 </asp:Content>
