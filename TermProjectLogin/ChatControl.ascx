@@ -19,6 +19,7 @@
             </FooterTemplate>
         </asp:Repeater>
     </asp:Panel>
+     <asp:Timer ID="timer" Interval="1000" runat="server" OnTick="timer_Tick"></asp:Timer>
     <asp:UpdatePanel ID="upnMessages" runat="server">
         <ContentTemplate>
             <asp:Repeater ID="rptChat" runat="server">
@@ -35,7 +36,7 @@
                     </ul>
                 </FooterTemplate>
             </asp:Repeater>
-            <asp:Timer ID="timer" Interval="1000" runat="server" OnTick="timer_Tick"></asp:Timer>
+           
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="rptUser" />
