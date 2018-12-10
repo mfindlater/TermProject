@@ -30,6 +30,7 @@
                     <li class="list-group-item">
                         <asp:Label ID="lblName" runat="server" Text='<%# Eval("Name") %>'></asp:Label>: 
                 <asp:Label ID="lblMessage" runat="server" Text='<%# Eval("Message") %>'></asp:Label>
+                        <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandArgument='<%# Eval("MessageID") %>' OnClick="btnDelete_Click" />
                     </li>
                 </ItemTemplate>
                 <FooterTemplate>
@@ -41,7 +42,7 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="rptUser" />
             <asp:AsyncPostBackTrigger ControlID="timer" EventName="Tick" />
-            <asp:AsyncPostBackTrigger ControlID="btnSend" EventName="Click" />
+            <%--<asp:AsyncPostBackTrigger ControlID="btnSend" EventName="Click" />--%>
         </Triggers>
     </asp:UpdatePanel>
     <asp:TextBox ID="txtMessage" runat="server" TextMode="MultiLine"></asp:TextBox>

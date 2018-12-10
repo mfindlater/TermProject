@@ -1024,6 +1024,7 @@ namespace SocialNetwork
                 CommandType = CommandType.StoredProcedure
             };
 
+            command.Parameters.AddWithValue("@Email", email);
             command.Parameters.AddWithValue("@MessageID", messageID);
             int result = db.DoUpdateUsingCmdObj(command);
 
