@@ -39,40 +39,46 @@
                     </div>
                     <div class="nav-item">
                         <asp:LinkButton ID="btnForgotPassword" runat="server" OnClick="btnForgotPassword_Click">Forgot Password?</asp:LinkButton>
-                    <asp:Button ID="btnLogin" CssClass="btn btn-primary" runat="server" Text="Log In" OnClick="btnLogin_Click" />
-                    <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
+                        <asp:Button ID="btnLogin" CssClass="btn btn-primary" runat="server" Text="Log In" OnClick="btnLogin_Click" />
+                        <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
                     </div>
                 </nav>
             </asp:Panel>
             <asp:Panel ID="pnLoggedIn" runat="server" Visible="False">
-                <asp:ImageButton ID="imgBtnProfilePhoto" CssClass="rounded-circle" runat="server" ImageUrl="~/img/person_temp.jpg" OnClick="imgBtnProfilePhoto_Click" Width="50px" Height="65px" />
-                <asp:Label ID="lblName" runat="server"></asp:Label>
-                <div style="display: inline">
-                    <asp:UpdatePanel ID="upPanel" runat="server">
-                        <ContentTemplate>
-                            <asp:Button ID="btnNotification" runat="server" OnClick="btnNotification_Click" Text="Notifications (0)" />
-                            <asp:Button ID="btnSettings" runat="server" Text="Settings" OnClick="btnSettings_Click" />
-                            <asp:Button ID="btnLogOut" runat="server" Text="Log Out" OnClick="btnLogOut_Click" />
-                            <asp:Timer runat="server" Interval="1000" ID="timNotification" OnTick="timNotification_Tick"></asp:Timer>
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="timNotification" EventName="Tick" />
-                        </Triggers>
-                    </asp:UpdatePanel>
-                </div>
-            </asp:Panel>
-            <asp:Panel ID="pnSearch" runat="server" Visible="False">
-                <asp:DropDownList ID="ddlSearch" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlSearch_SelectedIndexChanged">
-                    <asp:ListItem>Name</asp:ListItem>
-                    <asp:ListItem>City & State</asp:ListItem>
-                    <asp:ListItem>Organization</asp:ListItem>
-                    <asp:ListItem>Like</asp:ListItem>
-                    <asp:ListItem>Dislike</asp:ListItem>
-                </asp:DropDownList>
-                <asp:TextBox ID="txtSearch1" runat="server"></asp:TextBox>
-                <asp:TextBox ID="txtSearch2" runat="server" Visible="false"></asp:TextBox>
-                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
-                <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false">
+                <nav class="navbar navbar-expand-sm bg-light navbar-light">
+                    <asp:ImageButton ID="imgBtnProfilePhoto" CssClass="rounded-circle" runat="server" ImageUrl="~/img/person_temp.jpg" OnClick="imgBtnProfilePhoto_Click" Width="40px" Height="52px" />
+                    <div class="nav-item">
+                        <asp:Label ID="lblName" CssClass="boldName" runat="server"></asp:Label>
+                    </div>
+                    <div ID="divBtn" class="nav-item">
+                        <asp:UpdatePanel ID="upPanel" runat="server">
+                            <ContentTemplate>
+                                <asp:Button ID="btnNotification" CssClass="btn btn-danger" runat="server" OnClick="btnNotification_Click" Text="Notifications (0)" />
+                                <asp:Button ID="btnSettings" CssClass="btn btn-success" runat="server" Text="Settings" OnClick="btnSettings_Click" />
+                                <asp:Button ID="btnLogOut" CssClass="btn btn-primary" runat="server" Text="Log Out" OnClick="btnLogOut_Click" />
+                                <asp:Timer runat="server" Interval="1000" ID="timNotification" OnTick="timNotification_Tick"></asp:Timer>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="timNotification" EventName="Tick" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+                    </div>
+                    <div class="nav-item">
+                        <asp:Panel ID="pnSearch" runat="server" Visible="False">
+                            <asp:DropDownList ID="ddlSearch" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlSearch_SelectedIndexChanged">
+                                <asp:ListItem>Name</asp:ListItem>
+                                <asp:ListItem>City & State</asp:ListItem>
+                                <asp:ListItem>Organization</asp:ListItem>
+                                <asp:ListItem>Like</asp:ListItem>
+                                <asp:ListItem>Dislike</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:TextBox ID="txtSearch1" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtSearch2" runat="server" Visible="false"></asp:TextBox>
+                            <asp:Button ID="btnSearch" CssClass="btn btn-dark" runat="server" Text="Search" OnClick="btnSearch_Click" />
+                        </asp:Panel>
+                    </div>
+                </nav>
+                <asp:GridView ID="gvSearchResult" CssClass="text-center" runat="server" AutoGenerateColumns="false">
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
@@ -85,7 +91,7 @@
                         <asp:BoundField DataField="Birthdate" HeaderText="Birthdate" />
                         <asp:TemplateField HeaderText="Add">
                             <ItemTemplate>
-                                <asp:Button ID="btnAddFriend" runat="server" Text="Add Friend" CommandArgument="<%# Container.DataItemIndex %>" OnClick="btnAddFriend_Click" />
+                                <asp:Button ID="btnAddFriend" CssClass="btn btn-info" runat="server" Text="Add Friend" CommandArgument="<%# Container.DataItemIndex %>" OnClick="btnAddFriend_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
