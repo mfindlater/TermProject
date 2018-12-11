@@ -8,7 +8,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <asp:Image ID="imgProfilePhoto" ImageUrl="~/img/person_temp.jpg" runat="server" Width="80px" Height="110px" />
     <asp:Label ID="lblName" runat="server"></asp:Label>
-    <asp:Button ID="btnAddFriend" runat="server" Text="Add Friend" Visible="false" />
+    <asp:Button ID="btnAddFriend" runat="server" Text="Add Friend" Visible="false" OnClick="btnAddFriend_Click" />
     <asp:Button ID="btnFollow" runat="server" Text="Follow" Visible="false" OnClick="btnFollow_Click" />
     <asp:Button ID="btnChat" runat="server" Visible="false" Text="Chat" OnClick="btnChat_Click" /><br />
     <br />

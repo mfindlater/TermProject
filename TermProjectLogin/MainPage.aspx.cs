@@ -39,15 +39,11 @@ namespace TermProjectLogin
 
                         imgProfilePhoto.ImageUrl = viewingUser.ProfilePhotoURL;
                         lblName.Text = viewingUser.Name;
-                        btnAddFriend.Visible = true;
                         btnFollow.Visible = true;
                         btnChat.Visible = false;
+                        btnAddFriend.Visible = true;
 
-                        if (socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email))
-                        {
-                            btnAddFriend.Enabled = false;
-                            btnChat.Visible = true;
-                        }
+                        ChangeFriendButton();
 
                         if (socialNetworkManager.IsFollowing(viewingUser.Email, currentUser.Email))
                         {
@@ -152,6 +148,7 @@ namespace TermProjectLogin
                         rptPhoto.DataSource = currentUser.Photos;
                         rptFriend.DataSource = currentUser.Friends;
                         lbtnNewsFeed.Visible = true;
+                        btnAddFriend.Visible = false;
 
                         if (ViewState["ViewMode"] == null || ViewState["ViewMode"].ToString() == "Wall")
                         {
@@ -169,6 +166,39 @@ namespace TermProjectLogin
                     rptPhoto.DataBind();
                     rptFriend.DataBind();
                 }
+            }
+        }
+
+        private void ChangeFriendButton()
+        {
+            currentUser = Session.GetUser();
+            socialNetworkManager = Session.GetSocialNetworkManager();
+            viewingUser = GetViewingUser();
+
+            if (currentUser == null || viewingUser == null)
+            {
+                return;
+            }
+
+            var outgoingFriendRequests = socialNetworkManager.GetOutgoingFriendRequests(currentUser.Email).Where(u => u.Email == viewingUser.Email);
+            var incomingFriendRequests = socialNetworkManager.GetIncomingFriendRequests(currentUser.Email).Where(u => u.Email == viewingUser.Email);
+
+            if (socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email))
+            {
+                btnChat.Visible = true;
+                btnAddFriend.Text = "Remove Friend";
+            }
+            else if (outgoingFriendRequests.Count() > 0)
+            {
+                btnAddFriend.Text = "Cancel Request";
+            }
+            else if (incomingFriendRequests.Count() > 0)
+            {
+                btnAddFriend.Text = "Accept Request";
+            }
+            else
+            {
+                btnAddFriend.Text = "Add Friend";
             }
         }
 
@@ -409,6 +439,33 @@ namespace TermProjectLogin
             viewingUser = Request.GetViewingUser(socialNetworkManager);
 
             ChatControl.ShowChat(viewingUser.Email);
+        }
+
+        protected void btnAddFriend_Click(object sender, EventArgs e)
+        {
+            socialNetworkManager = Session.GetSocialNetworkManager();
+            currentUser = Session.GetUser();
+            viewingUser = Request.GetViewingUser(socialNetworkManager);
+
+            string friendStatus = btnAddFriend.Text;
+
+            switch (friendStatus)
+            {
+                case "Remove Friend":
+                    socialNetworkManager.RemoveFriend(currentUser.Email, viewingUser.Email);
+                    break;
+                case "Cancel Request":
+                    socialNetworkManager.CancelFriendRequest(currentUser.Email, viewingUser.Email);
+                    break;
+                case "Accept Request":
+                    socialNetworkManager.AcceptFriendRequest(viewingUser.Email, currentUser.Email);
+                    break;
+                case "Add Friend":
+                    socialNetworkManager.CreateFriendRequest(currentUser.Email, viewingUser.Email);
+                    break;
+            }
+
+            Response.Redirect($"MainPage.aspx?Email={viewingUser.Email}");
         }
     }
 }
