@@ -276,6 +276,17 @@ namespace SocialNetwork
             return repository.DeleteMessage(email, messageID);
         }
 
+        public void DeleteConversation(string email1, string email2)
+        {
+            var messages = GetMessages(email1, email2);
+
+            foreach(var message in messages)
+            {
+                DeleteMessage(email1, message.MessageID);
+                DeleteMessage(email2, message.MessageID);
+            }
+        }
+
         public bool DeletePhoto(int photoID)
         {
             return repository.DeletePhoto(photoID);

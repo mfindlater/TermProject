@@ -152,6 +152,7 @@
       <DependentUpon>Common.Master</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="FileUploadExtensions.cs" />
     <Compile Include="ForgotPasswordPage.aspx.cs">
       <DependentUpon>ForgotPasswordPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

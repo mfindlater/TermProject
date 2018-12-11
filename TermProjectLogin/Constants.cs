@@ -19,16 +19,23 @@ namespace TermProjectLogin
             "What was your favorite food?", "What is the make of your first car?", "What is the name of your first pet?" };
         public static string[] SecurityQuestion3 = { "What is your favorite team?", "What was your childhood nickname?",
             "In what city was your first full time job?", "What primary school did you attend?", "What is your oldest sibling's middle name?" };
+#if DEBUG
+        public const string baseURL = "http://localhost:63063/api/SocialNetworkService/";
+#else 
+        public const string baseURL = "http://cis-iis2.temple.edu/Fall2018/CIS3342_tug98770/TermProjectWS/api/SocialNetworkService";
+#endif
+        public const string RequestUriByName = baseURL + "searchByName/";
+        public const string RequestUriByLocation = baseURL + "searchByLocation/";
+        public const string RequestUriByOrganization = baseURL + "searchByOrganization/";
+        public const string RequestUriByLike = baseURL + "searchByLike/";
+        public const string RequestUriByDislike = baseURL + "searchByDislike/";
 
-        public const string localhost = "http://localhost:63063/api/SocialNetworkService/";
-        public const string RequestUriByName = localhost + "searchByName/";
-        public const string RequestUriByLocation = localhost + "searchByLocation/";
-        public const string RequestUriByOrganization = localhost + "searchByOrganization/";
-        public const string RequestUriByLike = localhost + "searchByLike/";
-        public const string RequestUriByDislike = localhost + "searchByDislike/";
+
 
         public const string StoragePath = @"W:\TermProject\Storage\";
+
         public const string StorageURL = "http://cis-iis2.temple.edu/Fall2018/CIS3342_tug98770/TermProject/Storage/";
+
         public const string ManagerSession = "ManagerSession";
     }
 }

@@ -20,11 +20,10 @@ namespace TermProjectLogin
 
         protected void Session_Start(object sender, EventArgs e)
         {
+            Application.Lock();
             socialNetworkManager = new SocialNetworkManager(sqlRepository);
             Session[Constants.ManagerSession] = socialNetworkManager;
-           
-           
-
+            Application.UnLock();
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
@@ -44,10 +43,12 @@ namespace TermProjectLogin
 
         protected void Session_End(object sender, EventArgs e)
         {
+            Application.Lock();
             var user = Session.GetUser();
             var socialNetworkManager = Session.GetSocialNetworkManager();
             socialNetworkManager.SetOnlineStatus(user.Email, false);
             socialNetworkManager.UpdateUser(user);
+            Application.UnLock();
         }
 
         protected void Application_End(object sender, EventArgs e)
