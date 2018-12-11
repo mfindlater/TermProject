@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <asp:Panel ID="pnFriend" runat="server">
-        <asp:Label ID="lblAllFriends" runat="server" Text="All Friends"></asp:Label>
+        <asp:Label ID="lblAllFriends" CssClass="bold" runat="server" Text="All Friends"></asp:Label>
         <asp:Repeater ID="rptFriend" runat="server">
             <HeaderTemplate>
                 <div class="container">
