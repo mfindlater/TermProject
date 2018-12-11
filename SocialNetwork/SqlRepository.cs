@@ -253,7 +253,7 @@ namespace SocialNetwork
                     PostID = Convert.ToInt32(db.GetField("PostID", i)),
                     PosterID = Convert.ToInt32(db.GetField("PosterID", i)),
                     PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString()),
-                    Content = HttpUtility.HtmlEncode(db.GetField("Content", i))
+                    Content = HttpUtility.HtmlDecode(db.GetField("Content", i).ToString())
                 };
 
                 if (db.GetField("PhotoID", i) != DBNull.Value)
@@ -552,7 +552,7 @@ namespace SocialNetwork
                 {
                     PostID = Convert.ToInt32(db.GetField("PostID", i)),
                     PosterID = Convert.ToInt32(db.GetField("PosterID", i)),
-                    Content = db.GetField("Content", i).ToString(),
+                    Content = HttpUtility.HtmlDecode(db.GetField("Content", i).ToString()),
                     PostedDate = DateTime.Parse(db.GetField("PostedDate", i).ToString())
                 };
 

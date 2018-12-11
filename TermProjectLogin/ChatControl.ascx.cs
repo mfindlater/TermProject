@@ -10,9 +10,14 @@ namespace TermProjectLogin
 {
     public partial class ChatControl : System.Web.UI.UserControl
     {
+        //public override bool Visible
+        //{
+        //    get { return pnChat.Visible; }
+        //    set { pnChat.Visible = value; }
+        //}
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             var user = Session.GetUser();
             if (user != null)
             {
@@ -74,6 +79,12 @@ namespace TermProjectLogin
                     btnDelete.Visible = false;
                 }
             }
+        }
+
+        public void ShowChat(string email)
+        {
+            Visible = true;
+            GetChat(email);
         }
 
         protected void timer_Tick(object sender, EventArgs e)

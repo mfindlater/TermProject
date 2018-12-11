@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ChatControl.ascx.cs" Inherits="TermProjectLogin.ChatControl" %>
 
-<asp:Panel ID="pnChat" runat="server">
+<asp:Panel ID="pnChat" CssClass="chat" runat="server">
     <asp:Panel ID="pnUser" runat="server">
         <asp:Repeater ID="rptUser" runat="server">
             <HeaderTemplate>

@@ -64,8 +64,8 @@ namespace TermProjectLogin
                         pnWallNewsFeed.Visible = true;
                         pnCreatePost.Visible = true;
                         btnFollow.Visible = true;
-
-                        // TODO: Likes/Dislikes Panel
+                        pnContactInfo.Visible = true;
+                        pnLikesDislikes.Visible = true;
 
 
                         // Profile
@@ -80,6 +80,7 @@ namespace TermProjectLogin
                                     pnWallNewsFeed.Visible = false;
                                     pnCreatePost.Visible = false;
                                     btnFollow.Visible = false;
+                                    pnLikesDislikes.Visible = false;
                                 }
                                 break;
                             case PrivacySettingType.FriendsOfFriends:
@@ -90,6 +91,7 @@ namespace TermProjectLogin
                                     pnWallNewsFeed.Visible = false;
                                     pnCreatePost.Visible = false;
                                     btnFollow.Visible = false;
+                                    pnLikesDislikes.Visible = false;
                                 }
                                 break;
                         }
@@ -123,7 +125,7 @@ namespace TermProjectLogin
                             case PrivacySettingType.Friends:
                                 if (!socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email))
                                 {
-                                    // 
+                                    pnContactInfo.Visible = false;
                                 }
                                 break;
 
@@ -131,7 +133,7 @@ namespace TermProjectLogin
                                 if (!socialNetworkManager.AreFriends(currentUser.Email, viewingUser.Email) &&
                                     !socialNetworkManager.IsFriendOfFriend(currentUser.Email, viewingUser.Email))
                                 {
-                                    //
+                                    pnContactInfo.Visible = false;
                                 }
                                 break;
                         }
@@ -141,6 +143,9 @@ namespace TermProjectLogin
                         lbtnNewsFeed.Visible = false;
 
                         rptWall.DataSource = socialNetworkManager.GetWall(viewingUser.Email);
+
+                        ShowContactInfo(viewingUser);
+                        ShowLikesDislikes(viewingUser);
                     }
                     else
                     {
@@ -156,12 +161,30 @@ namespace TermProjectLogin
                         {
                             rptWall.DataSource = socialNetworkManager.GetNewsFeed(currentUser.Email);
                         }
+
+                        ShowContactInfo(currentUser);
+                        ShowLikesDislikes(currentUser);
                     }
                     rptWall.DataBind();
                     rptPhoto.DataBind();
                     rptFriend.DataBind();
                 }
             }
+        }
+
+        private void ShowContactInfo(User user)
+        {
+            lblBirthdate.Text += user.BirthDate.ToString("d");
+            lblEmail.Text += user.Email;
+            lblPhone.Text += user.ContactInfo.Phone;
+            lblAddress.Text += "<br />" + user.Address.AddressLine1 + " " + user.Address.AddressLine2 + "<br />" + user.Address.City + " " + user.Address.State + "" + user.Address.PostalCode;
+            lblOrganization.Text += user.Organization;
+        }
+
+        private void ShowLikesDislikes(User user)
+        {
+            lblLikes.Text += user.Likes;
+            lblDislikes.Text += user.Dislikes;
         }
 
         protected void btnFollow_Click(object sender, EventArgs e)
@@ -254,13 +277,13 @@ namespace TermProjectLogin
 
                         Photo photo = new Photo();
                         photo.URL = Constants.StorageURL + filename;
-                        photo.Description = txtPhotoDescription.Text;
+                        photo.Description = HttpUtility.HtmlEncode(txtPhotoDescription.Text);
 
                         photo = socialNetworkManager.AddPhoto(photo, currentUser.Email);
                         post.Photo = photo;
                     }
 
-                    post.Content = txtContent.Text;
+                    post.Content = HttpUtility.HtmlEncode(txtContent.Text);
                     post = socialNetworkManager.CreatePost(post, currentUser.Email);
                     lblMsg.Text = "Posted!";
 
@@ -378,6 +401,14 @@ namespace TermProjectLogin
         {
             Page.ClientScript.RegisterForEventValidation(ChatControl.UniqueID, this.ToString());
             base.Render(writer);
+        }
+
+        protected void btnChat_Click(object sender, EventArgs e)
+        {
+            socialNetworkManager = Session.GetSocialNetworkManager();
+            viewingUser = Request.GetViewingUser(socialNetworkManager);
+
+            ChatControl.ShowChat(viewingUser.Email);
         }
     }
 }

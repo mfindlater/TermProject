@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Common.Master" AutoEventWireup="true" CodeBehind="MainPage.aspx.cs" Inherits="TermProjectLogin.MainPage" EnableEventValidation="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Common.Master" AutoEventWireup="true" CodeBehind="MainPage.aspx.cs" Inherits="TermProjectLogin.MainPage" EnableEventValidation="false" ValidateRequest="false" %>
 
 
 <%@ Register Src="~/ChatControl.ascx" TagPrefix="uc1" TagName="ChatControl" %>
@@ -10,8 +10,20 @@
     <asp:Label ID="lblName" runat="server"></asp:Label>
     <asp:Button ID="btnAddFriend" runat="server" Text="Add Friend" Visible="false" />
     <asp:Button ID="btnFollow" runat="server" Text="Follow" Visible="false" OnClick="btnFollow_Click" />
-    <asp:Button ID="btnChat" runat="server" Visible="false" Text="Chat" /><br />
+    <asp:Button ID="btnChat" runat="server" Visible="false" Text="Chat" OnClick="btnChat_Click" /><br />
     <br />
+    <asp:Panel ID="pnContactInfo" runat="server">
+        <asp:Label ID="lblContactInfo" runat="server" Text="ContactInfo"></asp:Label><br />
+        <asp:Label ID="lblBirthdate" runat="server" Text="Birthdate: "></asp:Label><br />
+        <asp:Label ID="lblEmail" runat="server" Text="Email: "></asp:Label><br />
+        <asp:Label ID="lblPhone" runat="server" Text="Phone: "></asp:Label><br />
+        <asp:Label ID="lblAddress" runat="server" Text="Address: "></asp:Label><br />
+        <asp:Label ID="lblOrganization" runat="server" Text="Organization: "></asp:Label><br />
+    </asp:Panel>
+    <asp:Panel ID="pnLikesDislikes" runat="server">
+        <asp:Label ID="lblLikes" runat="server" Text="Likes: "></asp:Label><br />
+        <asp:Label ID="lblDislikes" runat="server" Text="Dislikes: "></asp:Label>
+    </asp:Panel>
     <asp:Panel ID="pnCreatePost" runat="server">
         <asp:LinkButton ID="lbtnPost" runat="server" Text="Post" OnClick="lbtnPost_Click"></asp:LinkButton>
         <asp:LinkButton ID="lbtnPhoto" runat="server" Text="Photo" OnClick="lbtnPhoto_Click"></asp:LinkButton>
@@ -87,5 +99,5 @@
             </FooterTemplate>
         </asp:Repeater>
     </asp:Panel>
-    <uc1:ChatControl runat="server" ID="ChatControl" />
+    <uc1:ChatControl runat="server" ID="ChatControl" Visible="false"/>
 </asp:Content>
