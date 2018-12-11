@@ -29,3 +29,7 @@
 #divPnPhotos, divPnFriends {
     width: 70%;
 }
+
+.bold {
+    font-weight: 500;
+}

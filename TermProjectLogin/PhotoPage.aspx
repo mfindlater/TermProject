@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <asp:Panel ID="pnPhoto" runat="server">
-        <asp:Label ID="lblAllPhotos" runat="server" Text="All Photos"></asp:Label>
+        <asp:Label ID="lblAllPhotos" CssClass="bold" runat="server" Text="All Photos"></asp:Label>
         <asp:Repeater ID="rptPhoto" runat="server">
             <HeaderTemplate>
                 <div class="container">
@@ -13,7 +13,7 @@
             <ItemTemplate>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                         <asp:Label ID="lblPhotoID" runat="server" Text='<%# Eval("PhotoID") %>' Visible="false"></asp:Label>
-                        <asp:CheckBox ID="chkPhoto" runat="server"/>
+                        <asp:CheckBox ID="chkPhoto" CssClass="checkbox" runat="server"/>
                         <asp:Image ID="imgPhoto" runat="server" ImageUrl='<%# Eval("URL") %>' Width="100px" Height="130px" />
                     </div>
             </ItemTemplate>
@@ -23,7 +23,7 @@
             </FooterTemplate>
         </asp:Repeater>
     </asp:Panel>
-    <asp:Button ID="btnDeletePhoto" runat="server" Text="DeletePhoto" OnClick="btnDeletePhoto_Click" />
+    <asp:Button ID="btnDeletePhoto" CssClass="btn btn-danger" runat="server" Text="DeletePhoto" OnClick="btnDeletePhoto_Click" />
     <asp:Label ID="lblDeleteMsg" runat="server"></asp:Label>
     <asp:Panel ID="pnCreateAlbum" runat="server">
         <asp:FileUpload ID="photoUpload" runat="server" /><br />
@@ -36,11 +36,11 @@
         <br />
         <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine"></asp:TextBox>
         <br />
-        <asp:Button ID="btnCreate" runat="server" Text="Create" OnClick="btnCreate_Click" />
+        <asp:Button ID="btnCreate" CssClass="btn btn-info" runat="server" Text="Create" OnClick="btnCreate_Click" />
         <asp:Label ID="lblMsg" runat="server"></asp:Label>
     </asp:Panel>
     <asp:Panel ID="pnAlbum" runat="server">
-        <asp:Label ID="lblAlbum" runat="server" Text="All Albums"></asp:Label>
+        <asp:Label ID="lblAlbum" CssClass="bold" runat="server" Text="All Albums"></asp:Label>
         <asp:Repeater ID="rptAlbum" runat="server">
             <HeaderTemplate>
                 <div class="container">
@@ -58,7 +58,7 @@
         </asp:Repeater>
     </asp:Panel>
     <asp:Panel ID="pnAlbumPhoto" runat="server" Visible="false">
-        <asp:Label ID="lblAlbumPhotos" runat="server" Text="Album Photos"></asp:Label>
+        <asp:Label ID="lblAlbumPhotos" CssClass="bold" runat="server" Text="Album Photos"></asp:Label>
         <asp:Repeater ID="rptAlbumPhoto" runat="server">
             <HeaderTemplate>
                 <div class="container">
