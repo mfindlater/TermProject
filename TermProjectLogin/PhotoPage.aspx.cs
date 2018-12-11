@@ -30,11 +30,13 @@ namespace TermProjectLogin
                         rptPhoto.DataSource = viewingUser.Photos;
                         pnCreateAlbum.Visible = false;
                         rptAlbum.DataSource = viewingUser.PhotoAlbums;
+                        btnDeletePhoto.Visible = false;
                     }
                     else
                     {
                         rptPhoto.DataSource = currentUser.Photos;
                         rptAlbum.DataSource = currentUser.PhotoAlbums;
+                        btnDeletePhoto.Visible = true;
                     }
                     rptPhoto.DataBind();
                     rptAlbum.DataBind();
