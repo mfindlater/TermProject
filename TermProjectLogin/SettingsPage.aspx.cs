@@ -178,11 +178,11 @@ namespace TermProjectLogin
             if (profilePhotoUpload.HasFile)
             {
                 filename = user.UserId + "_" + Path.GetFileName(profilePhotoUpload.PostedFile.FileName);
-                profilePhotoUpload.SaveAs(Constants.StoragePath + filename);
+                string url = profilePhotoUpload.Save(Server,filename);
                 lblMsg.Text = "File Uploaded Successfully";
 
                 Photo photo = new Photo();
-                photo.URL = Constants.StorageURL + filename;
+                photo.URL = url;
                 photo.Description = "Profile Photo";
 
                 photo = socialNetworkManager.AddPhoto(photo, user.ContactInfo.Email);

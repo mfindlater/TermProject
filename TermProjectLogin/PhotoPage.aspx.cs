@@ -78,10 +78,10 @@ namespace TermProjectLogin
                 if (photoUpload.HasFile)
                 {
                     string filename = currentUser.UserId + "_" + Path.GetFileName(photoUpload.PostedFile.FileName);
-                    photoUpload.SaveAs(Constants.StoragePath + filename);
+                    string url = photoUpload.Save(Server, filename);
 
                     Photo photo = new Photo();
-                    photo.URL = Constants.StorageURL + filename;
+                    photo.URL = url;
                     photo.Description = txtPhotoDescription.Text;
 
                     photo = socialNetworkManager.AddPhoto(photo, currentUser.Email);
