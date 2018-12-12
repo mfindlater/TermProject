@@ -22,7 +22,7 @@ namespace TermProjectLogin
 #if DEBUG
         public const string baseURL = "http://localhost:63063/api/SocialNetworkService/";
 #else 
-        public const string baseURL = "http://cis-iis2.temple.edu/Fall2018/CIS3342_tug98770/TermProjectWS/api/SocialNetworkService";
+        public const string baseURL = "http://cis-iis2.temple.edu/Fall2018/CIS3342_tug98770/TermProjectWS/api/SocialNetworkService/";
 #endif
         public const string RequestUriByName = baseURL + "searchByName/";
         public const string RequestUriByLocation = baseURL + "searchByLocation/";
