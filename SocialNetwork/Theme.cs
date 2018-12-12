@@ -8,10 +8,10 @@ namespace SocialNetwork
     public class Theme
     {
         public int ThemeID { get; set; }
-        public string Name { get; set; }
-        public string FontColor { get; set; }
-        public string BackgroundColor { get; set; }
-        public int FontSize { get; set; }
-        public string FontWeight { get; set; }
+        public string Name { get; set; } = "default";
+        public string FontColor { get; set; } = "#000000";
+        public string BackgroundColor { get; set; } = "#FFFFFF";
+        public int FontSize { get; set; } = 12;
+        public string FontWeight { get; set; } = "normal";
     }
 }

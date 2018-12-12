@@ -209,6 +209,35 @@ namespace TermProjectLogin
             cpFontColor.Color = theme.FontColor;
             ddlFontWeight.SelectedValue = theme.FontWeight;
             txtFontSize.Text = theme.FontSize.ToString();
+            LoadTheme(theme);
+        }
+
+        private void LoadTheme(Theme theme)
+        {
+            if (theme.FontSize == 0)
+            {
+                theme.FontSize = 20;
+            }
+
+            if (theme.FontColor == null)
+            {
+                theme.FontColor = "#000000";
+            }
+
+            if (theme.BackgroundColor == null)
+            {
+                theme.BackgroundColor = "#FFFFFF";
+            }
+
+            if (theme.FontWeight == null)
+            {
+                theme.FontWeight = "normal";
+            }
+
+            string style = string.Format(@"background-color:{0};color:{1};font-size:{2}px;font-weight:{3} 
+           ", theme.BackgroundColor, theme.FontColor, theme.FontSize, theme.FontWeight.ToLower());
+
+            this.Form.Style.Value = style;
         }
     }
 }
