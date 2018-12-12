@@ -304,5 +304,20 @@ namespace SocialNetwork.Tests
         {
             throw new NotImplementedException();
         }
+
+        public List<Theme> GetThemes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ChatMessage> GetMessages(string email1, string email2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeletePhoto(int photoID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
