@@ -10,7 +10,7 @@ namespace Utilities
 {
     public class DBConnect
     {
-        string SqlConnectString = "server=cis-mssql1.temple.edu;Database=fa18_3342_tuc28686;User id=tuc28686;Password=ung3aPie";
+        string SqlConnectString = "REDACTED";
         SqlConnection myConnectionSql;
         SqlCommand objCmd;
         DataSet ds;
@@ -19,7 +19,7 @@ namespace Utilities
         {
 
 #if DEBUG
-            //SqlConnectString = "server=127.0.0.1,5555;Database=fa18_3342_tuc28686;User id=tuc28686;Password=ung3aPie";
+            //SqlConnectString = "REDACTED";
 #endif
             myConnectionSql = new SqlConnection(SqlConnectString);
         }
